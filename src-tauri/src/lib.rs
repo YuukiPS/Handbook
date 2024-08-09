@@ -7,7 +7,7 @@ mod utility;
 
 use crate::generate::handbook::generate_handbook;
 use crate::log::{log_error, log_info, log_warn};
-use crate::search::gi::{find, get_path_handbook, update_path_handbook, get_category};
+use crate::search::gi::{find, get_category, get_path_handbook, update_path_handbook};
 use crate::structure::gm::Gmhandbook;
 use crate::utility::Logger;
 use lazy_static::lazy_static;
@@ -26,7 +26,6 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_clipboard_manager::init())
-        .plugin(tauri_plugin_log::Builder::new().build())
         .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![
             find,

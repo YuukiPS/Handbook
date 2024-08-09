@@ -8,7 +8,6 @@
     "permissions": [
         "core:default",
         "core:path:default",
-        "log:allow-log",
         "clipboard-manager:allow-write-text",
         "clipboard-manager:deny-read-text",
         "clipboard-manager:deny-read-image",
