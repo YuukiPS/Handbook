@@ -6,17 +6,8 @@
     },
     "drawer": {
         "search_id": "ID検索",
-        "search_id_description": "特定のIDを検索する",
         "generate": "生成",
-        "generate_description": "GMハンドブックを生成",
-        "commands": "コマンド",
-        "commands_description": "ユウキサーバーにカスタムコマンドを送信",
-        "settings": "設定",
-        "settings_description": "アカウント設定を変更する",
-        "changelog": "更新履歴",
-        "changelog_description": "更新履歴を確認する",
-        "mobile_appearance": "外観",
-        "menu": "メニュー",
+        "player_settings": "プレイヤー設定",
         "theme_mode": {
             "light": "ライト",
             "dark": "ダーク",

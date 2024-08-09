@@ -6,17 +6,8 @@
     },
     "drawer": {
         "search_id": "Search ID",
-        "search_id_description": "Search for a specific ID",
         "generate": "Generate",
-        "generate_description": "Generate GM Handbook",
-        "commands": "Commands",
-        "commands_description": "Send custom command to Yuuki server",
-        "settings": "Settings",
-        "settings_description": "Configure account settings",
-        "changelog": "Changelog",
-        "changelog_description": "View the changelog",
-        "mobile_appearance": "Appearance",
-        "menu": "Menu",
+        "player_settings": "Player Settings",
         "theme_mode": {
             "light": "Light",
             "dark": "Dark",

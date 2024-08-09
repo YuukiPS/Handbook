@@ -6,17 +6,8 @@
     },
     "drawer": {
         "search_id": "搜索ID",
-        "search_id_description": "搜索特定ID",
         "generate": "生成",
-        "generate_description": "生成GM手册",
-        "commands": "命令",
-        "commands_description": "向Yuuki服务器发送自定义命令",
-        "settings": "设置",
-        "settings_description": "配置账户设置",
-        "changelog": "更新日志",
-        "changelog_description": "查看更新日志",
-        "mobile_appearance": "外观",
-        "menu": "菜单",
+        "player_settings": "玩家设置",
         "theme_mode": {
             "light": "浅色",
             "dark": "深色",

@@ -6,17 +6,8 @@
     },
     "drawer": {
         "search_id": "ค้นหาไอดี",
-        "search_id_description": "ค้นหาไอดีเฉพาะเจาะจง",
         "generate": "สร้าง",
-        "generate_description": "สร้างคู่มือ GM",
-        "commands": "คำสั่ง",
-        "commands_description": "ส่งคำสั่งพิเศษไปยังเซิร์ฟเวอร์ยูกิ",
-        "settings": "การตั้งค่า",
-        "settings_description": "ปรับแต่งการตั้งค่าบัญชี",
-        "changelog": "บันทึกการเปลี่ยนแปลง",
-        "changelog_description": "ดูบันทึกการเปลี่ยนแปลง",
-        "mobile_appearance": "รูปลักษณ์",
-        "menu": "เมนู",
+        "player_settings": "การตั้งค่าผู้เล่น",
         "theme_mode": {
             "light": "สว่าง",
             "dark": "มืด",

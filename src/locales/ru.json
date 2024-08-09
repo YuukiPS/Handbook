@@ -6,17 +6,8 @@
     },
     "drawer": {
         "search_id": "Поиск ID",
-        "search_id_description": "Найти конкретный ID",
         "generate": "Генерация",
-        "generate_description": "Генерация GM Handbook",
-        "commands": "Команды",
-        "commands_description": "Отправить пользовательскую команду на сервер Юки",
-        "settings": "Настройки",
-        "settings_description": "Настроить параметры аккаунта",
-        "changelog": "История изменений",
-        "changelog_description": "Посмотреть историю изменений",
-        "mobile_appearance": "Внешний вид",
-        "menu": "Меню",
+        "player_settings": "Настройки игрока",
         "theme_mode": {
             "light": "Светлая",
             "dark": "Тёмная",

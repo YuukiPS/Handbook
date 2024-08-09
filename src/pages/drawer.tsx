@@ -13,12 +13,16 @@ import {
     PickaxeIcon,
     MoonIcon,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface DrawerProps {
     children: React.ReactNode;
 }
 
 const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
+    const { t } = useTranslation("default", {
+        keyPrefix: "drawer",
+    });
     const { setTheme, theme } = useTheme();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -88,7 +92,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                                 }`}
                             >
                                 <SearchIcon className="h-5 w-5" />
-                                Search ID
+                                {t("search_id")}
                             </a>
                         </li>
                         <li>
@@ -101,7 +105,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                                 }`}
                             >
                                 <UserIcon className="h-5 w-5" />
-                                Player Settings
+                                {t("player_settings")}
                             </a>
                         </li>
                         <li>
@@ -114,7 +118,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                                 }`}
                             >
                                 <PickaxeIcon className="h-5 w-5" />
-                                Generate
+                                {t("generate")}
                             </a>
                         </li>
                     </ul>

@@ -6,17 +6,8 @@
     },
     "drawer": {
         "search_id": "Cari ID",
-        "search_id_description": "Cari ID tertentu",
         "generate": "Generate",
-        "generate_description": "Generate GM Handbook",
-        "commands": "Perintah",
-        "commands_description": "Kirim perintah khusus ke server Yuuki",
-        "settings": "Pengaturan",
-        "settings_description": "Atur pengaturan akun",
-        "changelog": "Changelog",
-        "changelog_description": "Lihat catatan perubahan",
-        "mobile_appearance": "Tampilan",
-        "menu": "Menu",
+        "player_settings": "Pengaturan Pemain",
         "theme_mode": {
             "light": "Terang",
             "dark": "Gelap",
