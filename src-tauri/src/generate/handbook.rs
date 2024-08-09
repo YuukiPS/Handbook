@@ -225,8 +225,9 @@ where
 
 pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Command {
     let mut commands_map: BTreeMap<String, BTreeMap<String, Commands>> = BTreeMap::new();
-    let mut comamnds_map_gc = BTreeMap::new();
-    let mut comamnds_map_gio = BTreeMap::new();
+    let mut commands_map_gc = BTreeMap::new();
+    let mut commands_map_gio = BTreeMap::new();
+
     let commands_gc = match category {
         Category::Characters => vec![
             ("Normal", ""),
@@ -278,6 +279,7 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
             ),
         ],
     };
+
     let commands_gio = match category {
         Category::Characters => vec![("Normal", format!("avatar add {}", id))],
         Category::Artifacts => vec![("With Amount", format!("avatar add {} <amount>", id))],
@@ -311,28 +313,19 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
             ("With Amount", format!("item add {} <amount>", id)),
         ],
     };
+
     for (i, (name, command_suffix)) in commands_gc.into_iter().enumerate() {
-        let command = if category == Category::Quests {
-            Commands {
-                name: name.to_string(),
-                command: format!("{} {} {}", prefix, command_suffix, id)
-                    .trim()
-                    .to_string(),
+        let command = Commands {
+            name: name.to_string(),
+            command: match category {
+                Category::Quests => format!("{} {} {}", prefix, command_suffix, id),
+                Category::Dungeons | Category::Scenes => format!("{} 0 0 0 {}", prefix, id),
+                _ => format!("{} {} {}", prefix, id, command_suffix.trim()),
             }
-        } else if category == Category::Dungeons || category == Category::Scenes {
-            Commands {
-                name: name.to_string(),
-                command: format!("{} 0 0 0 {}", prefix, id).trim().to_string(),
-            }
-        } else {
-            Commands {
-                name: name.to_string(),
-                command: format!("{} {} {}", prefix, id, command_suffix.trim())
-                    .trim()
-                    .to_string(),
-            }
+            .trim()
+            .to_string(),
         };
-        comamnds_map_gc.insert(format!("command_{}", i + 1), command);
+        commands_map_gc.insert(format!("command_{}", i + 1), command);
     }
 
     for (i, (name, command_suffix)) in commands_gio.into_iter().enumerate() {
@@ -340,11 +333,11 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
             name: name.to_string(),
             command: command_suffix.trim().to_string(),
         };
-        comamnds_map_gio.insert(format!("command_{}", i + 1), command);
+        commands_map_gio.insert(format!("command_{}", i + 1), command);
     }
 
-    commands_map.insert("gc".to_string(), comamnds_map_gc);
-    commands_map.insert("gio".to_string(), comamnds_map_gio);
+    commands_map.insert("gc".to_string(), commands_map_gc);
+    commands_map.insert("gio".to_string(), commands_map_gio);
 
     commands_map
 }
@@ -991,9 +984,9 @@ pub fn generate_handbook(
     let start = std::time::Instant::now();
     let mut result: Vec<ResultData> = Vec::new();
     for lang in language_slice {
-        let _ = app_handle.emit(
-            "handbook",
-            format!(
+        output_log(
+            &app_handle,
+            &format!(
                 "Reading {}/TextMap{}.json",
                 path_text_map.to_str().unwrap(),
                 lang.to_string().to_uppercase()
