@@ -2,6 +2,7 @@ import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import type React from "react";
 import { memo, useState } from "react";
+import Updater from "./updater";
 
 import "@/i18n";
 import {
@@ -121,7 +122,10 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                         version 1.0.0
                     </footer>
                 </nav>
-                <main className="flex-1 overflow-auto w-full">{children}</main>
+                <main className="flex-1 overflow-auto w-full">
+                    <Updater />
+                    {children}
+                </main>
                 {isSidebarOpen && (
                     <div
                         className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"

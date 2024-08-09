@@ -31,3 +31,6 @@ colored = "2.1"
 [dev-dependencies]
 pretty_assertions = "1.4"
 tempfile = "3.10"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-updater = "2.0.0-rc.0"

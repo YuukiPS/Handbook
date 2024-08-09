@@ -13,7 +13,8 @@
         "clipboard-manager:deny-read-image",
         "clipboard-manager:deny-clear",
         "dialog:allow-open",
-        "shell:allow-open"
+        "shell:allow-open",
+        "updater:default"
     ],
     "platforms": [
         "windows",
