@@ -282,7 +282,10 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
 
     let commands_gio = match category {
         Category::Characters => vec![("Normal", format!("avatar add {}", id))],
-        Category::Artifacts => vec![("With Amount", format!("avatar add {} <amount>", id))],
+        Category::Artifacts => vec![
+            ("Normal", format!("item add {}", id)),
+            ("With Amount", format!("item add {} <amount>", id)),
+        ],
         Category::Quests => vec![
             ("Add Quest", format!("quest add {}", id)),
             ("Accept Quest", format!("quest accept {}", id)),

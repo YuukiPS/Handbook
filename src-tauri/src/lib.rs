@@ -3,6 +3,8 @@ mod generate;
 mod log;
 mod search;
 mod structure;
+#[cfg(test)]
+mod tests;
 mod utility;
 
 use crate::generate::handbook::generate_handbook;
