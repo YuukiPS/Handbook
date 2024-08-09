@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
 	darkMode: ['class'],
-	content: ['./src/**/*.{ts,tsx}', './node_modules/@rewind-ui/core/dist/theme/styles/*.js'],
+	content: ['./src/**/*.{ts,tsx}'],
 	prefix: '',
 	theme: {
 		container: {
@@ -68,11 +68,5 @@ export default {
 			},
 		},
 	},
-	plugins: [
-		require('tailwindcss-animate'),
-		require('@tailwindcss/typography'),
-		require('daisyui'),
-		require('tailwind-scrollbar'),
-		require('@tailwindcss/forms'),
-	],
+	plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography'), require('daisyui')],
 }

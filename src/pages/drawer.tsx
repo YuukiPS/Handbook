@@ -1,23 +1,16 @@
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
-import {
-    Overlay,
-    Sidebar,
-    type SidebarState,
-    useSidebar,
-} from "@rewind-ui/core";
 import type React from "react";
 import { memo, useState } from "react";
 
 import "@/i18n";
 import {
-    Users,
-    Search,
-    SunIcon,
-    MoonIcon,
-    PaletteIcon,
-    PickaxeIcon,
     MenuIcon,
+    SunMoonIcon,
+    UserIcon,
+    SearchIcon,
+    PickaxeIcon,
+    MoonIcon,
 } from "lucide-react";
 
 interface DrawerProps {
@@ -25,125 +18,122 @@ interface DrawerProps {
 }
 
 const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
-    // const { t } = useTranslation("default", { keyPrefix: "drawer" });
-    const { setTheme } = useTheme();
-    const [expanded, setExpanded] = useState(true);
-    const [mobile, setMobile] = useState(false);
-    const sidebar = useSidebar();
+    const { setTheme, theme } = useTheme();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
-        <div className="relative flex flex-row min-h-screen">
-            <Sidebar
-                onToggle={(state: SidebarState) => {
-                    setExpanded(state.expanded);
-                    setMobile(state.mobile);
-                }}
-                className="absolute"
-            >
-                <Sidebar.Head>
-                    <Sidebar.Head.Logo>
-                        <img
-                            src="/logo.png"
-                            width={32}
-                            height={32}
-                            alt="Logo"
+        <div className="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-300">
+            <div className="flex h-16 shrink-0 items-center justify-between border-b border-b-muted px-4 sm:px-6">
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setIsSidebarOpen((prev) => !prev)}
+                    className="lg:hidden"
+                >
+                    <MenuIcon className="h-6 w-6" />
+                    <span className="sr-only">Toggle sidebar</span>
+                </Button>
+                <a href="/" className="flex items-center gap-2 font-bold">
+                    <img
+                        src="/logo.png"
+                        alt="Handbook Finder"
+                        className="h-6 w-6"
+                    />
+                    <span>Handbook Finder</span>
+                </a>
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() =>
+                        setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                >
+                    <div className="relative w-6 h-6">
+                        <SunMoonIcon
+                            className={`h-6 w-6 absolute transition-all duration-300 ${
+                                theme === "dark"
+                                    ? "opacity-100 rotate-0"
+                                    : "opacity-0 -rotate-90"
+                            }`}
                         />
-                    </Sidebar.Head.Logo>
-                    <Sidebar.Head.Title>Handbook Finder</Sidebar.Head.Title>
-                    <Sidebar.Head.Toggle />
-                </Sidebar.Head>
-
-                <Sidebar.Nav>
-                    <Sidebar.Nav.Section>
-                        <Sidebar.Nav.Section.Title>
-                            Menu
-                        </Sidebar.Nav.Section.Title>
-                        <Sidebar.Nav.Section.Item
-                            icon={<Search />}
-                            label="Search ID"
-                            href="/"
+                        <MoonIcon
+                            className={`h-6 w-6 absolute transition-all duration-300 ${
+                                theme === "light"
+                                    ? "opacity-100 rotate-0"
+                                    : "opacity-0 rotate-90"
+                            }`}
                         />
-                        <Sidebar.Nav.Section.Item
-                            icon={<PickaxeIcon />}
-                            label="Generate"
-                            href="/generate"
-                        />
-                    </Sidebar.Nav.Section>
-                    <Sidebar.Nav.Section>
-                        <Sidebar.Nav.Section.Title>
-                            Settings
-                        </Sidebar.Nav.Section.Title>
-                        <Sidebar.Nav.Section.Item
-                            icon={<Users />}
-                            label="Players"
-                            href="/settings"
-                        />
-                        <Sidebar.Nav.Section.Item
-                            as={"button"}
-                            label="Theme"
-                            icon={<PaletteIcon />}
-                        >
-                            <Sidebar.Nav.Section
-                                isChild
-                                className="dark:bg-slate-900"
-                            >
-                                <Sidebar.Nav.Section.Item
-                                    icon={<SunIcon />}
-                                    label="Light"
-                                    href="#"
-                                    as={"button"}
-                                    onClick={() => setTheme("light")}
-                                    className="ml-4"
-                                />
-                                <Sidebar.Nav.Section.Item
-                                    icon={<MoonIcon />}
-                                    label="Dark"
-                                    href="#"
-                                    as={"button"}
-                                    onClick={() => setTheme("dark")}
-                                    className="ml-4"
-                                />
-                            </Sidebar.Nav.Section>
-                        </Sidebar.Nav.Section.Item>
-                    </Sidebar.Nav.Section>
-                </Sidebar.Nav>
-
-                <Sidebar.Footer>
-                    <div className="flex flex-col justify-center items-center text-sm">
-                        <span className="font-semibold">Handbook Finder</span>
-                        <span>version 1.0.0</span>
                     </div>
-                </Sidebar.Footer>
-            </Sidebar>
-
-            <main
-                className={`transition-all transform duration-100 flex w-full flex-col items-center ${
-                    expanded && "md:ml-20"
-                }`}
-            >
-                {mobile && (
-                    <Overlay
-                        blur="none"
-                        onClick={() => {
-                            sidebar.toggleMobile();
+                    <span className="sr-only">Toggle theme</span>
+                </Button>
+            </div>
+            <div className="flex flex-1 relative">
+                <nav
+                    className={`
+                        fixed top-16 left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted px-4 py-6 sm:px-6 
+                        transition-all duration-300 ease-in-out dark:border-r-[#2d3748] bg-background
+                        lg:relative lg:top-0 lg:z-auto lg:w-64 lg:translate-x-0
+                        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+                    `}
+                >
+                    <ul className="grid gap-2">
+                        <li>
+                            <a
+                                href="/"
+                                className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-[#2d3748] ${
+                                    window.location.pathname === "/"
+                                        ? "bg-primary text-primary-foreground dark:bg-[#4c51bf] dark:text-[#e5e7eb]"
+                                        : "text-muted-foreground hover:text-foreground dark:text-[#a0aec0] dark:hover:text-[#e5e7eb]"
+                                }`}
+                            >
+                                <SearchIcon className="h-5 w-5" />
+                                Search ID
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="/settings"
+                                className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-[#2d3748] ${
+                                    window.location.pathname === "/settings"
+                                        ? "bg-primary text-primary-foreground dark:bg-[#4c51bf] dark:text-[#e5e7eb]"
+                                        : "text-muted-foreground hover:text-foreground dark:text-[#a0aec0] dark:hover:text-[#e5e7eb]"
+                                }`}
+                            >
+                                <UserIcon className="h-5 w-5" />
+                                Player Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="/generate"
+                                className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-[#2d3748] ${
+                                    window.location.pathname === "/generate"
+                                        ? "bg-primary text-primary-foreground dark:bg-[#4c51bf] dark:text-[#e5e7eb]"
+                                        : "text-muted-foreground hover:text-foreground dark:text-[#a0aec0] dark:hover:text-[#e5e7eb]"
+                                }`}
+                            >
+                                <PickaxeIcon className="h-5 w-5" />
+                                Generate
+                            </a>
+                        </li>
+                    </ul>
+                    <footer className="mt-auto py-4 text-center text-sm text-muted-foreground dark:text-[#a0aec0]">
+                        version 1.0.0
+                    </footer>
+                </nav>
+                <main className="flex-1 overflow-auto w-full">{children}</main>
+                {isSidebarOpen && (
+                    <div
+                        className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+                        onClick={() => setIsSidebarOpen(false)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Escape") setIsSidebarOpen(false);
                         }}
-                        className="md:hidden z-40"
+                        role="button"
+                        tabIndex={0}
                     />
                 )}
-                <header>
-                    <Button
-                        onClick={() => {
-                            sidebar.toggleMobile();
-                        }}
-                        size="sm"
-                        color="white"
-                        className="ml-auto flex md:hidden"
-                    >
-                        <MenuIcon />
-                    </Button>
-                </header>
-                {children}
-            </main>
+            </div>
         </div>
     );
 });
