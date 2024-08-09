@@ -282,7 +282,7 @@ where
 /// * There's an I/O error while reading the file.
 /// * The JSON data cannot be parsed into a `TextMap` struct.
 pub(crate) fn read_text_map(path: &str, lang: &str) -> Result<TextMap, TextMapError> {
-    let path = Path::new(&path.to_string()).join(format!("TextMap{}.json", lang.to_uppercase()));
+    let path = Path::new(&path).join(format!("TextMap{}.json", lang.to_uppercase()));
     if !path.exists() {
         return Err(TextMapError::IoError(io::Error::new(
             io::ErrorKind::NotFound,
