@@ -1,0 +1,26 @@
+{
+    "page_not_found": {
+        "title": "Page Not Found",
+        "description": "Oops! Looks like this page has gone on a digital vacation. It's nowhere to be found in our cyber neighborhood.",
+        "button": "Go to Home"
+    },
+    "drawer": {
+        "search_id": "Search ID",
+        "search_id_description": "Search for a specific ID",
+        "generate": "Generate",
+        "generate_description": "Generate GM Handbook",
+        "commands": "Commands",
+        "commands_description": "Send custom command to Yuuki server",
+        "settings": "Settings",
+        "settings_description": "Configure account settings",
+        "changelog": "Changelog",
+        "changelog_description": "View the changelog",
+        "mobile_appearance": "Appearance",
+        "menu": "Menu",
+        "theme_mode": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+        }
+    }
+}

@@ -1,0 +1,111 @@
+{
+    "search_for_something": "Search for something.",
+    "search_for_item": "Search for an item by typing in the search bar above.",
+    "no_results_found": "No results found.",
+    "no_results_for_query": "No result were found for your query: ",
+    "error_occurred": "An error occurred.",
+    "error_message": "Error message: ",
+    "load_more": "Load More",
+    "output": {
+        "response_command": "Response: {{message}} | {{code}}",
+        "websocket_not_established": "WebSocket is not established. Please refresh the page.",
+        "executing_command": "Executing command: {{command}}"
+    },
+    "search": {
+        "input_placeholder": "Search",
+        "kbd": {
+            "enter": "<0>Enter</0> to search",
+            "escape": "<0>Esc</0> to clear"
+        },
+        "tooltip_menu": {
+            "open": "Open the Menu",
+            "close": "Close the Menu"
+        },
+        "label": {
+            "api_settings": "API Settings",
+            "games": "Games",
+            "category": "Category",
+            "category_all": "All",
+            "language": "Language",
+            "results": "Results: "
+        },
+        "checkbox": {
+            "image": "Image",
+            "commands": "Commands"
+        }
+    },
+    "card": {
+        "title": {
+            "gc": "GC",
+            "gio": "GIO",
+            "lc": "LC"
+        },
+        "description": {
+            "gc": "Commands for GC (Grasscutter) for versions 4.7 or lower",
+            "gio": "Commands for GIO version 3.2",
+            "lc": "Commands for LC (LunarCore) for versions 2.4 or lower"
+        },
+        "tabs_title": {
+            "gc": "GC",
+            "gio": "GIO"
+        },
+        "show_the_commands": "Show The Commands",
+        "next_mission": "Next mission: {{id}}",
+        "button": {
+            "copy_id": "Copy ID",
+            "clear_output": "Clear output",
+            "apply_command": "Apply",
+            "close": "Close"
+        },
+        "dialog": {
+            "title": "Apply the Command",
+            "description": {
+                "without_values": "Command ({{command}}) will be executed",
+                "with_values": "Command ({{command}}) will be executed with the values ({{list}})"
+            },
+            "account": "UID: {{uid}} | Server: {{server}}"
+        }
+    },
+    "toast": {
+        "command_copied": {
+            "title": "The command has been copied to the clipboard",
+            "description": "Command: {{command}}"
+        },
+        "command_copied_error": {
+            "title": "Failed to copy command to clipboard",
+            "description": "Please try again later"
+        },
+        "invalid_input": {
+            "title": "Invalid input parameters",
+            "description": "No UID, code, or server entered. Please go to settings page",
+            "action": {
+                "text": "Go to settings page",
+                "url_text": "Settings"
+            }
+        },
+        "copied_id": {
+            "title": "Copied ID",
+            "description": "ID: {{id}} for {{name}}"
+        },
+        "failed_copy_id": {
+            "title": "Failed to copy ID",
+            "description": "Please try again later."
+        },
+        "copied_command": {
+            "title": "Copied Command",
+            "description": "Command: {{command}}"
+        },
+        "failed_copy_command": {
+            "title": "Failed to copy command",
+            "description": "Please try again later."
+        },
+        "apply_command_no_configured": {
+            "title": "Error",
+            "description": "You must enter your UID, code, and server first. Please go to settings page.",
+            "action": {
+                "text": "Go to settings page",
+                "url_text": "Go to settings"
+            }
+        }
+    }
+}

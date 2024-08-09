@@ -1,0 +1,51 @@
+{
+    "title": "玩家设置",
+    "failed_check_account_title": "账号检查失败",
+    "failed_check_account_description": "如果您遇到 `AxiosError: 网络错误`，这是正常现象。首先，请访问<0>此网站</0>。如果出现 reCaptcha，这可能是由于 Cloudflare 或 CORS 策略导致的常见问题。我们目前还没有解决方案。",
+    "uid_account": "UID 账号",
+    "uid_code": "验证码",
+    "get_uid_and_code": "获取 UID 和验证码",
+    "check_account_button": "检查",
+    "check_account_button_checking": "检查中...",
+    "save_account_button": "保存",
+    "cancel_button": "取消",
+    "list_server_available": {
+        "toast": {
+            "title": "需要 UID",
+            "description": "请输入您的 UID"
+        },
+        "label": "列表中没有您的服务器？",
+        "button": "手动添加",
+        "select_server": "选择服务器",
+        "search_placeholder": "搜索服务器",
+        "tooltip": {
+            "online": "在线",
+            "offline": "离线"
+        },
+        "dialog": {
+            "title": "输入您的 UID",
+            "description": "这是您游戏的 UID，而不是 YuukiPS 的 UID",
+            "input_placeholder": "输入您的 UID",
+            "button": {
+                "save": "保存",
+                "cancel": "取消"
+            }
+        }
+    },
+    "output": {
+        "button": "清除输出",
+        "successfully_checked_account": "成功检查 UID {{uid}}。此 UID 下注册了 {{list_total}} 个账号。",
+        "no_account_registered": "未找到与提供的 UID 相关的账号。",
+        "error_occurred": "检查账号时发生错误：{{error}}",
+        "successfully_selected_account": "服务器 {{name}} 已成功保存。",
+        "input_unexpected_error": "输入出现错误。未定义的变量：{{error}}",
+        "uid_code_saved": "UID 和验证码已成功保存。",
+        "uid_code_empty": "UID 或验证码为空",
+        "uid_must_be_5_digits": "UID 必须是 5 位数字",
+        "code_must_be_4_digits": "验证码必须是 4 位数字"
+    },
+    "select_account": {
+        "button_trigger": "选择账号",
+        "menu_label": "服务器 | 昵称 | UID"
+    }
+}

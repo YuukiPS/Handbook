@@ -1,0 +1,23 @@
+{
+    "$schema": "../gen/schemas/desktop-schema.json",
+    "identifier": "default",
+    "description": "Capability for the main window",
+    "windows": [
+        "main"
+    ],
+    "permissions": [
+        "core:default",
+        "core:path:default",
+        "log:allow-log",
+        "clipboard-manager:allow-write-text",
+        "clipboard-manager:deny-read-text",
+        "clipboard-manager:deny-read-image",
+        "clipboard-manager:deny-clear",
+        "dialog:allow-open",
+        "shell:allow-open"
+    ],
+    "platforms": [
+        "windows",
+        "android"
+    ]
+}

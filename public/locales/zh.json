@@ -1,0 +1,111 @@
+{
+    "search_for_something": "搜索一些内容。",
+    "search_for_item": "在上方搜索栏中输入以搜索物品。",
+    "no_results_found": "未找到结果。",
+    "no_results_for_query": "未找到与您的查询相关的结果：",
+    "error_occurred": "发生错误。",
+    "error_message": "错误信息：",
+    "load_more": "加载更多",
+    "output": {
+        "response_command": "回应：{{message}} | {{code}}",
+        "websocket_not_established": "WebSocket 连接未建立。请刷新页面。",
+        "executing_command": "正在执行命令：{{command}}"
+    },
+    "search": {
+        "input_placeholder": "搜索",
+        "kbd": {
+            "enter": "<0>回车</0>进行搜索",
+            "escape": "<0>Esc</0>清除输入"
+        },
+        "tooltip_menu": {
+            "open": "打开菜单",
+            "close": "关闭菜单"
+        },
+        "label": {
+            "api_settings": "API 设置",
+            "games": "游戏",
+            "category": "分类",
+            "category_all": "全部",
+            "language": "语言",
+            "results": "结果："
+        },
+        "checkbox": {
+            "image": "图片",
+            "commands": "命令"
+        }
+    },
+    "card": {
+        "title": {
+            "gc": "原神",
+            "gio": "崩坏：星穹铁道",
+            "lc": "绝区零"
+        },
+        "description": {
+            "gc": "适用于原神（Grasscutter）4.7 版本及以下的命令",
+            "gio": "适用于崩坏：星穹铁道 3.2 版本的命令",
+            "lc": "适用于绝区零（LunarCore）2.4 版本及以下的命令"
+        },
+        "tabs_title": {
+            "gc": "原神",
+            "gio": "星穹铁道"
+        },
+        "show_the_commands": "显示命令",
+        "next_mission": "下一个任务：{{id}}",
+        "button": {
+            "copy_id": "复制 ID",
+            "clear_output": "清除输出",
+            "apply_command": "应用",
+            "close": "关闭"
+        },
+        "dialog": {
+            "title": "应用命令",
+            "description": {
+                "without_values": "将执行命令（{{command}}）",
+                "with_values": "将执行命令（{{command}}），参数为（{{list}}）"
+            },
+            "account": "UID：{{uid}} | 服务器：{{server}}"
+        }
+    },
+    "toast": {
+        "command_copied": {
+            "title": "命令已复制到剪贴板",
+            "description": "命令：{{command}}"
+        },
+        "command_copied_error": {
+            "title": "复制命令到剪贴板失败",
+            "description": "请稍后重试"
+        },
+        "invalid_input": {
+            "title": "无效的输入参数",
+            "description": "未输入 UID、代码或服务器。请前往设置页面",
+            "action": {
+                "text": "前往设置页面",
+                "url_text": "设置"
+            }
+        },
+        "copied_id": {
+            "title": "已复制 ID",
+            "description": "{{name}} 的 ID：{{id}}"
+        },
+        "failed_copy_id": {
+            "title": "复制 ID 失败",
+            "description": "请稍后重试。"
+        },
+        "copied_command": {
+            "title": "已复制命令",
+            "description": "命令：{{command}}"
+        },
+        "failed_copy_command": {
+            "title": "复制命令失败",
+            "description": "请稍后重试。"
+        },
+        "apply_command_no_configured": {
+            "title": "错误",
+            "description": "您必须先输入 UID、代码和服务器。请前往设置页面。",
+            "action": {
+                "text": "前往设置页面",
+                "url_text": "前往设置"
+            }
+        }
+    }
+}

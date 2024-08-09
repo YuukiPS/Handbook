@@ -1,0 +1,51 @@
+{
+    "title": "Настройки игрока",
+    "failed_check_account_title": "Не удалось проверить аккаунт",
+    "failed_check_account_description": "Если вы получаете ошибку `AxiosError: Network Error`, это нормально. Сначала перейдите на <0>этот сайт</0>. Если там есть reCaptcha, это может быть обычной проблемой из-за Cloudflare или политики CORS. У нас пока нет решения для этого.",
+    "uid_account": "UID аккаунта",
+    "uid_code": "Код",
+    "get_uid_and_code": "Получить UID и код",
+    "check_account_button": "Проверить",
+    "check_account_button_checking": "Проверка...",
+    "save_account_button": "Сохранить",
+    "cancel_button": "Отмена",
+    "list_server_available": {
+        "toast": {
+            "title": "Требуется UID",
+            "description": "Пожалуйста, введите ваш UID"
+        },
+        "label": "Не видите свой сервер в списке?",
+        "button": "Добавить вручную",
+        "select_server": "Выбрать сервер",
+        "search_placeholder": "Поиск сервера",
+        "tooltip": {
+            "online": "Онлайн",
+            "offline": "Оффлайн"
+        },
+        "dialog": {
+            "title": "Введите ваш UID",
+            "description": "Это ваш игровой UID, а не UID YuukiPS",
+            "input_placeholder": "Введите ваш UID",
+            "button": {
+                "save": "Сохранить",
+                "cancel": "Отмена"
+            }
+        }
+    },
+    "output": {
+        "button": "Очистить вывод",
+        "successfully_checked_account": "Успешно проверен UID {{uid}}. С этим UID зарегистрировано {{list_total}} аккаунтов.",
+        "no_account_registered": "Для указанного UID не найдено аккаунтов.",
+        "error_occurred": "Произошла ошибка при проверке аккаунта: {{error}}",
+        "successfully_selected_account": "Сервер {{name}} успешно сохранен.",
+        "input_unexpected_error": "Произошла ошибка во входных данных. Неопределенные переменные: {{error}}",
+        "uid_code_saved": "UID и код успешно сохранены.",
+        "uid_code_empty": "UID or Code empty",
+        "uid_must_be_5_digits": "UID must be 5 digits",
+        "code_must_be_4_digits": "Code must be 4 digits"
+    },
+    "select_account": {
+        "button_trigger": "Выбрать аккаунт",
+        "menu_label": "Сервер | Никнейм | UID"
+    }
+}
