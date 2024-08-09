@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
-use super::{category::Category, commands::Command};
+use super::category::Category;
+use crate::structure::handbook::commands::Command;
 
 #[derive(Serialize)]
 pub struct ScenesResult {

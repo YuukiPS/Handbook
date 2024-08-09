@@ -4,7 +4,6 @@ pub mod achievement;
 pub mod artifacts;
 pub mod category;
 pub mod characters;
-pub mod commands;
 pub mod dungeons;
 pub mod main_quests;
 pub mod materials;

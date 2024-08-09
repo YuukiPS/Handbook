@@ -1,7 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-use super::{category::Category, commands::Command, Language};
+use super::{category::Category, Language};
+use crate::structure::handbook::commands::Command;
 
 #[derive(Serialize)]
 pub struct DungeonsResult {

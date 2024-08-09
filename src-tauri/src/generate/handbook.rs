@@ -10,12 +10,12 @@ use serde::Serialize;
 use tauri::Emitter;
 
 use crate::{
+    structure::handbook::commands::{Command, Commands},
     structure::handbook::gi::{
         achievement::{AchievementResult, Achievements},
         artifacts::{ArtifactResult, Artifacts},
         category::Category,
         characters::{Character, CharactersList},
-        commands::{Command, Commands},
         dungeons::{Dungeons, DungeonsResult},
         main_quests::{MainQuestResult, MainQuests},
         materials::{Materials, MaterialsResult},

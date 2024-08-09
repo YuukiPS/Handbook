@@ -24,8 +24,8 @@ fn test_convert_rarity_to_number() {
 #[test]
 fn test_generate_command() {
     use crate::generate::handbook::generate_command;
+    use crate::structure::handbook::commands::Commands;
     use crate::structure::handbook::gi::category::Category;
-    use crate::structure::handbook::gi::commands::Commands;
     // Test for Characters
     let character_commands = generate_command(Category::Characters, 10000007, "/give");
     let character_expected = BTreeMap::from([
