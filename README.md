@@ -4,6 +4,8 @@ Handbook Finder is a desktop application built with Tauri, React, and TypeScript
 application, we are now transitioning to create an offline version that allows users to find id without needing
 an internet connection.
 
+**Note: This project is still under development and not ready for production use. Some features and code are not fully implemented yet. If you want to use this application, you'll need to compile it yourself following the guide provided below.**
+
 ## Features
 
 - Search for game items, characters, weapons, and more
