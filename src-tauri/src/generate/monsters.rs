@@ -1,83 +1,134 @@
-use std::collections::HashMap;
-
 use serde::Serialize;
+use std::collections::HashMap;
 
 use crate::{
     structure::handbook::{
         category::Category,
         commands::Command,
-        gi::monsters::{MonsterDescribe, Monsters},
+        gi::monsters::{Monster as GIMonster, MonsterDescribeElement},
+        sr::monster::Monster as SRMonster,
         Language,
     },
-    utility::{TextMap, TextMapError},
+    utility::TextMap,
 };
 
-use super::{commands::generate_command, output_log, ResultData};
+use super::{commands::generate_command, output_log, GameExcelReader, ResultData};
 
 #[derive(Serialize)]
 pub struct MonstersResult {
     pub id: i64,
     pub name: HashMap<Language, String>,
-    pub image: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<HashMap<Language, String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub image: Option<String>,
     pub category: Category,
-    pub commands: Command,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub commands: Option<Command>,
+}
+
+struct MonsterData {
+    id: i64,
+    name: i64,
+    description: Option<i64>,
+    icon: Option<String>,
+    category: Category,
+}
+
+impl MonsterData {
+    fn from_genshin(gi_monster: &GIMonster, gi_describe: &Option<&MonsterDescribeElement>) -> Self {
+        Self {
+            id: gi_monster.id,
+            name: gi_describe.map(|desc| desc.name_text_map_hash).unwrap_or(0),
+            description: None,
+            icon: gi_describe.and_then(|desc| Some(desc.icon.clone())),
+            category: Category::Monsters,
+        }
+    }
+
+    fn from_star_rail(sr_monster: &SRMonster) -> Self {
+        Self {
+            id: sr_monster.monster_id,
+            name: sr_monster.monster_name.hash,
+            description: Some(sr_monster.monster_introduction.hash),
+            icon: None,
+            category: Category::Monsters,
+        }
+    }
 }
 
 #[allow(clippy::too_many_arguments)]
-pub fn generate_monsters<F, D, G>(
+pub fn generate_monsters<G>(
     app_handle: &tauri::AppHandle,
-    resources: &String,
+    resources: &str,
     lang: &Language,
     text_map: &TextMap,
     result: &mut Vec<ResultData>,
-    read_excel_bin_output: F,
-    read_excel_bin_output_describe: D,
+    excel_reader: &GameExcelReader,
     get_image: G,
 ) -> Result<(), String>
 where
-    F: Fn(&str, &str) -> Result<Monsters, TextMapError>,
-    D: Fn(&str, &str) -> Result<MonsterDescribe, TextMapError>,
     G: Fn(&str, &str, &str) -> String,
 {
-    let monsters: Monsters =
-        match read_excel_bin_output(&resources.to_string(), "MonsterExcelConfigData") {
-            Ok(data) => data,
-            Err(e) => {
-                let error_msg = format!("Failed to read Monsters: {}", e);
-                output_log(app_handle, "error", &error_msg);
-                return Err(error_msg);
-            }
-        };
-    let monsters_describe: MonsterDescribe = match read_excel_bin_output_describe(
-        &resources.to_string(),
-        "MonsterDescribeExcelConfigData",
-    ) {
-        Ok(data) => data,
-        Err(e) => {
-            let error_msg = format!("Failed to read Monsters Describe: {}", e);
-            output_log(app_handle, "error", &error_msg);
-            return Err(error_msg);
+    let monsters: Vec<MonsterData> = match excel_reader {
+        GameExcelReader::GenshinImpact(_) => {
+            let monsters = match excel_reader
+                .read_excel_data::<GIMonster>(resources, "MonsterExcelConfigData")
+            {
+                Ok(data) => data,
+                Err(e) => return Err(e.to_string()),
+            };
+            let monsters_describe = match excel_reader.read_excel_data::<MonsterDescribeElement>(
+                resources,
+                "MonsterDescribeExcelConfigData",
+            ) {
+                Ok(data) => data,
+                Err(e) => return Err(e.to_string()),
+            };
+            monsters
+                .iter()
+                .map(|monster| {
+                    let describe = monster
+                        .describe_id
+                        .and_then(|id| monsters_describe.iter().find(|describe| describe.id == id));
+                    MonsterData::from_genshin(monster, &describe)
+                })
+                .collect()
+        }
+        GameExcelReader::StarRail(_) => {
+            let monsters =
+                match excel_reader.read_excel_data::<SRMonster>(resources, "MonsterConfig") {
+                    Ok(data) => data,
+                    Err(e) => return Err(e.to_string()),
+                };
+            monsters.iter().map(MonsterData::from_star_rail).collect()
         }
     };
+
     let mut total_monsters = 0;
     for monster in monsters.iter() {
+        let name = text_map.get(&monster.name.to_string()).cloned();
+        if name.is_none() {
+            continue;
+        }
         total_monsters += 1;
-        let describe = monster
-            .describe_id
-            .and_then(|id| monsters_describe.iter().find(|describe| describe.id == id));
 
-        let name =
-            describe.and_then(|desc| text_map.get(&desc.name_text_map_hash.to_string()).cloned());
-
-        // total_monsters += 1;
-
-        let icon: Option<String> = describe.map(|desc| desc.icon.clone());
-        let image = get_image(
-            "genshin-impact",
-            icon.as_deref().unwrap_or_default(),
-            "monsters",
-        );
-        let commands = generate_command(Category::Monsters, monster.id as u32, "/spawn");
+        let description = monster
+            .description
+            .and_then(|desc| text_map.get(&desc.to_string()).cloned());
+        let image = monster
+            .icon
+            .as_ref()
+            .map(|icon| get_image("genshin-impact", icon, "monsters"));
+        let commands = if matches!(excel_reader, GameExcelReader::GenshinImpact(_)) {
+            Some(generate_command(
+                Category::Monsters,
+                monster.id as u32,
+                "/spawn",
+            ))
+        } else {
+            None
+        };
 
         let monster_result = result
             .iter_mut()
@@ -94,14 +145,26 @@ where
             existing_monster
                 .name
                 .insert(lang.clone(), name.unwrap_or_default());
+            if let Some(desc) = description {
+                existing_monster
+                    .description
+                    .get_or_insert_with(HashMap::new)
+                    .insert(lang.clone(), desc);
+            }
         } else {
             let mut names = HashMap::new();
             names.insert(lang.clone(), name.unwrap_or_default());
+            let descriptions = description.map(|desc| {
+                let mut map = HashMap::new();
+                map.insert(lang.clone(), desc);
+                map
+            });
             result.push(ResultData::Monsters(MonstersResult {
                 id: monster.id,
                 name: names,
-                category: Category::Monsters,
+                description: descriptions,
                 image,
+                category: monster.category.clone(),
                 commands,
             }))
         }
@@ -111,7 +174,5 @@ where
         "info",
         &format!("Total Monsters added: {}", total_monsters),
     );
-    drop(monsters_describe);
-    drop(monsters);
     Ok(())
 }

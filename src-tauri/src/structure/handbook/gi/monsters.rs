@@ -1,9 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-pub type Monsters = Vec<Monster>;
-
-pub type MonsterDescribe = Vec<MonsterDescribeElement>;
-
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Monster {
