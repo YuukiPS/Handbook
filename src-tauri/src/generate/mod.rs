@@ -383,11 +383,11 @@ pub fn generate_handbook(
                 ),
                 SelectHandbookArgs::Quests => generate_quests(
                     &app_handle,
-                    &args.excel_path.to_string(),
+                    args.excel_path,
                     lang,
                     &text_map,
                     &mut result,
-                    read_excel_bin_output,
+                    &excel_reader,
                 ),
                 SelectHandbookArgs::Dungeons => generate_dungeons(
                     &app_handle,

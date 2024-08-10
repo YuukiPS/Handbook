@@ -1,7 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-pub type MainQuests = Vec<MainQuest>;
-
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MainQuest {
