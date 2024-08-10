@@ -1,7 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-pub type Artifacts = Vec<Artifact>;
-
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Artifact {

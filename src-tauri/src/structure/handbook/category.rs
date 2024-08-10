@@ -14,4 +14,5 @@ pub enum Category {
     Items,
     #[serde(rename = "Light Cones")]
     LightCones,
+    Relics,
 }

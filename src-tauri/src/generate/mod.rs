@@ -366,11 +366,11 @@ pub fn generate_handbook(
                 ),
                 SelectHandbookArgs::Artifacts => generate_artifacts(
                     &app_handle,
-                    &args.excel_path.to_string(),
+                    args.excel_path,
                     lang,
                     &text_map,
                     &mut result,
-                    read_excel_bin_output,
+                    &excel_reader,
                     get_image,
                 ),
                 SelectHandbookArgs::Achievements => generate_achievements(
