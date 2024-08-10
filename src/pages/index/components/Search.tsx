@@ -30,10 +30,11 @@ import debounce from "lodash/debounce";
 import type { State } from "./types";
 import { Trans, useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { open } from "@tauri-apps/plugin-dialog";
+import { open, type OpenDialogOptions } from "@tauri-apps/plugin-dialog";
 import { FolderIcon } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { invoke } from "@tauri-apps/api/core";
+import { platform } from "@tauri-apps/plugin-os";
 
 interface SearchProps {
     currentLanguage: string;
@@ -132,10 +133,12 @@ const Search: React.FC<SearchProps> = ({
     }, []);
 
     const selectHandbook = async () => {
-        const path = await open({
-            directory: false,
-            filters: [{ name: "GM Handbook", extensions: ["json"] }],
-        });
+        const currentPlatform = platform();
+        const options: OpenDialogOptions = { directory: false };
+        if (currentPlatform === "windows") {
+            options.filters = [{ name: "GM Handbook", extensions: ["json"] }];
+        }
+        const path = await open(options);
         if (!path) {
             toast({
                 title: "No path selected",

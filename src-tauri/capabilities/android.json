@@ -1,0 +1,21 @@
+{
+    "$schema": "../gen/schemas/android-schema.json",
+    "identifier": "android",
+    "description": "Capability for the android",
+    "windows": [
+        "main"
+    ],
+    "permissions": [
+        "core:default",
+        "core:path:default",
+        "clipboard-manager:allow-write-text",
+        "clipboard-manager:deny-read-text",
+        "clipboard-manager:deny-read-image",
+        "clipboard-manager:deny-clear",
+        "dialog:allow-open",
+        "shell:allow-open"
+    ],
+    "platforms": [
+        "android"
+    ]
+}

@@ -4,6 +4,7 @@ version = "1.0.0"
 description = "Find ID on Handbook"
 authors = ["you"]
 edition = "2021"
+license-file = "../LICENSE"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -27,6 +28,7 @@ thiserror = "1.0"
 tauri-plugin-dialog = "2.0.0-rc.0"
 chrono = "0.4"
 colored = "2.1"
+tauri-plugin-os = "2.0.0-rc.0"
 
 [dev-dependencies]
 pretty_assertions = "1.4"

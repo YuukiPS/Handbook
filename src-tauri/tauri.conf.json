@@ -22,7 +22,11 @@
             }
         ],
         "security": {
-            "csp": null
+            "csp": null,
+            "capabilities": [
+                "android",
+                "windows"
+            ]
         }
     },
     "bundle": {
@@ -31,6 +35,9 @@
         "targets": [
             "msi"
         ],
+        "android": {
+            "minSdkVersion": 24
+        },
         "resources": [
             "resources/*"
         ],
