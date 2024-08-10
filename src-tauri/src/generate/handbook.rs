@@ -6,7 +6,7 @@ use std::{
     str::FromStr,
 };
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use tauri::Emitter;
 
 use crate::{
@@ -173,12 +173,28 @@ impl AllVariants for Language {
     }
 }
 
-fn output_log(app_handle: &tauri::AppHandle, message: &str) {
-    let _ = app_handle.emit("handbook", message);
-    Logger::info(message);
+#[derive(Serialize, Deserialize, Clone)]
+struct OutputEmit {
+    log_level: String,
+    message: String,
 }
 
-fn parse_selections<T>(args: &Option<Vec<String>>) -> Result<Vec<T>, ()>
+fn output_log(app_handle: &tauri::AppHandle, log_level: &str, message: &str) {
+    let _ = app_handle.emit(
+        "handbook",
+        OutputEmit {
+            log_level: log_level.to_string(),
+            message: message.to_string(),
+        },
+    );
+    match log_level {
+        "info" => Logger::info(message),
+        "warn" => Logger::warn(message),
+        _ => {}
+    }
+}
+
+fn parse_selections<T>(args: &Option<Vec<String>>) -> Result<Vec<T>, String>
 where
     T: FromStr + fmt::Debug + fmt::Display + AllVariants,
     T::Err: fmt::Display + fmt::Debug,
@@ -204,17 +220,17 @@ where
                     .collect::<Vec<_>>()
                     .join(", ");
 
-                eprintln!(
-                    "Error: Invalid selections: {}.",
-                    invalid_selections.join(", ")
+                let mut error_message = format!(
+                    "Error: Invalid selections: {}. Available selections are: {}",
+                    invalid_selections.join(", "),
+                    available
                 );
-                eprintln!("Available selections are: {}", available);
 
                 if !valid_selections.is_empty() {
-                    println!("Valid selections: {:?}", valid_selections);
+                    error_message.push_str(&format!(" Valid selections: {:?}", valid_selections));
                 }
 
-                Err(())
+                Err(error_message)
             } else {
                 Ok(valid_selections)
             }
@@ -368,8 +384,14 @@ where
     G: Fn(&str, &str, &str) -> String,
 {
     let character: CharactersList =
-        read_excel_bin_output(&resources.to_string(), "AvatarExcelConfigData")
-            .map_err(|_| "Failed to read Characters")?;
+        match read_excel_bin_output(&resources.to_string(), "AvatarExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Characters: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
     let mut total_characters = 0;
     for character in character.iter() {
         if character.id == 10000001 || character.id > 11000000 {
@@ -426,6 +448,7 @@ where
     }
     output_log(
         app_handle,
+        "info",
         &format!("Total Characters added: {}", total_characters),
     );
     drop(character);
@@ -446,8 +469,14 @@ where
     G: Fn(&str, &str, &str) -> String,
 {
     let materials: Materials =
-        read_excel_bin_output(&resources.to_string(), "MaterialExcelConfigData")
-            .map_err(|_| "Failed to read Materials")?;
+        match read_excel_bin_output(&resources.to_string(), "MaterialExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Materials: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
     let mut total_materials = 0;
     for material in materials.iter() {
         let name = text_map
@@ -498,6 +527,7 @@ where
     }
     output_log(
         app_handle,
+        "info",
         &format!("Total Materials added: {}", total_materials),
     );
     drop(materials);
@@ -517,8 +547,15 @@ where
     F: Fn(&str, &str) -> Result<Weapons, TextMapError>,
     G: Fn(&str, &str, &str) -> String,
 {
-    let weapons: Weapons = read_excel_bin_output(&resources.to_string(), "WeaponExcelConfigData")
-        .map_err(|_| "Failed to read Weapons")?;
+    let weapons: Weapons =
+        match read_excel_bin_output(&resources.to_string(), "WeaponExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Weapons: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
     let mut total_weapons = 0;
     for weapon in weapons.iter() {
         total_weapons += 1;
@@ -569,6 +606,7 @@ where
     }
     output_log(
         app_handle,
+        "info",
         &format!("Total Weapons added: {}", total_weapons),
     );
     drop(weapons);
@@ -589,8 +627,14 @@ where
     G: Fn(&str, &str, &str) -> String,
 {
     let artifacts: Artifacts =
-        read_excel_bin_output(&resources.to_string(), "ReliquaryExcelConfigData")
-            .map_err(|_| "Failed to read Artifacts")?;
+        match read_excel_bin_output(&resources.to_string(), "ReliquaryExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Artifacts: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
 
     let mut total_artifacts = 0;
     for artifact in artifacts.iter() {
@@ -643,6 +687,7 @@ where
 
     output_log(
         app_handle,
+        "info",
         &format!("Total Artifacts added: {}", total_artifacts),
     );
     drop(artifacts);
@@ -661,8 +706,14 @@ where
     F: Fn(&str, &str) -> Result<Achievements, TextMapError>,
 {
     let achievements: Achievements =
-        read_excel_bin_output(&resources.to_string(), "AchievementExcelConfigData")
-            .map_err(|_| "Failed to read Achievements")?;
+        match read_excel_bin_output(&resources.to_string(), "AchievementExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Achievements: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
     let mut total_achievements = 0;
     for achievement in achievements.iter() {
         total_achievements += 1;
@@ -711,6 +762,7 @@ where
     }
     output_log(
         app_handle,
+        "info",
         &format!("Total Achievements added: {}", total_achievements),
     );
     drop(achievements);
@@ -729,8 +781,14 @@ where
     F: Fn(&str, &str) -> Result<MainQuests, TextMapError>,
 {
     let main_quests: MainQuests =
-        read_excel_bin_output(&resources.to_string(), "MainQuestExcelConfigData")
-            .map_err(|_| "Failed to read Main Quests")?;
+        match read_excel_bin_output(&resources.to_string(), "MainQuestExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Main Quests: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
 
     let mut total_main_quests = 0;
     for main_quest in main_quests.iter() {
@@ -779,6 +837,7 @@ where
     }
     output_log(
         app_handle,
+        "info",
         &format!("Total Main Quests added: {}", total_main_quests),
     );
     drop(main_quests);
@@ -797,8 +856,14 @@ where
     F: Fn(&str, &str) -> Result<Dungeons, TextMapError>,
 {
     let dungeons: Dungeons =
-        read_excel_bin_output(&resources.to_string(), "DungeonExcelConfigData")
-            .map_err(|_| "Failed to read Dungeons")?;
+        match read_excel_bin_output(&resources.to_string(), "DungeonExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Dungeons: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
 
     let mut total_dungeons = 0;
     for dungeon in dungeons.iter() {
@@ -847,6 +912,7 @@ where
     }
     output_log(
         app_handle,
+        "info",
         &format!("Total Dungeons added: {}", total_dungeons),
     );
     drop(dungeons);
@@ -862,8 +928,15 @@ pub fn generate_scenes<F>(
 where
     F: Fn(&str, &str) -> Result<Scenes, TextMapError>,
 {
-    let scenes: Scenes = read_excel_bin_output(&resources.to_string(), "SceneExcelConfigData")
-        .map_err(|_| "Failed to read Scenes")?;
+    let scenes: Scenes = match read_excel_bin_output(&resources.to_string(), "SceneExcelConfigData")
+    {
+        Ok(data) => data,
+        Err(e) => {
+            let error_msg = format!("Failed to read Scenes: {}", e);
+            output_log(app_handle, "error", &error_msg);
+            return Err(error_msg);
+        }
+    };
 
     let mut total_scenes = 0;
     for scene in scenes.iter() {
@@ -878,7 +951,11 @@ where
             commands: command,
         }))
     }
-    output_log(app_handle, &format!("Total Scenes added: {}", total_scenes));
+    output_log(
+        app_handle,
+        "info",
+        &format!("Total Scenes added: {}", total_scenes),
+    );
     drop(scenes);
     Ok(())
 }
@@ -900,11 +977,25 @@ where
     G: Fn(&str, &str, &str) -> String,
 {
     let monsters: Monsters =
-        read_excel_bin_output(&resources.to_string(), "MonsterExcelConfigData")
-            .map_err(|_| "Failed to read Monsters")?;
-    let monsters_describe: MonsterDescribe =
-        read_excel_bin_output_describe(&resources.to_string(), "MonsterDescribeExcelConfigData")
-            .map_err(|_| "Failed to read Monsters Describe")?;
+        match read_excel_bin_output(&resources.to_string(), "MonsterExcelConfigData") {
+            Ok(data) => data,
+            Err(e) => {
+                let error_msg = format!("Failed to read Monsters: {}", e);
+                output_log(app_handle, "error", &error_msg);
+                return Err(error_msg);
+            }
+        };
+    let monsters_describe: MonsterDescribe = match read_excel_bin_output_describe(
+        &resources.to_string(),
+        "MonsterDescribeExcelConfigData",
+    ) {
+        Ok(data) => data,
+        Err(e) => {
+            let error_msg = format!("Failed to read Monsters Describe: {}", e);
+            output_log(app_handle, "error", &error_msg);
+            return Err(error_msg);
+        }
+    };
     let mut total_monsters = 0;
     for monster in monsters.iter() {
         total_monsters += 1;
@@ -954,6 +1045,7 @@ where
     }
     output_log(
         app_handle,
+        "info",
         &format!("Total Monsters added: {}", total_monsters),
     );
     drop(monsters_describe);
@@ -978,10 +1070,14 @@ pub fn generate_handbook(
     if !path_text_map.exists() {
         return Err("Path does not exist".to_string());
     }
-    let parsed_selections = parse_selections::<SelectHandbookArgs>(&selections)
-        .map_err(|_| "Invalid selection".to_string())?;
-    let parsed_language = parse_selections::<Language>(&languages)
-        .map_err(|_| "Invalid language selection".to_string())?;
+    let parsed_selections = match parse_selections::<SelectHandbookArgs>(&selections) {
+        Ok(selections) => selections,
+        Err(e) => return Err(e.to_string()),
+    };
+    let parsed_language = match parse_selections::<Language>(&languages) {
+        Ok(languages) => languages,
+        Err(e) => return Err(e.to_string()),
+    };
     let selections_slice: &[SelectHandbookArgs] = &parsed_selections;
     let language_slice: &[Language] = &parsed_language;
     let start = std::time::Instant::now();
@@ -989,14 +1085,17 @@ pub fn generate_handbook(
     for lang in language_slice {
         output_log(
             &app_handle,
+            "info",
             &format!(
                 "Reading {}/TextMap{}.json",
                 path_text_map.to_str().unwrap(),
                 lang.to_string().to_uppercase()
             ),
         );
-        let text_map = read_text_map(path_text_map.to_str().unwrap(), &lang.to_string())
-            .map_err(|e| e.to_string())?;
+        let text_map = match read_text_map(path_text_map.to_str().unwrap(), &lang.to_string()) {
+            Ok(text_map) => text_map,
+            Err(e) => return Err(e.to_string()),
+        };
 
         for selection in selections_slice {
             match selection {
@@ -1080,19 +1179,28 @@ pub fn generate_handbook(
         }
         drop(text_map);
     }
-    output_log(&app_handle, &format!("Total all added: {}", result.len()));
+    output_log(
+        &app_handle,
+        "info",
+        &format!("Total all added: {}", result.len()),
+    );
     let json = serde_json::to_string_pretty(&result).unwrap();
     let output_path = Path::new(output).join(output_file_name);
     output_log(
         &app_handle,
+        "info",
         &format!("Writing to {}", output_path.to_str().unwrap()),
     );
     fs::write(output_path.clone(), json).unwrap();
     let duration = start.elapsed();
-    let metadata_file = fs::metadata(output_path).map_err(|e| e.to_string())?;
+    let metadata_file = match fs::metadata(output_path) {
+        Ok(metadata) => metadata,
+        Err(e) => return Err(e.to_string()),
+    };
     let size = format_file_size(metadata_file.len());
     output_log(
         &app_handle,
+        "info",
         &format!("Total time: {:?}, Size: {}", duration, size),
     );
     Ok("Success".to_string())

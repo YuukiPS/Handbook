@@ -14,6 +14,11 @@ import {
 import { listen } from "@tauri-apps/api/event";
 import { error } from "@/log";
 
+interface Output {
+    log_level: string;
+    message: string;
+}
+
 const App: React.FC = (): JSX.Element => {
     const [selectedResourcesDirectory, setSelectedResourcesDirectory] =
         useState<string>("");
@@ -22,7 +27,7 @@ const App: React.FC = (): JSX.Element => {
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
     const [outputPath, setOutputPath] = useState<string>("");
     const [filename, setFilename] = useState<string>("");
-    const [outputLog, setOutputLog] = useState<string[]>([]);
+    const [outputLog, setOutputLog] = useState<Output[]>([]);
     const [isOutputVisible, setIsOutputVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const outputContainerRef = useRef<HTMLDivElement>(null);
@@ -42,7 +47,7 @@ const App: React.FC = (): JSX.Element => {
     useEffect(() => {
         const unlisten = listen("handbook", (event) => {
             const { payload } = event;
-            setOutputLog((prev) => [...prev, payload as string]);
+            setOutputLog((prev) => [...prev, payload as Output]);
         });
         return () => {
             unlisten.then((f) => f());
@@ -287,13 +292,23 @@ const App: React.FC = (): JSX.Element => {
                                 </div>
                                 {outputLog.map((line, index) => (
                                     <div
-                                        key={`output-line-${index}-${line.slice(
+                                        key={`output-line-${index}-${line.message.slice(
                                             0,
                                             10
                                         )}`}
                                         className="py-1"
                                     >
-                                        <span className="text-green-600 dark:text-green-400">{`> ${line}`}</span>
+                                        <span
+                                            className={`${
+                                                line.log_level === "info"
+                                                    ? "text-green-600 dark:text-green-400"
+                                                    : line.log_level === "warn"
+                                                    ? "text-yellow-600 dark:text-yellow-400"
+                                                    : "text-red-600 dark:text-red-400"
+                                            }`}
+                                        >
+                                            {`> ${line.message}`}
+                                        </span>
                                     </div>
                                 ))}
                             </>
