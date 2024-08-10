@@ -9,9 +9,7 @@ use crate::{
     structure::handbook::Language, utility::TextMap,
 };
 
-use super::{
-    commands::generate_command, convert_rarity_to_number, output_log, GameExcelReader, ResultData,
-};
+use super::{commands::generate_command, output_log, GameExcelReader, ResultData};
 
 struct CharacterData {
     id: i64,
@@ -28,7 +26,7 @@ impl CharacterData {
             id: genshin_char.id,
             name: genshin_char.name_text_map_hash,
             description: Some(genshin_char.desc_text_map_hash),
-            rarity: genshin_char.quality_type,
+            rarity: genshin_char.quality_type.to_string(),
             icon: genshin_char.icon_name,
             category: Category::Characters,
         }
@@ -150,7 +148,7 @@ where
                 id: character.id,
                 name: names,
                 description: Some(descriptions),
-                rarity: Some(convert_rarity_to_number(&character.rarity)),
+                rarity: Some(character.rarity.parse::<u8>().unwrap_or_default()),
                 image,
                 category: character.category.clone(),
                 commands: command,

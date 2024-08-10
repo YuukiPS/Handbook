@@ -3,25 +3,6 @@ use std::collections::BTreeMap;
 use pretty_assertions::assert_eq;
 
 #[test]
-fn test_convert_rarity_to_number() {
-    use crate::generate::convert_rarity_to_number;
-    // Test case 1: QUALITY_ORANGE
-    assert_eq!(convert_rarity_to_number("QUALITY_ORANGE"), 5);
-
-    // Test case 2: QUALITY_PURPLE
-    assert_eq!(convert_rarity_to_number("QUALITY_PURPLE"), 4);
-
-    // Test case 3: Unknown quality
-    assert_eq!(convert_rarity_to_number("QUALITY_UNKNOWN"), 0);
-
-    // Test case 4: Empty string
-    assert_eq!(convert_rarity_to_number(""), 0);
-
-    // Test case 5: Lowercase input (should return 0 as it doesn't match exactly)
-    assert_eq!(convert_rarity_to_number("quality_orange"), 0);
-}
-
-#[test]
 fn test_generate_command() {
     use crate::generate::commands::generate_command;
     use crate::structure::handbook::{category::Category, commands::Commands};

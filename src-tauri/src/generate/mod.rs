@@ -278,14 +278,6 @@ where
     }
 }
 
-pub(crate) fn convert_rarity_to_number(rarity: &str) -> u8 {
-    match rarity {
-        "QUALITY_ORANGE" => 5,
-        "QUALITY_PURPLE" => 4,
-        _ => 0,
-    }
-}
-
 // TODO: Change or remove this to use from the user input provide for the path of the images
 pub static PATH_IMAGE: &str = "./src/images/";
 pub static URL_IMAGE: &str = "https://api.elaxan.com/images/";
