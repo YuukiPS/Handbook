@@ -108,12 +108,13 @@ pub fn get_category() -> Result<Vec<String>, String> {
     Logger::info("Attempting to read handbook content...");
     let handbook_content = HANDBOOK_CONTENT.read().unwrap();
     Logger::info("Successfully read handbook content.");
-    let unique_categories: HashSet<String> = handbook_content.iter()
+    let unique_categories: HashSet<String> = handbook_content
+        .iter()
         .map(|data| data.category.to_string())
         .collect();
     let mut result: Vec<String> = unique_categories.into_iter().collect();
 
     result.sort();
-    
+
     Ok(result)
 }

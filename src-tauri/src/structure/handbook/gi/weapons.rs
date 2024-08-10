@@ -1,22 +1,4 @@
-use std::collections::HashMap;
-
 use serde::{Deserialize, Serialize};
-
-use super::{category::Category, Language};
-use crate::structure::handbook::commands::Command;
-
-#[derive(Serialize)]
-pub struct WeaponResult {
-    pub id: i64,
-    pub name: HashMap<Language, String>,
-    pub description: HashMap<Language, String>,
-    pub icon: String,
-    pub rarity: i64,
-    pub category: Category,
-    pub commands: Command,
-}
-
-pub type Weapons = Vec<Weapon>;
 
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

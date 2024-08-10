@@ -67,30 +67,53 @@ const App: React.FC = (): JSX.Element => {
     ];
 
     const generate = async () => {
+        setLoading(true);
+        setIsOutputVisible(true);
+
+        const checkAndLogError = (condition: boolean, message: string) => {
+            if (condition) {
+                setOutputLog((prev) => [
+                    ...prev,
+                    { log_level: "error", message },
+                ]);
+                error(message);
+                return true;
+            }
+            return false;
+        };
+
+        if (
+            checkAndLogError(
+                selectedResourcesDirectory.length === 0,
+                "No resources directory selected"
+            ) ||
+            checkAndLogError(languages.length === 0, "No languages selected") ||
+            checkAndLogError(
+                selectedSelections.length === 0,
+                "No selections selected"
+            )
+        ) {
+            setLoading(false);
+            return;
+        }
+
         try {
-            setLoading(true);
-            setIsOutputVisible(true);
-            if (selectedResourcesDirectory.length === 0) {
-                error("No directory selected");
-                return;
-            }
-            if (languages.length === 0) {
-                error("No languages selected");
-                return;
-            }
-            if (selectedSelections.length === 0) {
-                error("No selections selected");
-                return;
-            }
             await invoke("generate_handbook", {
-                path: selectedResourcesDirectory,
-                pathTextMap: selectedTextMapPath,
+                args: {
+                    excelPath: selectedResourcesDirectory,
+                    textMapPath: selectedTextMapPath,
+                    outputPath,
+                    outputFileName: filename,
+                },
+                game: "genshin-impact",
                 selections: selectedSelections,
                 languages: selectedLanguages,
-                output: outputPath,
-                outputFileName: filename,
             });
         } catch (e) {
+            setOutputLog((prev) => [
+                ...prev,
+                { log_level: "error", message: `Error: ${e}` },
+            ]);
             error(`Error: ${e}`);
         } finally {
             setLoading(false);

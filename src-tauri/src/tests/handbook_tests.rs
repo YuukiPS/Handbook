@@ -4,7 +4,7 @@ use pretty_assertions::assert_eq;
 
 #[test]
 fn test_convert_rarity_to_number() {
-    use crate::generate::handbook::convert_rarity_to_number;
+    use crate::generate::convert_rarity_to_number;
     // Test case 1: QUALITY_ORANGE
     assert_eq!(convert_rarity_to_number("QUALITY_ORANGE"), 5);
 
@@ -23,9 +23,8 @@ fn test_convert_rarity_to_number() {
 
 #[test]
 fn test_generate_command() {
-    use crate::generate::handbook::generate_command;
-    use crate::structure::handbook::commands::Commands;
-    use crate::structure::handbook::gi::category::Category;
+    use crate::generate::commands::generate_command;
+    use crate::structure::handbook::{category::Category, commands::Commands};
     // Test for Characters
     let character_commands = generate_command(Category::Characters, 10000007, "/give");
     let character_expected = BTreeMap::from([

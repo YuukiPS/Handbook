@@ -1,18 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-use super::category::Category;
-use crate::structure::handbook::commands::Command;
-
-#[derive(Serialize)]
-pub struct ScenesResult {
-    pub id: i64,
-    #[serde(rename = "type")]
-    pub scene_type: SceneType,
-    pub name: String,
-    pub category: Category,
-    pub commands: Command,
-}
-
 pub type Scenes = Vec<Scene>;
 
 #[derive(Serialize, Deserialize)]

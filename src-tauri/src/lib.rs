@@ -7,7 +7,7 @@ mod structure;
 mod tests;
 mod utility;
 
-use crate::generate::handbook::generate_handbook;
+use crate::generate::generate_handbook;
 use crate::log::{log_error, log_info, log_warn};
 use crate::search::gi::{find, get_category, get_path_handbook, update_path_handbook};
 use crate::structure::gm::Gmhandbook;

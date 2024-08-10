@@ -48,7 +48,7 @@ impl fmt::Display for Category {
             Category::Monsters => "Monsters",
             Category::Quests => "Quests",
             Category::Scenes => "Scenes",
-            Category::Weapons => "Weapons"
+            Category::Weapons => "Weapons",
         };
         write!(f, "{}", category_str)
     }

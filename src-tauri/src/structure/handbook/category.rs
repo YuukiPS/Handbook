@@ -11,4 +11,7 @@ pub enum Category {
     Dungeons,
     Scenes,
     Monsters,
+    Items,
+    #[serde(rename = "Light Cones")]
+    LightCones,
 }
