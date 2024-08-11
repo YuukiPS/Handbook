@@ -14,9 +14,7 @@ import androidx.core.content.ContextCompat
 import app.tauri.Logger
 import app.tauri.annotation.Command
 import app.tauri.annotation.ActivityCallback
-import app.tauri.annotation.InvokeArg
 import app.tauri.annotation.TauriPlugin
-import app.tauri.plugin.JSObject
 import app.tauri.plugin.Plugin
 import app.tauri.plugin.Invoke
 
@@ -37,6 +35,7 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
                     intent.addCategory("android.intent.category.DEFAULT")
                     intent.data = Uri.parse("package:${activity.packageName}")
                     activity.startActivityForResult(intent, MANAGE_EXTERNAL_STORAGE_PERMISSION_CODE)
+                    startActivityForResult(invoke, intent, "handlePermissionResult")
                 } catch (e: Exception) {
                     val intent = Intent()
                     intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
@@ -44,7 +43,6 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
                         intent,
                         MANAGE_EXTERNAL_STORAGE_PERMISSION_CODE
                     )
-                } finally {
                     startActivityForResult(invoke, intent, "handlePermissionResult")
                 }
             }
