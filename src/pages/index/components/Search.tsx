@@ -134,7 +134,16 @@ const Search: React.FC<SearchProps> = ({
 
     const selectHandbook = async () => {
         const currentPlatform = platform();
-        const options: OpenDialogOptions = { directory: false };
+        if (currentPlatform === "android") {
+            const result = await invoke(
+                "plugin:handbook-finder|requestStoragePermission"
+            );
+            console.log(result);
+        }
+        const options: OpenDialogOptions = {
+            directory: false,
+            title: "Select GM Handbook path",
+        };
         if (currentPlatform === "windows") {
             options.filters = [{ name: "GM Handbook", extensions: ["json"] }];
         }

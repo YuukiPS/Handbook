@@ -1622,6 +1622,7 @@ dependencies = [
  "tauri-build",
  "tauri-plugin-clipboard-manager",
  "tauri-plugin-dialog",
+ "tauri-plugin-handbook-finder",
  "tauri-plugin-os",
  "tauri-plugin-shell",
  "tauri-plugin-updater",
@@ -4094,6 +4095,16 @@ dependencies = [
  "thiserror",
  "url",
  "uuid",
+]
+
+[[package]]
+name = "tauri-plugin-handbook-finder"
+version = "0.0.0"
+dependencies = [
+ "serde",
+ "tauri",
+ "tauri-plugin",
+ "thiserror",
 ]
 
 [[package]]
