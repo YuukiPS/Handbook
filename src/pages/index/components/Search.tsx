@@ -44,6 +44,10 @@ interface SearchProps {
     setState: React.Dispatch<React.SetStateAction<State>>;
 }
 
+interface StoragePermissionResponse {
+    status: string;
+}
+
 const Search: React.FC<SearchProps> = ({
     loadGI,
     loadSR,
@@ -135,10 +139,28 @@ const Search: React.FC<SearchProps> = ({
     const selectHandbook = async () => {
         const currentPlatform = platform();
         if (currentPlatform === "android") {
-            const result = await invoke(
-                "plugin:handbook-finder|requestStoragePermission"
-            );
-            console.log(result);
+            try {
+                const result = await invoke<StoragePermissionResponse>(
+                    "plugin:handbook-finder|requestStoragePermission"
+                );
+                if (result.status === "Cancelled") {
+                    toast({
+                        title: "Storage permission cancelled",
+                        description:
+                            "Storage permission has been cancelled, this required to read the handbook file",
+                    });
+                    return;
+                }
+            } catch (e) {
+                toast({
+                    title: "Error",
+                    description: `Error while requesting storage permission: ${JSON.stringify(
+                        e
+                    )}`,
+                    variant: "destructive",
+                });
+                return;
+            }
         }
         const options: OpenDialogOptions = {
             directory: false,

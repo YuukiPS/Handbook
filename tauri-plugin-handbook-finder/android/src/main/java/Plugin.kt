@@ -17,12 +17,12 @@ import app.tauri.annotation.ActivityCallback
 import app.tauri.annotation.TauriPlugin
 import app.tauri.plugin.Plugin
 import app.tauri.plugin.Invoke
+import app.tauri.plugin.JSObject
 
 @TauriPlugin
 class Plugin(private val activity: Activity) : Plugin(activity) {
     companion object {
         private const val STORAGE_PERMISSION_CODE = 100
-        private const val MANAGE_EXTERNAL_STORAGE_PERMISSION_CODE = 101
     }
 
     @Command
@@ -34,15 +34,10 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
                     val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                     intent.addCategory("android.intent.category.DEFAULT")
                     intent.data = Uri.parse("package:${activity.packageName}")
-                    activity.startActivityForResult(intent, MANAGE_EXTERNAL_STORAGE_PERMISSION_CODE)
                     startActivityForResult(invoke, intent, "handlePermissionResult")
                 } catch (e: Exception) {
                     val intent = Intent()
                     intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
-                    activity.startActivityForResult(
-                        intent,
-                        MANAGE_EXTERNAL_STORAGE_PERMISSION_CODE
-                    )
                     startActivityForResult(invoke, intent, "handlePermissionResult")
                 }
             }
@@ -75,17 +70,23 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
             when (result.resultCode) {
                 Activity.RESULT_OK -> {
                     Logger.info(result.data.toString())
-                    invoke.resolve()
+                    invoke.resolve(JSObject().apply {
+                        put("status", "Granted")
+                    })
                 }
 
                 Activity.RESULT_CANCELED -> {
-                    invoke.reject("Cancelled")
+                    invoke.resolve(JSObject().apply {
+                        put("status", "Cancelled")
+                    })
                 }
 
                 else -> invoke.reject("Failed to request storage permissions")
             }
         } catch (e: Exception) {
-            Logger.error(e.message ?: "Failed to request storage permissions")
+            val errorMessage = e.message ?: "Failed to request storage permissions"
+            Logger.error(errorMessage)
+            invoke.reject(errorMessage)
         }
     }
 }
