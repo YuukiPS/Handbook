@@ -1,20 +1,20 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import ElaXanAPI from "@/api/elaxanApi";
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
 import Search from "./components/Search";
 import expiresInAMonth from "./components/cookieExpires";
 import DataCard from "./components/DataCard";
 import DataCardSR from "./components/DataCardSR";
-import {Button} from "@/components/ui/button";
-import type {CurrentType, State} from "./components/types";
+import { Button } from "@/components/ui/button";
+import type { CurrentType, State } from "./components/types";
 import YuukiPS from "@/api/yuukips";
-import {useTranslation} from "react-i18next";
-import {invoke} from "@tauri-apps/api/core";
-import type {Description, GmhandbookGI} from "@/types/gm";
-import {error} from "@/log.ts";
+import { useTranslation } from "react-i18next";
+import { invoke } from "@tauri-apps/api/core";
+import type { Description, GmhandbookGI } from "@/types/gm";
+import { error } from "@tauri-apps/plugin-log";
 
 function App() {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const [cookies, setCookie] = useCookies([
         "language",
         "showImage",
@@ -120,7 +120,7 @@ function App() {
     };
 
     if (!cookies.limitsResult) {
-        setCookie("limitsResult", 300, {expires: expiresInAMonth()});
+        setCookie("limitsResult", 300, { expires: expiresInAMonth() });
     }
 
     useEffect(() => {
@@ -146,13 +146,13 @@ function App() {
     useEffect(() => {
         const getCategory = async () => {
             try {
-                const response = await invoke<string[]>('get_category');
+                const response = await invoke<string[]>("get_category");
                 setState((prevState) => ({
                     ...prevState,
-                    listCategory: response
-                }))
+                    listCategory: response,
+                }));
             } catch (e) {
-                error(`There was an error while get a list of category: ${e}`)
+                error(`There was an error while get a list of category: ${e}`);
             }
         };
 
@@ -177,8 +177,8 @@ function App() {
     const noResult =
         !state.loading &&
         (state.currentType === "Genshin Impact"
-                ? state.mainData
-                : state.mainDataSR
+            ? state.mainData
+            : state.mainDataSR
         ).length === 0 &&
         state.searchInputValue !== "";
 
@@ -230,10 +230,10 @@ function App() {
             {/* Load More Button */}
             {!state.error &&
                 state.currentLimit <
-                (state.currentType === "Genshin Impact"
+                    (state.currentType === "Genshin Impact"
                         ? state.mainData
                         : state.mainDataSR
-                ).length && (
+                    ).length && (
                     <div className="mb-8 flex justify-center">
                         <Button
                             className="w-full bg-primary px-6 py-2 text-primary-foreground transition-colors duration-200 hover:bg-primary/90 sm:w-auto"
@@ -253,8 +253,8 @@ function App() {
             {!state.loading &&
                 !noResult &&
                 (state.currentType === "Genshin Impact"
-                        ? state.mainData
-                        : state.mainDataSR
+                    ? state.mainData
+                    : state.mainDataSR
                 ).length === 0 && (
                     <div className="my-20 flex items-center justify-center">
                         <div className="text-center">
@@ -307,17 +307,14 @@ function App() {
             {state.loading && (
                 <div className="flex min-h-[50vh] items-center justify-center">
                     <div className="relative h-24 w-24">
-                        <div
-                            className="absolute inset-0 animate-spin rounded-full border-4 border-b-transparent border-l-transparent border-r-transparent border-t-primary"/>
-                        <div
-                            className="animation-delay-150 absolute inset-2 animate-spin rounded-full border-4 border-b-transparent border-l-transparent border-r-transparent border-t-secondary"/>
-                        <div
-                            className="animation-delay-300 absolute inset-4 animate-spin rounded-full border-4 border-b-transparent border-l-transparent border-r-transparent border-t-accent"/>
+                        <div className="absolute inset-0 animate-spin rounded-full border-4 border-b-transparent border-l-transparent border-r-transparent border-t-primary" />
+                        <div className="animation-delay-150 absolute inset-2 animate-spin rounded-full border-4 border-b-transparent border-l-transparent border-r-transparent border-t-secondary" />
+                        <div className="animation-delay-300 absolute inset-4 animate-spin rounded-full border-4 border-b-transparent border-l-transparent border-r-transparent border-t-accent" />
                     </div>
                 </div>
             )}
             {/* End of Loading */}
-            <div className="m-4"/>
+            <div className="m-4" />
         </div>
     );
 }

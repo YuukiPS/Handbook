@@ -17,12 +17,13 @@ use std::{
     str::FromStr,
 };
 
+use log::{info, warn};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use tauri::Emitter;
 
 use crate::{
     structure::handbook::Language,
-    utility::{format_file_size, read_excel_bin_output, read_text_map, Logger, TextMapError},
+    utility::{format_file_size, read_excel_bin_output, read_text_map, TextMapError},
 };
 
 use self::{
@@ -66,8 +67,8 @@ pub fn output_log(app_handle: &tauri::AppHandle, log_level: &str, message: &str)
         },
     );
     match log_level {
-        "info" => Logger::info(message),
-        "warn" => Logger::warn(message),
+        "info" => info!("{}", message),
+        "warn" => warn!("{}", message),
         _ => {}
     }
 }

@@ -36,7 +36,8 @@ impl<R: Runtime, T: Manager<R>> crate::HandbookFinderExt<R> for T {
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     Builder::new("handbook-finder")
         .invoke_handler(tauri::generate_handler![
-            commands::request_storage_permission
+            commands::request_storage_permission,
+            commands::check_permissions
         ])
         .setup(|app, api| {
             #[cfg(mobile)]

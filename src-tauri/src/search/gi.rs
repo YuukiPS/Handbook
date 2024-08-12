@@ -3,8 +3,8 @@ use std::fs::File;
 use std::io::BufReader;
 
 use crate::structure::gm::{Gmhandbook, NameUnion};
-use crate::utility::Logger;
 use crate::{HANDBOOK_CONTENT, HANDBOOK_PATH};
+use log::{info, warn};
 use tauri::ipc::InvokeError;
 use thiserror::Error;
 
@@ -82,7 +82,7 @@ pub fn update_path_handbook(path: &str, force: bool) -> Result<(), String> {
         return Err("Path is the same as the current path. No need to update.".to_string());
     }
     if force {
-        Logger::warn(format!("Force updating handbook path to: {}", path));
+        warn!("Force updating handbook path to: {}", path);
     }
     let mut handbook_content = HANDBOOK_CONTENT
         .write()
@@ -105,9 +105,9 @@ pub fn get_path_handbook() -> Result<String, String> {
 
 #[tauri::command(async)]
 pub fn get_category() -> Result<Vec<String>, String> {
-    Logger::info("Attempting to read handbook content...");
+    info!("Attempting to read handbook content...");
     let handbook_content = HANDBOOK_CONTENT.read().unwrap();
-    Logger::info("Successfully read handbook content.");
+    info!("Successfully read handbook content.");
     let unique_categories: HashSet<String> = handbook_content
         .iter()
         .map(|data| data.category.to_string())

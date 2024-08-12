@@ -1,6 +1,5 @@
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 mod generate;
-mod log;
 mod search;
 mod structure;
 #[cfg(test)]
@@ -8,13 +7,11 @@ mod tests;
 mod utility;
 
 use crate::generate::generate_handbook;
-use crate::log::{log_error, log_info, log_warn};
 use crate::search::gi::{find, get_category, get_path_handbook, update_path_handbook};
 use crate::structure::gm::Gmhandbook;
-use crate::utility::Logger;
 use lazy_static::lazy_static;
+use log::error;
 use std::fs;
-use std::path::Path;
 use std::sync::RwLock;
 use tauri::Manager;
 
@@ -27,6 +24,17 @@ lazy_static! {
 pub fn run() {
     #[allow(unused_mut)]
     let mut builder = tauri::Builder::default()
+        .plugin(
+            tauri_plugin_log::Builder::new()
+                .targets([
+                    tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::LogDir {
+                        file_name: Some("logs.txt".to_string()),
+                    }),
+                    tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout),
+                ])
+                .timezone_strategy(tauri_plugin_log::TimezoneStrategy::UseLocal)
+                .build(),
+        )
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_clipboard_manager::init())
@@ -38,9 +46,6 @@ pub fn run() {
             update_path_handbook,
             get_path_handbook,
             get_category,
-            log_error,
-            log_info,
-            log_warn
         ])
         .setup(|app| {
             let app_dir = app
@@ -48,16 +53,17 @@ pub fn run() {
                 .resource_dir()
                 .expect("Failed to resolve resource directory");
 
-            Logger::init(Path::new(&app_dir).join("logs").to_str().unwrap());
-
             let handbook_path = app_dir.join("resources").join("gmhandbook.json");
-            let handbook_content = fs::read_to_string(&handbook_path).unwrap_or_default();
+            let handbook_content = fs::read_to_string(&handbook_path).unwrap_or_else(|e| {
+                error!("There was an error while read a gmhandbook.json file: {}", e);
+                String::new()
+            });
             let handbook_json: Gmhandbook =
                 serde_json::from_str(&handbook_content).unwrap_or_else(|e| {
-                    Logger::error(format!(
+                    error!(
                         "Failed to parse gmhandbook.json. Using empty vector instead: {}",
                         e
-                    ));
+                    );
                     Vec::new()
                 });
             *HANDBOOK_CONTENT.write().unwrap() = handbook_json;

@@ -1,4 +1,4 @@
-const COMMANDS: &[&str] = &["requestStoragePermission", "handlePermissionResult"];
+const COMMANDS: &[&str] = &["requestStoragePermission", "checkPermissions"];
 
 fn main() {
     tauri_plugin::Builder::new(COMMANDS)

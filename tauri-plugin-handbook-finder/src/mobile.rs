@@ -28,12 +28,15 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
 pub struct HandbookFinder<R: Runtime>(PluginHandle<R>);
 
 impl<R: Runtime> HandbookFinder<R> {
-    pub fn request_storage_permission(
-        &self,
-        payload: RequestStoragePermissionRequest,
-    ) -> crate::Result<RequestStoragePermissionResponse> {
+    pub fn request_storage_permission(&self) -> crate::Result<RequestStoragePermissionResponse> {
         self.0
-            .run_mobile_plugin("requestStoragePermission", payload)
+            .run_mobile_plugin("requestStoragePermission", ())
+            .map_err(Into::into)
+    }
+
+    pub fn check_permissions(&self) -> crate::Result<CheckPermissionsResponse> {
+        self.0
+            .run_mobile_plugin("checkPermissions", ())
             .map_err(Into::into)
     }
 }

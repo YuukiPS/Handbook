@@ -15,7 +15,8 @@
         "dialog:allow-open",
         "shell:allow-open",
         "updater:default",
-        "os:default"
+        "os:default",
+        "log:default"
     ],
     "platforms": [
         "windows"

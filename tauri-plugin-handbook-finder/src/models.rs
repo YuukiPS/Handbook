@@ -9,5 +9,11 @@ pub struct RequestStoragePermissionRequest {
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RequestStoragePermissionResponse {
-    pub request_code: u32,
+    pub status: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CheckPermissionsResponse {
+    pub status: String,
 }

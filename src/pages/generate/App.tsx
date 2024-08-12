@@ -1,6 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
-import { useCallback, useEffect, useRef, useState } from "react";
+import type React from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +13,9 @@ import {
     RocketIcon,
 } from "lucide-react";
 import { listen } from "@tauri-apps/api/event";
-import { error } from "@/log";
+import { error, info } from "@tauri-apps/plugin-log";
+import { platform } from "@tauri-apps/plugin-os";
+import {toast} from "@/components/ui/use-toast.ts";
 
 interface Output {
     log_level: string;
@@ -66,33 +69,31 @@ const App: React.FC = (): JSX.Element => {
         "Monsters",
     ];
 
-    const generate = async () => {
+    const generate = useCallback(async () => {
         setLoading(true);
         setIsOutputVisible(true);
 
-        const checkAndLogError = (condition: boolean, message: string) => {
-            if (condition) {
-                setOutputLog((prev) => [
-                    ...prev,
-                    { log_level: "error", message },
-                ]);
-                error(message);
-                return true;
-            }
-            return false;
+        const logError = (message: string) => {
+            setOutputLog((prev) => [
+                ...prev,
+                {log_level: "error", message},
+            ]);
+            error(message);
         };
 
-        if (
-            checkAndLogError(
-                selectedResourcesDirectory.length === 0,
-                "No resources directory selected"
-            ) ||
-            checkAndLogError(languages.length === 0, "No languages selected") ||
-            checkAndLogError(
-                selectedSelections.length === 0,
-                "No selections selected"
-            )
-        ) {
+        const errors = [];
+        if (selectedResourcesDirectory.length === 0) {
+            errors.push("No resources directory selected");
+        }
+        if (languages.length === 0) {
+            errors.push("No languages selected");
+        }
+        if (selectedSelections.length === 0) {
+            errors.push("No selections selected");
+        }
+
+        if (errors.length > 0) {
+            errors.forEach(logError);
             setLoading(false);
             return;
         }
@@ -103,31 +104,43 @@ const App: React.FC = (): JSX.Element => {
                     excelPath: selectedResourcesDirectory,
                     textMapPath: selectedTextMapPath,
                     outputPath,
-                    outputFileName: filename,
+                    outputFileName: filename || "gmhandbook.json",
                 },
                 game: "genshin-impact",
                 selections: selectedSelections,
                 languages: selectedLanguages,
             });
         } catch (e) {
-            setOutputLog((prev) => [
-                ...prev,
-                { log_level: "error", message: `Error: ${e}` },
-            ]);
-            error(`Error: ${e}`);
+            const errorMessage = `Error: ${e instanceof Error ? e.message : e}`;
+            logError(errorMessage);
         } finally {
             setLoading(false);
         }
-    };
+    }, [filename, outputPath, selectedLanguages, selectedSelections, selectedTextMapPath, selectedResourcesDirectory]);
+
 
     const selectResourcesDirectory = async () => {
-        const result = await open({
-            directory: true,
-            title: "Select a directory to where Resources",
-            multiple: false,
-        });
+        const currentPlatform = platform();
+        let result: string | null = null;
+
+        if (currentPlatform === "windows") {
+            result = await open({
+                directory: true,
+                title: "Select a directory to where Resources",
+                multiple: false,
+            });
+        } else if (currentPlatform === "android") {
+            result = await invoke("plugin:handbook-finder|openFolderPicker");
+        } else {
+            toast({
+                title: "Not Supported",
+                description: "Platform does not support or it's not implemented.",
+
+            })
+        }
+        await info(`Selected directory: ${JSON.stringify(result)}`);
         if (!result) {
-            error("No directory selected");
+            await error("No directory selected");
             return;
         }
         setSelectedResourcesDirectory(result);
@@ -140,7 +153,7 @@ const App: React.FC = (): JSX.Element => {
             title: "Select a text map folder",
         });
         if (!result) {
-            error("No folder selected");
+            await error("No folder selected");
             return;
         }
         setSelectedTextMapPath(result);
@@ -153,7 +166,7 @@ const App: React.FC = (): JSX.Element => {
             title: "Select a directory to where the handbook will be generated",
         });
         if (!result) {
-            error("No directory selected");
+            await error("No directory selected");
             return;
         }
         setOutputPath(result);

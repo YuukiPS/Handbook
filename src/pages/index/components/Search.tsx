@@ -45,7 +45,7 @@ interface SearchProps {
 }
 
 interface StoragePermissionResponse {
-    status: string;
+    status: "Granted" | "Cancelled" | "Denied";
 }
 
 const Search: React.FC<SearchProps> = ({
@@ -136,25 +136,49 @@ const Search: React.FC<SearchProps> = ({
         getPath();
     }, []);
 
-    const selectHandbook = async () => {
+    const selectHandbook = useCallback(async () => {
         const currentPlatform = platform();
         if (currentPlatform === "android") {
             try {
-                const result = await invoke<StoragePermissionResponse>(
-                    "plugin:handbook-finder|requestStoragePermission"
-                );
-                if (result.status === "Cancelled") {
+                const checkPermissions =
+                    await invoke<StoragePermissionResponse>(
+                        "plugin:handbook-finder|checkPermissions"
+                    );
+                toast({
+                    title: "Testing",
+                    description: `${checkPermissions.status}`,
+                });
+                if (checkPermissions.status === "Denied") {
                     toast({
-                        title: "Storage permission cancelled",
-                        description:
-                            "Storage permission has been cancelled, this required to read the handbook file",
+                        title: "Code is passed",
+                        description: "Code is passed",
                     });
-                    return;
+                    const result = await invoke<StoragePermissionResponse>(
+                        "plugin:handbook-finder|requestStoragePermission"
+                    );
+                    toast({
+                        title: "Request Storage Permission",
+                        description: `${result.status}`,
+                    });
+                    if (result.status === "Cancelled") {
+                        // Re-check permissions may return 'Cancelled' even when granted
+                        const recheck = await invoke<StoragePermissionResponse>(
+                            "plugin:handbook-finder|checkPermissions"
+                        );
+                        if (recheck.status === "Denied") {
+                            toast({
+                                title: "Storage permission denied",
+                                description:
+                                    "Storage permission is required to read the handbook file",
+                            });
+                            return;
+                        }
+                    }
                 }
             } catch (e) {
                 toast({
                     title: "Error",
-                    description: `Error while requesting storage permission: ${JSON.stringify(
+                    description: `Error requesting storage permission: ${JSON.stringify(
                         e
                     )}`,
                     variant: "destructive",
@@ -162,13 +186,16 @@ const Search: React.FC<SearchProps> = ({
                 return;
             }
         }
+
         const options: OpenDialogOptions = {
             directory: false,
             title: "Select GM Handbook path",
+            filters:
+                currentPlatform === "windows"
+                    ? [{ name: "GM Handbook", extensions: ["json"] }]
+                    : undefined,
         };
-        if (currentPlatform === "windows") {
-            options.filters = [{ name: "GM Handbook", extensions: ["json"] }];
-        }
+
         const path = await open(options);
         if (!path) {
             toast({
@@ -178,13 +205,14 @@ const Search: React.FC<SearchProps> = ({
             });
             return;
         }
+
         try {
             await invoke("update_path_handbook", {
                 path: path.path,
                 force: forceUpdatePath,
             });
-            const getPath = await invoke<string>("get_path_handbook");
-            setPathHandbook(getPath);
+            const newPath = await invoke<string>("get_path_handbook");
+            setPathHandbook(newPath);
             toast({
                 title: "Path updated",
                 description: "Path updated successfully",
@@ -196,7 +224,7 @@ const Search: React.FC<SearchProps> = ({
                 variant: "destructive",
             });
         }
-    };
+    }, [forceUpdatePath, toast]);
 
     const handleTypeChange = useCallback(
         (e: string) => {

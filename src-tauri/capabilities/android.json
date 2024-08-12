@@ -14,7 +14,8 @@
         "clipboard-manager:deny-clear",
         "dialog:allow-open",
         "shell:allow-open",
-        "handbook-finder:default"
+        "handbook-finder:default",
+        "log:default"
     ],
     "platforms": [
         "android"

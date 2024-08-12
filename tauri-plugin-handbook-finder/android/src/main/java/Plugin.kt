@@ -27,66 +27,102 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
 
     @Command
     fun requestStoragePermission(invoke: Invoke) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            // For Android 11 (API 30) and above
-            if (!Environment.isExternalStorageManager()) {
-                try {
-                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                    intent.addCategory("android.intent.category.DEFAULT")
-                    intent.data = Uri.parse("package:${activity.packageName}")
-                    startActivityForResult(invoke, intent, "handlePermissionResult")
-                } catch (e: Exception) {
-                    val intent = Intent()
-                    intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
-                    startActivityForResult(invoke, intent, "handlePermissionResult")
-                }
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // For Android 6.0 (API 23) to Android 10 (API 29)
-            if (ContextCompat.checkSelfPermission(
-                    activity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_DENIED ||
-                ContextCompat.checkSelfPermission(
-                    activity,
+        val intent = getStoragePermissionIntent(activity)
+
+        if (intent != null) {
+            startActivityForResult(invoke, intent, "handlePermissionResult")
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val permissions = arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_DENIED
-            ) {
+                )
                 ActivityCompat.requestPermissions(
                     activity,
-                    arrayOf(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ),
+                    permissions,
                     STORAGE_PERMISSION_CODE
                 )
             }
         }
+//        when {
+//            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
+//                if (!Environment.isExternalStorageManager()) {
+//                    val intent =
+//                        Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
+//                            addCategory("android.intent.category.DEFAULT")
+//                            data = Uri.parse("package:${activity.packageName}")
+//                        }
+//                    startActivityForResult(invoke, intent, "handlePermissionResult")
+//                }
+//            }
+//
+//            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
+//                val permissions = arrayOf(
+//                    Manifest.permission.READ_EXTERNAL_STORAGE,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+//                )
+//                if (permissions.any {
+//                        ContextCompat.checkSelfPermission(
+//                            activity,
+//                            it
+//                        ) == PackageManager.PERMISSION_DENIED
+//                    }) {
+//                    ActivityCompat.requestPermissions(
+//                        activity,
+//                        permissions,
+//                        STORAGE_PERMISSION_CODE
+//                    )
+//                }
+//            }
+//        }
     }
 
     @ActivityCallback
     fun handlePermissionResult(invoke: Invoke, result: ActivityResult) {
-        try {
-            when (result.resultCode) {
-                Activity.RESULT_OK -> {
-                    Logger.info(result.data.toString())
-                    invoke.resolve(JSObject().apply {
-                        put("status", "Granted")
-                    })
-                }
+        val resultCodeString = result.resultCode.toString()
+        Logger.info("ActivityResult resultCode: $resultCodeString")
+        android.util.Log.d("PermissionResult", "ActivityResult resultCode: $resultCodeString")
 
-                Activity.RESULT_CANCELED -> {
-                    invoke.resolve(JSObject().apply {
-                        put("status", "Cancelled")
-                    })
-                }
-
-                else -> invoke.reject("Failed to request storage permissions")
+        val status = when (result.resultCode) {
+            Activity.RESULT_OK -> {
+                "Granted"
             }
-        } catch (e: Exception) {
-            val errorMessage = e.message ?: "Failed to request storage permissions"
-            Logger.error(errorMessage)
-            invoke.reject(errorMessage)
+
+            Activity.RESULT_CANCELED -> "Cancelled"
+            else -> throw Exception("Failed to request storage permissions")
         }
+
+        try {
+            invoke.resolve(JSObject().apply { put("status", status) })
+        } catch (e: Exception) {
+            Logger.error(e.message ?: "Failed to request storage permissions")
+            invoke.reject(e.message ?: "Failed to request storage permissions")
+        }
+    }
+
+    @Command
+    override fun checkPermissions(invoke: Invoke) {
+        val status = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
+                if (Environment.isExternalStorageManager()) "Granted" else "Denied"
+            }
+
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
+                if (ContextCompat.checkSelfPermission(
+                        activity,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) == PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(
+                        activity,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) "Granted" else "Denied"
+            }
+
+            else -> "Granted"
+        }
+        invoke.resolve(JSObject().apply {
+            put("status", status)
+        })
     }
 }
