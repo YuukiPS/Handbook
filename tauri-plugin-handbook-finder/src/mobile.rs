@@ -39,4 +39,10 @@ impl<R: Runtime> HandbookFinder<R> {
             .run_mobile_plugin("checkPermissions", ())
             .map_err(Into::into)
     }
+
+    pub fn select_folder(&self) -> crate::Result<SelectFolderResponse> {
+        self.0
+            .run_mobile_plugin("openFolderPicker", ())
+            .map_err(Into::into)
+    }
 }

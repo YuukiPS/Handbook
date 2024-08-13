@@ -17,3 +17,8 @@ pub struct RequestStoragePermissionResponse {
 pub struct CheckPermissionsResponse {
     pub status: String,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SelectFolderResponse {
+    pub path: String,
+}

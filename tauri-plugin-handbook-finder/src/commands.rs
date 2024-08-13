@@ -12,6 +12,13 @@ pub(crate) async fn request_storage_permission<R: Runtime>(
 }
 
 #[command]
+pub(crate) async fn select_folder<R: Runtime>(
+    app: AppHandle<R>
+) -> Result<SelectFolderResponse> {
+    app.handbook_finder().select_folder()
+}
+
+#[command]
 pub(crate) async fn check_permissions<R: Runtime>(
     app: AppHandle<R>,
 ) -> Result<CheckPermissionsResponse> {

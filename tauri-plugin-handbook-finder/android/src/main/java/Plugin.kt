@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.provider.Settings
+import android.provider.DocumentsContract
 import androidx.activity.result.ActivityResult
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,6 +18,7 @@ import app.tauri.annotation.TauriPlugin
 import app.tauri.plugin.Plugin
 import app.tauri.plugin.Invoke
 import app.tauri.plugin.JSObject
+import java.io.File
 
 @TauriPlugin
 class Plugin(private val activity: Activity) : Plugin(activity) {
@@ -44,45 +45,10 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
                 )
             }
         }
-//        when {
-//            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
-//                if (!Environment.isExternalStorageManager()) {
-//                    val intent =
-//                        Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-//                            addCategory("android.intent.category.DEFAULT")
-//                            data = Uri.parse("package:${activity.packageName}")
-//                        }
-//                    startActivityForResult(invoke, intent, "handlePermissionResult")
-//                }
-//            }
-//
-//            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
-//                val permissions = arrayOf(
-//                    Manifest.permission.READ_EXTERNAL_STORAGE,
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-//                )
-//                if (permissions.any {
-//                        ContextCompat.checkSelfPermission(
-//                            activity,
-//                            it
-//                        ) == PackageManager.PERMISSION_DENIED
-//                    }) {
-//                    ActivityCompat.requestPermissions(
-//                        activity,
-//                        permissions,
-//                        STORAGE_PERMISSION_CODE
-//                    )
-//                }
-//            }
-//        }
     }
 
     @ActivityCallback
     fun handlePermissionResult(invoke: Invoke, result: ActivityResult) {
-        val resultCodeString = result.resultCode.toString()
-        Logger.info("ActivityResult resultCode: $resultCodeString")
-        android.util.Log.d("PermissionResult", "ActivityResult resultCode: $resultCodeString")
-
         val status = when (result.resultCode) {
             Activity.RESULT_OK -> {
                 "Granted"
@@ -98,6 +64,54 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
             Logger.error(e.message ?: "Failed to request storage permissions")
             invoke.reject(e.message ?: "Failed to request storage permissions")
         }
+    }
+
+    @Command
+    fun openFolderPicker(invoke: Invoke) {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        startActivityForResult(invoke, intent, "openFolderCallback")
+    }
+
+    @ActivityCallback
+    fun openFolderCallback(invoke: Invoke, result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            val uri: Uri? = result.data?.data
+
+            if (uri != null) {
+                val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                activity.contentResolver.takePersistableUriPermission(uri, takeFlags)
+
+                val uriString = uri.toString()
+
+                val displayName = getDisplayName(uri)
+
+                invoke.resolve(JSObject().apply {
+                    put("uri", uriString)
+                    put("displayName", displayName)
+                })
+            } else {
+                invoke.reject("Failed to get path")
+            }
+        } else {
+            invoke.resolve(null)
+        }
+    }
+
+    // Source: https://stackoverflow.com/questions/65363269/resolve-content-uri-into-actual-filepath
+    private fun getDisplayName(uri: Uri): String {
+        val context = activity.applicationContext
+        val docUri = DocumentsContract.buildDocumentUriUsingTree(uri, DocumentsContract.getTreeDocumentId(uri))
+        val projection = arrayOf(DocumentsContract.Document.COLUMN_DISPLAY_NAME)
+
+        context.contentResolver.query(docUri, projection, null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                return cursor.getString(0)
+            }
+        }
+    
+        throw Exception("Failed to get display name for $uri")
     }
 
     @Command

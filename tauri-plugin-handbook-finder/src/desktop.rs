@@ -25,4 +25,10 @@ impl<R: Runtime> HandbookFinder<R> {
             status: "Granted".to_string(),
         })
     }
+
+    pub fn select_folder(&self) -> crate::Result<SelectFolderResponse> {
+        Ok(SelectFolderResponse {
+            path: "".to_string()
+        })
+    }
 }
