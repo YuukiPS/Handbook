@@ -1894,10 +1894,10 @@ i18next-http-backend@^2.5.2:
   dependencies:
     cross-fetch "4.0.0"
 
-i18next@^23.12.2:
-  version "23.12.2"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.12.2.tgz#c5b44bb95e4d4a5908a51577fa06c63dc2f650a4"
-  integrity sha512-XIeh5V+bi8SJSWGL3jqbTEBW5oD6rbP5L+E7dVQh1MNTxxYef0x15rhJVcRb7oiuq4jLtgy2SD8eFlf6P2cmqg==
+i18next@^23.12.3:
+  version "23.12.3"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.12.3.tgz#e0b811ef218f6d3fdb0b91f1a1eed099a1f7c48b"
+  integrity sha512-DyigQmrR10V9U2N6pjhbfahW13GY7n8BQD9swN09JuRRropgsksWVi4vRLeex0Qf7zCPnBfIqQfhcBzdZBQBYw==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
@@ -2558,10 +2558,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-tailwind-merge@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-2.5.1.tgz#55fe73fca04a0f2baae32bc9ff6f317616fa8ba3"
-  integrity sha512-1zKDdExKvNltulO+J0x/Rqv40xQn78FHsEQVn3rxt8e4HdebRIT6o6zGeLYlGuxd3Efue9Y69qsp8vKwEhuEeg==
+tailwind-merge@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-2.5.2.tgz#000f05a703058f9f9f3829c644235f81d4c08a1f"
+  integrity sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==
 
 tailwindcss-animate@^1.0.7:
   version "1.0.7"
