@@ -130,8 +130,8 @@ const Search: React.FC<SearchProps> = ({
     }, []);
     useEffect(() => {
         const getPath = async () => {
-            const resposne = await invoke<string>("get_path_handbook");
-            setPathHandbook(resposne);
+            const response = await invoke<string>("get_path_handbook");
+            setPathHandbook(response);
         };
         getPath();
     }, []);
@@ -144,22 +144,10 @@ const Search: React.FC<SearchProps> = ({
                     await invoke<StoragePermissionResponse>(
                         "plugin:handbook-finder|checkPermissions"
                     );
-                toast({
-                    title: "Testing",
-                    description: `${checkPermissions.status}`,
-                });
                 if (checkPermissions.status === "Denied") {
-                    toast({
-                        title: "Code is passed",
-                        description: "Code is passed",
-                    });
                     const result = await invoke<StoragePermissionResponse>(
                         "plugin:handbook-finder|requestStoragePermission"
                     );
-                    toast({
-                        title: "Request Storage Permission",
-                        description: `${result.status}`,
-                    });
                     if (result.status === "Cancelled") {
                         // Re-check permissions may return 'Cancelled' even when granted
                         const recheck = await invoke<StoragePermissionResponse>(
@@ -213,6 +201,11 @@ const Search: React.FC<SearchProps> = ({
             });
             const newPath = await invoke<string>("get_path_handbook");
             setPathHandbook(newPath);
+            const listCategory = await invoke<string[]>("get_category");
+            setState((prev) => ({
+                ...prev,
+                listCategory
+            }))
             toast({
                 title: "Path updated",
                 description: "Path updated successfully",
@@ -224,7 +217,7 @@ const Search: React.FC<SearchProps> = ({
                 variant: "destructive",
             });
         }
-    }, [forceUpdatePath, toast]);
+    }, [forceUpdatePath, toast, setState]);
 
     const handleTypeChange = useCallback(
         (e: string) => {
