@@ -7,6 +7,7 @@ mod tests;
 mod utility;
 
 use crate::generate::generate_handbook;
+use crate::generate::list::get_list_text_map;
 use crate::search::gi::{find, get_category, get_path_handbook, update_path_handbook};
 use crate::structure::gm::Gmhandbook;
 use lazy_static::lazy_static;
@@ -46,6 +47,7 @@ pub fn run() {
             update_path_handbook,
             get_path_handbook,
             get_category,
+            get_list_text_map
         ])
         .setup(|app| {
             let app_dir = app

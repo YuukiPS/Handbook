@@ -9,6 +9,7 @@ pub mod monsters;
 pub mod quests;
 pub mod scenes;
 pub mod weapons;
+pub mod list;
 
 use std::{
     fmt::{self, Formatter},

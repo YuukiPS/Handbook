@@ -19,7 +19,7 @@ interface Output {
 
 interface SelectFolderResponse {
 	displayName: string | undefined
-    uri: string | undefined
+	uri: string | undefined
 }
 
 const App: React.FC = (): JSX.Element => {
@@ -55,7 +55,7 @@ const App: React.FC = (): JSX.Element => {
 		}
 	}, [])
 
-	const languages = ['EN', 'ID', 'TH', 'JP', 'FR', 'RU', 'CHS', 'CHT']
+	const [languages, setLanguages] = useState<string[]>([])
 	const selections = ['Characters', 'Materials', 'Weapons', 'Artifacts', 'Quests', 'Dungeons', 'Scenes', 'Monsters']
 
 	const generate = useCallback(async () => {
@@ -102,48 +102,72 @@ const App: React.FC = (): JSX.Element => {
 		} finally {
 			setLoading(false)
 		}
-	}, [filename, outputPath, selectedLanguages, selectedSelections, selectedTextMapPath, selectedResourcesDirectory])
+	}, [
+		filename,
+		outputPath,
+		selectedLanguages,
+		selectedSelections,
+		selectedTextMapPath,
+		selectedResourcesDirectory,
+		languages.length,
+	])
 
-    const getPlatformFolderSelector = () => {
-        const currentPlatform = platform();
-        if (currentPlatform === 'windows') {
-            return (title: string) => open({ directory: true, title, multiple: false });
-        }
-        if (currentPlatform === 'android') {
-            return () => invoke<SelectFolderResponse>('plugin:handbook-finder|openFolderPicker');
-        }
-        return null;
-    };
+	const getPlatformFolderSelector = () => {
+		const currentPlatform = platform()
+		if (currentPlatform === 'windows') {
+			return (title: string) => open({ directory: true, title, multiple: false })
+		}
+		if (currentPlatform === 'android') {
+			return () => invoke<SelectFolderResponse>('plugin:handbook-finder|openFolderPicker')
+		}
+		return null
+	}
 
-    const selectFolder = async (title: string, setPath: (path: string) => void) => {
-        const folderSelector = getPlatformFolderSelector();
-        if (!folderSelector) {
-            toast({
-                title: 'Not Supported',
-                description: "Platform does not support or it's not implemented.",
-                variant: "destructive"
-            });
-            return;
-        }
+	const selectFolder = async (title: string, setPath: (path: string) => void) => {
+		const folderSelector = getPlatformFolderSelector()
+		if (!folderSelector) {
+			toast({
+				title: 'Not Supported',
+				description: "Platform does not support or it's not implemented.",
+				variant: 'destructive',
+			})
+			return
+		}
 
-        const result = await folderSelector(title);
-        const selectedPath = typeof result === "string" ? result : result?.uri;
-        if (!selectedPath) {
-            toast({
-                title: "Folder Select",
-                description: "No folder is selected.",
-                variant: "destructive"
-            });
-            return;
-        }
+		const result = await folderSelector(title)
+		const selectedPath = typeof result === 'string' ? result : result?.uri
+		if (!selectedPath) {
+			toast({
+				title: 'Folder Select',
+				description: 'No folder is selected.',
+				variant: 'destructive',
+			})
+			return
+		}
 
-        setPath(selectedPath);
-        await info(`Selected directory: ${selectedPath}`);
-    };
+		setPath(selectedPath)
+		await info(`Selected directory: ${selectedPath}`)
+	}
 
-    const selectResourcesDirectory = () => selectFolder('Select a directory to where Resources', setSelectedResourcesDirectory)
-    const selectTextMapPath = () => selectFolder('Select a directory to where Text Map', setSelectedTextMapPath)
-    const selectOutputPath = () => selectFolder('Select a directory to where Output', setOutputPath)
+	const selectResourcesDirectory = async () =>
+		await selectFolder('Select a directory to where Resources', setSelectedResourcesDirectory)
+	const selectTextMapPath = async () => {
+		try {
+			await selectFolder('Select a directory to where Text Map', setSelectedTextMapPath)
+			const listTextMap = await invoke<string[]>('get_list_text_map', { path: selectedTextMapPath })
+			setLanguages(listTextMap)
+			if (listTextMap.length === 0) {
+				toast({
+					title: 'Text Map',
+					description: `No TextMap found in the '${selectedTextMapPath}' folders`,
+					variant: 'destructive',
+				})
+			}
+		} catch (e) {
+			await error(e instanceof Error ? e.message : `Unknown error: ${e}`)
+		}
+	}
+	const selectOutputPath = async () => await selectFolder('Select a directory to where Output', setOutputPath)
 
 	return (
 		<div className='p-4 sm:p-6 lg:p-8'>
