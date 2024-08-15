@@ -14,12 +14,6 @@ ReactDOM.createRoot(
             <Drawer>
                 <App />
             </Drawer>
-            {/* <div className="flex min-h-screen">
-                <Drawer />
-                <div className="flex flex-col flex-1 justify-between">
-                    <App />
-                </div>
-            </div> */}
             <Toaster />
         </ThemeProvider>
     </Router>
