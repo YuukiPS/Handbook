@@ -8,7 +8,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
+import android.provider.MediaStore
 import androidx.activity.result.ActivityResult
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import app.tauri.Logger
@@ -32,18 +34,16 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
 
         if (intent != null) {
             startActivityForResult(invoke, intent, "handlePermissionResult")
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val permissions = arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-                ActivityCompat.requestPermissions(
-                    activity,
-                    permissions,
-                    STORAGE_PERMISSION_CODE
-                )
-            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val permissions = arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            ActivityCompat.requestPermissions(
+                activity,
+                permissions,
+                STORAGE_PERMISSION_CODE
+            )
         }
     }
 
@@ -76,43 +76,74 @@ class Plugin(private val activity: Activity) : Plugin(activity) {
 
     @ActivityCallback
     fun openFolderCallback(invoke: Invoke, result: ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            val uri: Uri? = result.data?.data
+        when (result.resultCode) {
+            Activity.RESULT_OK -> {
+                val data = result.data
+                if (data == null) {
+                    Logger.error("Result data is null")
+                    invoke.reject("Result data is null")
+                    return
+                }
 
-            if (uri != null) {
-                val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                activity.contentResolver.takePersistableUriPermission(uri, takeFlags)
+                val uri = data.data
+                if (uri == null) {
+                    Logger.error("URI is null")
+                    invoke.reject("URI is null")
+                    return
+                }
 
-                val uriString = uri.toString()
+                try {
+                    val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
 
-                val displayName = getDisplayName(uri)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        activity.contentResolver.takePersistableUriPermission(uri, takeFlags)
+                    }
 
-                invoke.resolve(JSObject().apply {
-                    put("uri", uriString)
-                    put("displayName", displayName)
-                })
-            } else {
-                invoke.reject("Failed to get path")
+                    val uriString = uri.toString()
+                    val displayName = getDisplayName(uri)
+
+                    invoke.resolve(JSObject().apply {
+                        put("uri", uriString)
+                        put("displayName", displayName)
+                    })
+                } catch (e: Exception) {
+                    Logger.error("Error processing URI: ${e.message}")
+                    invoke.reject("Error processing URI: ${e.message}")
+                }
             }
-        } else {
-            invoke.resolve(null)
+            Activity.RESULT_CANCELED -> {
+                Logger.info("Folder selection cancelled")
+                invoke.resolve(null)
+            }
+            else -> {
+                Logger.error("Unexpected result code: ${result.resultCode}")
+                invoke.reject("Unexpected result code: ${result.resultCode}")
+            }
         }
     }
 
-    // Source: https://stackoverflow.com/questions/65363269/resolve-content-uri-into-actual-filepath
     private fun getDisplayName(uri: Uri): String {
-        val context = activity.applicationContext
-        val docUri = DocumentsContract.buildDocumentUriUsingTree(uri, DocumentsContract.getTreeDocumentId(uri))
-        val projection = arrayOf(DocumentsContract.Document.COLUMN_DISPLAY_NAME)
-
-        context.contentResolver.query(docUri, projection, null, null, null)?.use { cursor ->
-            if (cursor.moveToFirst()) {
-                return cursor.getString(0)
+        return try {
+            val docId = DocumentsContract.getTreeDocumentId(uri)
+            val split = docId.split(":")
+            if (split.size > 1) {
+                val type = split[0]
+                val path = split[1]
+                if ("primary".equals(type, ignoreCase = true)) {
+                    "/storage/emulated/0/$path"
+                } else {
+                    "/$type/$path"
+                }
+            } else {
+                uri.lastPathSegment ?: "Selected Folder"
             }
+        } catch (e: Exception) {
+            Logger.error("Error getting display name: ${e.message}")
+            uri.lastPathSegment ?: "Selected Folder"
         }
-    
-        throw Exception("Failed to get display name for $uri")
     }
+
+    // Remove or comment out the getDisplayNameApi29AndAbove and getDisplayNameLegacy methods
 
     @Command
     override fun checkPermissions(invoke: Invoke) {
