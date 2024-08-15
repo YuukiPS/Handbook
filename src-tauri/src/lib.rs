@@ -50,26 +50,34 @@ pub fn run() {
             get_list_text_map
         ])
         .setup(|app| {
-            let app_dir = app
-                .path()
-                .resource_dir()
-                .expect("Failed to resolve resource directory");
-
-            let handbook_path = app_dir.join("resources").join("gmhandbook.json");
-            let handbook_content = fs::read_to_string(&handbook_path).unwrap_or_else(|e| {
-                error!("There was an error while read a gmhandbook.json file: {}", e);
-                String::new()
-            });
-            let handbook_json: Gmhandbook =
-                serde_json::from_str(&handbook_content).unwrap_or_else(|e| {
-                    error!(
-                        "Failed to parse gmhandbook.json. Using empty vector instead: {}",
-                        e
-                    );
-                    Vec::new()
-                });
-            *HANDBOOK_CONTENT.write().unwrap() = handbook_json;
-            *HANDBOOK_PATH.write().unwrap() = handbook_path.to_string_lossy().to_string();
+            let handbook_path = app.path().resolve(
+                "resources/gmhandbook.json",
+                tauri::path::BaseDirectory::Resource,
+            );
+            match handbook_path {
+                Ok(path) => {
+                    let handbook_content = fs::read_to_string(&path).unwrap_or_else(|e| {
+                        error!(
+                            "There was an error while read a gmhandbook.json file: {}",
+                            e
+                        );
+                        String::new()
+                    });
+                    let handbook_json: Gmhandbook = serde_json::from_str(&handbook_content)
+                        .unwrap_or_else(|e| {
+                            error!(
+                                "Failed to parse gmhandbook.json. Using empty vector instead: {}",
+                                e
+                            );
+                            Vec::new()
+                        });
+                    *HANDBOOK_CONTENT.write().unwrap() = handbook_json;
+                    *HANDBOOK_PATH.write().unwrap() = path.to_string_lossy().to_string();
+                }
+                Err(e) => {
+                    error!("Failed to resolve gmhandbook.json: {}", e);
+                }
+            }
             #[cfg(debug_assertions)]
             {
                 app.get_webview_window("main").unwrap().open_devtools();
