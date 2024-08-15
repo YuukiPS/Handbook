@@ -8,11 +8,15 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 34
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    lint {
+        baseline = file("lint-baseline.xml")
+        targetSdk = 34
     }
 
     buildTypes {
@@ -38,6 +42,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.0")
     implementation("com.google.android.material:material:1.7.0")
+    implementation("androidx.annotation:annotation:1.8.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
