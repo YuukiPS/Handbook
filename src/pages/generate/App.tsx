@@ -16,6 +16,7 @@ import { listen } from "@tauri-apps/api/event";
 import { error, info } from "@tauri-apps/plugin-log";
 import { platform } from "@tauri-apps/plugin-os";
 import { useToast } from "@/components/ui/use-toast.ts";
+import WebNotSupported from "@/lib/WebNotSupported";
 
 interface Output {
     log_level: string;
@@ -411,6 +412,7 @@ const App: React.FC = (): JSX.Element => {
                     </div>
                 </div>
             </div>
+            <WebNotSupported />
         </div>
     );
 };
