@@ -15,11 +15,15 @@ import {
 import { listen } from "@tauri-apps/api/event";
 import { error, info } from "@tauri-apps/plugin-log";
 import { platform } from "@tauri-apps/plugin-os";
-import { toast } from "@/components/ui/use-toast.ts";
+import { useToast } from "@/components/ui/use-toast.ts";
 
 interface Output {
     log_level: string;
     message: string;
+}
+
+interface StoragePermissionResponse {
+    status: "Granted" | "Cancelled" | "Denied";
 }
 
 interface SelectFolderResponse {
@@ -28,6 +32,7 @@ interface SelectFolderResponse {
 }
 
 const App: React.FC = (): JSX.Element => {
+    const { toast } = useToast();
     const [selectedResourcesDirectory, setSelectedResourcesDirectory] =
         useState<string>("");
     const [selectedSelections, setSelectedSelections] = useState<string[]>([]);
@@ -128,13 +133,35 @@ const App: React.FC = (): JSX.Element => {
         languages.length,
     ]);
 
-    const getPlatformFolderSelector = () => {
+    const getPlatformFolderSelector = async () => {
         const currentPlatform = platform();
         if (currentPlatform === "windows") {
             return (title: string) =>
                 open({ directory: true, title, multiple: false });
         }
         if (currentPlatform === "android") {
+            const checkPermissions = await invoke<StoragePermissionResponse>(
+                "plugin:handbook-finder|checkPermissions"
+            );
+            if (checkPermissions.status === "Denied") {
+                const result = await invoke<StoragePermissionResponse>(
+                    "plugin:handbook-finder|requestStoragePermission"
+                );
+                if (result.status === "Cancelled") {
+                    // Re-check permissions may return 'Cancelled' even when granted
+                    const recheck = await invoke<StoragePermissionResponse>(
+                        "plugin:handbook-finder|checkPermissions"
+                    );
+                    if (recheck.status === "Denied") {
+                        toast({
+                            title: "Storage permission denied",
+                            description:
+                                "Storage permission is required to read the handbook file",
+                        });
+                        return null;
+                    }
+                }
+            }
             return () =>
                 invoke<SelectFolderResponse>(
                     "plugin:handbook-finder|openFolderPicker"
@@ -147,12 +174,12 @@ const App: React.FC = (): JSX.Element => {
         title: string,
         setPath: (path: string) => void
     ) => {
-        const folderSelector = getPlatformFolderSelector();
+        const folderSelector = await getPlatformFolderSelector();
         if (!folderSelector) {
             toast({
                 title: "Not Supported",
                 description:
-                    "Platform does not support or it's not implemented.",
+                    "Platform does not support folder selection, or permission was denied on Android.",
                 variant: "destructive",
             });
             return null;
