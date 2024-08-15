@@ -42,14 +42,14 @@ async function getHandbook(type: 'gi' | 'sr', data: HandbookGi | HandbookSr): Pr
 	return res.data
 }
 
-function getCategoryList(type: 'gi' | 'sr'): Promise<Category> {
-	return instance
+async function getCategoryList(type: 'gi' | 'sr'): Promise<Category> {
+	const res = await instance
 		.get(endpoints.category, {
 			params: {
 				type,
 			},
 		})
-		.then((res) => res.data)
+	return res.data
 }
 
 export default { getHandbook, getCategoryList }
