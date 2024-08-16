@@ -28,7 +28,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 
     return (
         <div className="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-300">
-            <div className="flex h-16 shrink-0 items-center justify-between border-b border-b-muted px-4 sm:px-6">
+            <div className="fixed top-0 left-0 right-0 z-50 flex h-16 shrink-0 items-center justify-between border-b border-b-muted bg-background px-4 sm:px-6">
                 <Button
                     variant="ghost"
                     size="icon"
@@ -75,9 +75,9 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
             <div className="flex flex-1 relative">
                 <nav
                     className={`
-                        fixed top-16 left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted px-4 py-6 sm:px-6 
+                        fixed top-[4rem] left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted px-4 py-6 sm:px-6 
                         transition-all duration-300 ease-in-out dark:border-r-[#2d3748] bg-background
-                        lg:relative lg:top-0 lg:z-auto lg:w-64 lg:translate-x-0
+                        lg:fixed lg:top-[4rem] lg:z-30 lg:w-64 lg:translate-x-0
                         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
                     `}
                 >
@@ -126,7 +126,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                         version 1.0.0
                     </footer>
                 </nav>
-                <main className="flex-1 overflow-auto w-full">
+                <main className="flex-1 overflow-auto w-full pt-16 lg:pl-64">
                     <Updater />
                     {children}
                 </main>
