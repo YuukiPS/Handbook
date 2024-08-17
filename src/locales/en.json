@@ -1,17 +1,17 @@
 {
-    "page_not_found": {
-        "title": "Page Not Found",
-        "description": "Oops! Looks like this page has gone on a digital vacation. It's nowhere to be found in our cyber neighborhood.",
-        "button": "Go to Home"
-    },
-    "drawer": {
-        "search_id": "Search ID",
-        "generate": "Generate",
-        "player_settings": "Player Settings",
-        "theme_mode": {
-            "light": "Light",
-            "dark": "Dark",
-            "system": "System"
-        }
-    }
+	"page_not_found": {
+		"title": "Page Not Found",
+		"description": "Oops! Looks like this page has gone on a digital vacation. It's nowhere to be found in our cyber neighborhood.",
+		"button": "Go to Home"
+	},
+	"drawer": {
+		"search_id": "Search ID",
+		"generate": "Generate",
+		"player_settings": "Player Settings",
+		"theme_mode": {
+			"light": "Light",
+			"dark": "Dark",
+			"system": "System"
+		}
+	}
 }

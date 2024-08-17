@@ -1,111 +1,111 @@
 {
-    "search_for_something": "何かを検索してください。",
-    "search_for_item": "上の検索バーに入力してアイテムを検索してください。",
-    "no_results_found": "結果が見つかりませんでした。",
-    "no_results_for_query": "お探しの検索キーワードに一致する結果はありませんでした：",
-    "error_occurred": "エラーが発生しました。",
-    "error_message": "エラーメッセージ：",
-    "load_more": "もっと読み込む",
-    "output": {
-        "response_command": "応答：{{message}} | {{code}}",
-        "websocket_not_established": "WebSocketが確立されていません。ページを更新してください。",
-        "executing_command": "コマンドを実行中：{{command}}"
-    },
-    "search": {
-        "input_placeholder": "検索",
-        "kbd": {
-            "enter": "<0>Enter</0>で検索",
-            "escape": "<0>Esc</0>でクリア"
-        },
-        "tooltip_menu": {
-            "open": "メニューを開く",
-            "close": "メニューを閉じる"
-        },
-        "label": {
-            "api_settings": "API設定",
-            "games": "ゲーム",
-            "category": "カテゴリー",
-            "category_all": "すべて",
-            "language": "言語",
-            "results": "結果："
-        },
-        "checkbox": {
-            "image": "画像",
-            "commands": "コマンド"
-        }
-    },
-    "card": {
-        "title": {
-            "gc": "GC",
-            "gio": "GIO",
-            "lc": "LC"
-        },
-        "description": {
-            "gc": "バージョン4.7以下のGC（Grasscutter）用コマンド",
-            "gio": "バージョン3.2のGIO用コマンド",
-            "lc": "バージョン2.4以下のLC（LunarCore）用コマンド"
-        },
-        "tabs_title": {
-            "gc": "GC",
-            "gio": "GIO"
-        },
-        "show_the_commands": "コマンドを表示",
-        "next_mission": "次のミッション：{{id}}",
-        "button": {
-            "copy_id": "IDをコピー",
-            "clear_output": "出力をクリア",
-            "apply_command": "適用",
-            "close": "閉じる"
-        },
-        "dialog": {
-            "title": "コマンドを適用",
-            "description": {
-                "without_values": "コマンド（{{command}}）が実行されます",
-                "with_values": "コマンド（{{command}}）が値（{{list}}）と共に実行されます"
-            },
-            "account": "UID：{{uid}} | サーバー：{{server}}"
-        }
-    },
-    "toast": {
-        "command_copied": {
-            "title": "コマンドがクリップボードにコピーされました",
-            "description": "コマンド：{{command}}"
-        },
-        "command_copied_error": {
-            "title": "コマンドのクリップボードへのコピーに失敗しました",
-            "description": "後でもう一度お試しください"
-        },
-        "invalid_input": {
-            "title": "無効な入力パラメータ",
-            "description": "UIDやコード、サーバーが入力されていません。設定ページに移動してください",
-            "action": {
-                "text": "設定ページへ移動",
-                "url_text": "設定"
-            }
-        },
-        "copied_id": {
-            "title": "IDをコピーしました",
-            "description": "ID：{{id}}（{{name}}）"
-        },
-        "failed_copy_id": {
-            "title": "IDのコピーに失敗しました",
-            "description": "後でもう一度お試しください。"
-        },
-        "copied_command": {
-            "title": "コマンドをコピーしました",
-            "description": "コマンド：{{command}}"
-        },
-        "failed_copy_command": {
-            "title": "コマンドのコピーに失敗しました",
-            "description": "後でもう一度お試しください。"
-        },
-        "apply_command_no_configured": {
-            "title": "エラー",
-            "description": "先にUIDとコード、サーバーを入力する必要があります。設定ページに移動してください。",
-            "action": {
-                "text": "設定ページへ移動",
-                "url_text": "設定へ移動"
-            }
-        }
-    }
+	"search_for_something": "何かを検索してください。",
+	"search_for_item": "上の検索バーに入力してアイテムを検索してください。",
+	"no_results_found": "結果が見つかりませんでした。",
+	"no_results_for_query": "お探しの検索キーワードに一致する結果はありませんでした：",
+	"error_occurred": "エラーが発生しました。",
+	"error_message": "エラーメッセージ：",
+	"load_more": "もっと読み込む",
+	"output": {
+		"response_command": "応答：{{message}} | {{code}}",
+		"websocket_not_established": "WebSocketが確立されていません。ページを更新してください。",
+		"executing_command": "コマンドを実行中：{{command}}"
+	},
+	"search": {
+		"input_placeholder": "検索",
+		"kbd": {
+			"enter": "<0>Enter</0>で検索",
+			"escape": "<0>Esc</0>でクリア"
+		},
+		"tooltip_menu": {
+			"open": "メニューを開く",
+			"close": "メニューを閉じる"
+		},
+		"label": {
+			"api_settings": "API設定",
+			"games": "ゲーム",
+			"category": "カテゴリー",
+			"category_all": "すべて",
+			"language": "言語",
+			"results": "結果："
+		},
+		"checkbox": {
+			"image": "画像",
+			"commands": "コマンド"
+		}
+	},
+	"card": {
+		"title": {
+			"gc": "GC",
+			"gio": "GIO",
+			"lc": "LC"
+		},
+		"description": {
+			"gc": "バージョン4.7以下のGC（Grasscutter）用コマンド",
+			"gio": "バージョン3.2のGIO用コマンド",
+			"lc": "バージョン2.4以下のLC（LunarCore）用コマンド"
+		},
+		"tabs_title": {
+			"gc": "GC",
+			"gio": "GIO"
+		},
+		"show_the_commands": "コマンドを表示",
+		"next_mission": "次のミッション：{{id}}",
+		"button": {
+			"copy_id": "IDをコピー",
+			"clear_output": "出力をクリア",
+			"apply_command": "適用",
+			"close": "閉じる"
+		},
+		"dialog": {
+			"title": "コマンドを適用",
+			"description": {
+				"without_values": "コマンド（{{command}}）が実行されます",
+				"with_values": "コマンド（{{command}}）が値（{{list}}）と共に実行されます"
+			},
+			"account": "UID：{{uid}} | サーバー：{{server}}"
+		}
+	},
+	"toast": {
+		"command_copied": {
+			"title": "コマンドがクリップボードにコピーされました",
+			"description": "コマンド：{{command}}"
+		},
+		"command_copied_error": {
+			"title": "コマンドのクリップボードへのコピーに失敗しました",
+			"description": "後でもう一度お試しください"
+		},
+		"invalid_input": {
+			"title": "無効な入力パラメータ",
+			"description": "UIDやコード、サーバーが入力されていません。設定ページに移動してください",
+			"action": {
+				"text": "設定ページへ移動",
+				"url_text": "設定"
+			}
+		},
+		"copied_id": {
+			"title": "IDをコピーしました",
+			"description": "ID：{{id}}（{{name}}）"
+		},
+		"failed_copy_id": {
+			"title": "IDのコピーに失敗しました",
+			"description": "後でもう一度お試しください。"
+		},
+		"copied_command": {
+			"title": "コマンドをコピーしました",
+			"description": "コマンド：{{command}}"
+		},
+		"failed_copy_command": {
+			"title": "コマンドのコピーに失敗しました",
+			"description": "後でもう一度お試しください。"
+		},
+		"apply_command_no_configured": {
+			"title": "エラー",
+			"description": "先にUIDとコード、サーバーを入力する必要があります。設定ページに移動してください。",
+			"action": {
+				"text": "設定ページへ移動",
+				"url_text": "設定へ移動"
+			}
+		}
+	}
 }

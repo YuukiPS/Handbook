@@ -1,63 +1,48 @@
 {
-    "productName": "Handbook Finder",
-    "version": "1.0.0",
-    "identifier": "com.elaxan.handbookfinder",
-    "build": {
-        "beforeDevCommand": "yarn dev",
-        "devUrl": "http://localhost:1420",
-        "beforeBuildCommand": "yarn build",
-        "frontendDist": "../dist"
-    },
-    "app": {
-        "windows": [
-            {
-                "title": "Handbook Finder",
-                "fullscreen": false,
-                "center": true,
-                "width": 800,
-                "height": 600,
-                "resizable": true,
-                "minHeight": 600,
-                "minWidth": 800
-            }
-        ],
-        "security": {
-            "csp": null,
-            "capabilities": [
-                "android",
-                "windows"
-            ]
-        }
-    },
-    "bundle": {
-        "active": true,
-        "createUpdaterArtifacts": true,
-        "targets": [
-            "msi"
-        ],
-        "android": {
-            "minSdkVersion": 24
-        },
-        "resources": [
-            "resources/*"
-        ],
-        "icon": [
-            "icons/32x32.png",
-            "icons/128x128.png",
-            "icons/128x128@2x.png",
-            "icons/icon.icns",
-            "icons/icon.ico"
-        ]
-    },
-    "plugins": {
-        "updater": {
-            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDRDRDQ5NUJEM0RCRDM1NUMKUldSY05iMDl2WlhVVEV4dHBQWGpvTFMzMHI0c1RBYVdCeFRRR2pyNXZNMGNsMTVxelh4ZzRYbUwK",
-            "endpoints": [
-                "https://github.com/YuukiPS/Handbook/releases/updater/latest.json"
-            ],
-            "windows": {
-                "installMode": "basicUi"
-            }
-        }
-    }
+	"productName": "Handbook Finder",
+	"version": "0.1.0",
+	"identifier": "com.elaxan.handbookfinder",
+	"build": {
+		"beforeDevCommand": "yarn dev",
+		"devUrl": "http://localhost:1420",
+		"beforeBuildCommand": "yarn build",
+		"frontendDist": "../dist"
+	},
+	"app": {
+		"windows": [
+			{
+				"title": "Handbook Finder",
+				"fullscreen": false,
+				"center": true,
+				"width": 800,
+				"height": 600,
+				"resizable": true,
+				"minHeight": 600,
+				"minWidth": 800
+			}
+		],
+		"security": {
+			"csp": null,
+			"capabilities": ["android", "windows"]
+		}
+	},
+	"bundle": {
+		"active": true,
+		"createUpdaterArtifacts": true,
+		"targets": ["msi"],
+		"android": {
+			"minSdkVersion": 24
+		},
+		"resources": ["resources/*"],
+		"icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
+	},
+	"plugins": {
+		"updater": {
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDRDRDQ5NUJEM0RCRDM1NUMKUldSY05iMDl2WlhVVEV4dHBQWGpvTFMzMHI0c1RBYVdCeFRRR2pyNXZNMGNsMTVxelh4ZzRYbUwK",
+			"endpoints": ["https://api.elaxan.com/handbook/latest.json"],
+			"windows": {
+				"installMode": "basicUi"
+			}
+		}
+	}
 }

@@ -1,4 +1,4 @@
 export interface Category {
-    message: string;
-    data?: string[];
+	message: string
+	data?: string[]
 }

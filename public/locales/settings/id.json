@@ -1,51 +1,51 @@
 {
-    "title": "Pengaturan Pemain",
-    "failed_check_account_title": "Gagal Memeriksa Akun",
-    "failed_check_account_description": "Jika Anda mendapatkan kesalahan `AxiosError: Network Error`, ini normal. Pertama, kunjungi <0>situs web ini</0>. Jika ada reCaptcha, ini mungkin masalah normal karena Cloudflare atau Kebijakan CORS. Kami belum memiliki solusi untuk ini.",
-    "uid_account": "Akun UID",
-    "uid_code": "Kode",
-    "get_uid_and_code": "Dapatkan UID dan Kode",
-    "check_account_button": "Periksa",
-    "check_account_button_checking": "Sedang memeriksa...",
-    "save_account_button": "Simpan",
-    "cancel_button": "Batal",
-    "list_server_available": {
-        "toast": {
-            "title": "UID diperlukan",
-            "description": "Silakan masukkan UID Anda"
-        },
-        "label": "Tidak melihat server Anda dalam daftar?",
-        "button": "Tambah Manual",
-        "select_server": "Pilih Server",
-        "search_placeholder": "Cari server",
-        "tooltip": {
-            "online": "Online",
-            "offline": "Offline"
-        },
-        "dialog": {
-            "title": "Masukkan UID Anda",
-            "description": "Ini adalah UID game Anda, bukan UID YuukiPS",
-            "input_placeholder": "Masukkan UID Anda",
-            "button": {
-                "save": "Simpan",
-                "cancel": "Batal"
-            }
-        }
-    },
-    "output": {
-        "button": "Bersihkan output",
-        "successfully_checked_account": "Berhasil memeriksa UID {{uid}}. Ada {{list_total}} akun yang terdaftar dengan UID ini.",
-        "no_account_registered": "Tidak ada akun yang ditemukan untuk UID yang diberikan.",
-        "error_occurred": "Terjadi kesalahan saat memeriksa akun: {{error}}",
-        "successfully_selected_account": "Server {{name}} berhasil disimpan.",
-        "input_unexpected_error": "Terjadi kesalahan pada input. Variabel yang tidak terdefinisi: {{error}}",
-        "uid_code_saved": "UID dan Kode berhasil disimpan.",
-        "uid_code_empty": "UID atau Kode kosong",
-        "uid_must_be_5_digits": "UID harus terdiri dari 5 digit",
-        "code_must_be_4_digits": "Kode harus terdiri dari 4 digit"
-    },
-    "select_account": {
-        "button_trigger": "Pilih Akun",
-        "menu_label": "Server | Username | UID"
-    }
+	"title": "Pengaturan Pemain",
+	"failed_check_account_title": "Gagal Memeriksa Akun",
+	"failed_check_account_description": "Jika Anda mendapatkan kesalahan `AxiosError: Network Error`, ini normal. Pertama, kunjungi <0>situs web ini</0>. Jika ada reCaptcha, ini mungkin masalah normal karena Cloudflare atau Kebijakan CORS. Kami belum memiliki solusi untuk ini.",
+	"uid_account": "Akun UID",
+	"uid_code": "Kode",
+	"get_uid_and_code": "Dapatkan UID dan Kode",
+	"check_account_button": "Periksa",
+	"check_account_button_checking": "Sedang memeriksa...",
+	"save_account_button": "Simpan",
+	"cancel_button": "Batal",
+	"list_server_available": {
+		"toast": {
+			"title": "UID diperlukan",
+			"description": "Silakan masukkan UID Anda"
+		},
+		"label": "Tidak melihat server Anda dalam daftar?",
+		"button": "Tambah Manual",
+		"select_server": "Pilih Server",
+		"search_placeholder": "Cari server",
+		"tooltip": {
+			"online": "Online",
+			"offline": "Offline"
+		},
+		"dialog": {
+			"title": "Masukkan UID Anda",
+			"description": "Ini adalah UID game Anda, bukan UID YuukiPS",
+			"input_placeholder": "Masukkan UID Anda",
+			"button": {
+				"save": "Simpan",
+				"cancel": "Batal"
+			}
+		}
+	},
+	"output": {
+		"button": "Bersihkan output",
+		"successfully_checked_account": "Berhasil memeriksa UID {{uid}}. Ada {{list_total}} akun yang terdaftar dengan UID ini.",
+		"no_account_registered": "Tidak ada akun yang ditemukan untuk UID yang diberikan.",
+		"error_occurred": "Terjadi kesalahan saat memeriksa akun: {{error}}",
+		"successfully_selected_account": "Server {{name}} berhasil disimpan.",
+		"input_unexpected_error": "Terjadi kesalahan pada input. Variabel yang tidak terdefinisi: {{error}}",
+		"uid_code_saved": "UID dan Kode berhasil disimpan.",
+		"uid_code_empty": "UID atau Kode kosong",
+		"uid_must_be_5_digits": "UID harus terdiri dari 5 digit",
+		"code_must_be_4_digits": "Kode harus terdiri dari 4 digit"
+	},
+	"select_account": {
+		"button_trigger": "Pilih Akun",
+		"menu_label": "Server | Username | UID"
+	}
 }

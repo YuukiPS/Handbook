@@ -1,111 +1,111 @@
 {
-    "search_for_something": "Cari sesuatu.",
-    "search_for_item": "Cari item dengan mengetik di kotak pencarian di atas.",
-    "no_results_found": "Tidak ada hasil ditemukan.",
-    "no_results_for_query": "Tidak ada hasil ditemukan untuk pencarian Anda: ",
-    "error_occurred": "Terjadi kesalahan.",
-    "error_message": "Pesan kesalahan: ",
-    "load_more": "Muat Lebih Banyak",
-    "output": {
-        "response_command": "Respons: {{message}} | {{code}}",
-        "websocket_not_established": "WebSocket belum terhubung. Silakan muat ulang halaman.",
-        "executing_command": "Menjalankan perintah: {{command}}"
-    },
-    "search": {
-        "input_placeholder": "Cari",
-        "kbd": {
-            "enter": "<0>Enter</0> untuk mencari",
-            "escape": "<0>Esc</0> untuk menghapus"
-        },
-        "tooltip_menu": {
-            "open": "Buka Menu",
-            "close": "Tutup Menu"
-        },
-        "label": {
-            "api_settings": "Pengaturan API",
-            "games": "Permainan",
-            "category": "Kategori",
-            "category_all": "Semua",
-            "language": "Bahasa",
-            "results": "Hasil: "
-        },
-        "checkbox": {
-            "image": "Gambar",
-            "commands": "Perintah"
-        }
-    },
-    "card": {
-        "title": {
-            "gc": "GC",
-            "gio": "GIO",
-            "lc": "LC"
-        },
-        "description": {
-            "gc": "Perintah untuk GC (Grasscutter) untuk versi 4.7 atau lebih rendah",
-            "gio": "Perintah untuk GIO versi 3.2",
-            "lc": "Perintah untuk LC (LunarCore) untuk versi 2.4 atau lebih rendah"
-        },
-        "tabs_title": {
-            "gc": "GC",
-            "gio": "GIO"
-        },
-        "show_the_commands": "Tampilkan Perintah",
-        "next_mission": "Misi selanjutnya: {{id}}",
-        "button": {
-            "copy_id": "Salin ID",
-            "clear_output": "Bersihkan output",
-            "apply_command": "Terapkan",
-            "close": "Tutup"
-        },
-        "dialog": {
-            "title": "Terapkan Perintah",
-            "description": {
-                "without_values": "Perintah ({{command}}) akan dijalankan",
-                "with_values": "Perintah ({{command}}) akan dijalankan dengan nilai ({{list}})"
-            },
-            "account": "UID: {{uid}} | Server: {{server}}"
-        }
-    },
-    "toast": {
-        "command_copied": {
-            "title": "Perintah telah disalin ke clipboard",
-            "description": "Perintah: {{command}}"
-        },
-        "command_copied_error": {
-            "title": "Gagal menyalin perintah ke clipboard",
-            "description": "Silakan coba lagi nanti"
-        },
-        "invalid_input": {
-            "title": "Parameter input tidak valid",
-            "description": "UID, kode, atau server belum dimasukkan. Silakan pergi ke halaman pengaturan",
-            "action": {
-                "text": "Pergi ke halaman pengaturan",
-                "url_text": "Pengaturan"
-            }
-        },
-        "copied_id": {
-            "title": "ID Disalin",
-            "description": "ID: {{id}} untuk {{name}}"
-        },
-        "failed_copy_id": {
-            "title": "Gagal menyalin ID",
-            "description": "Silakan coba lagi nanti."
-        },
-        "copied_command": {
-            "title": "Perintah Disalin",
-            "description": "Perintah: {{command}}"
-        },
-        "failed_copy_command": {
-            "title": "Gagal menyalin perintah",
-            "description": "Silakan coba lagi nanti."
-        },
-        "apply_command_no_configured": {
-            "title": "Kesalahan",
-            "description": "Anda harus memasukkan UID, kode, dan server terlebih dahulu. Silakan pergi ke halaman pengaturan.",
-            "action": {
-                "text": "Pergi ke halaman pengaturan",
-                "url_text": "Pergi ke pengaturan"
-            }
-        }
-    }
+	"search_for_something": "Cari sesuatu.",
+	"search_for_item": "Cari item dengan mengetik di kotak pencarian di atas.",
+	"no_results_found": "Tidak ada hasil ditemukan.",
+	"no_results_for_query": "Tidak ada hasil ditemukan untuk pencarian Anda: ",
+	"error_occurred": "Terjadi kesalahan.",
+	"error_message": "Pesan kesalahan: ",
+	"load_more": "Muat Lebih Banyak",
+	"output": {
+		"response_command": "Respons: {{message}} | {{code}}",
+		"websocket_not_established": "WebSocket belum terhubung. Silakan muat ulang halaman.",
+		"executing_command": "Menjalankan perintah: {{command}}"
+	},
+	"search": {
+		"input_placeholder": "Cari",
+		"kbd": {
+			"enter": "<0>Enter</0> untuk mencari",
+			"escape": "<0>Esc</0> untuk menghapus"
+		},
+		"tooltip_menu": {
+			"open": "Buka Menu",
+			"close": "Tutup Menu"
+		},
+		"label": {
+			"api_settings": "Pengaturan API",
+			"games": "Permainan",
+			"category": "Kategori",
+			"category_all": "Semua",
+			"language": "Bahasa",
+			"results": "Hasil: "
+		},
+		"checkbox": {
+			"image": "Gambar",
+			"commands": "Perintah"
+		}
+	},
+	"card": {
+		"title": {
+			"gc": "GC",
+			"gio": "GIO",
+			"lc": "LC"
+		},
+		"description": {
+			"gc": "Perintah untuk GC (Grasscutter) untuk versi 4.7 atau lebih rendah",
+			"gio": "Perintah untuk GIO versi 3.2",
+			"lc": "Perintah untuk LC (LunarCore) untuk versi 2.4 atau lebih rendah"
+		},
+		"tabs_title": {
+			"gc": "GC",
+			"gio": "GIO"
+		},
+		"show_the_commands": "Tampilkan Perintah",
+		"next_mission": "Misi selanjutnya: {{id}}",
+		"button": {
+			"copy_id": "Salin ID",
+			"clear_output": "Bersihkan output",
+			"apply_command": "Terapkan",
+			"close": "Tutup"
+		},
+		"dialog": {
+			"title": "Terapkan Perintah",
+			"description": {
+				"without_values": "Perintah ({{command}}) akan dijalankan",
+				"with_values": "Perintah ({{command}}) akan dijalankan dengan nilai ({{list}})"
+			},
+			"account": "UID: {{uid}} | Server: {{server}}"
+		}
+	},
+	"toast": {
+		"command_copied": {
+			"title": "Perintah telah disalin ke clipboard",
+			"description": "Perintah: {{command}}"
+		},
+		"command_copied_error": {
+			"title": "Gagal menyalin perintah ke clipboard",
+			"description": "Silakan coba lagi nanti"
+		},
+		"invalid_input": {
+			"title": "Parameter input tidak valid",
+			"description": "UID, kode, atau server belum dimasukkan. Silakan pergi ke halaman pengaturan",
+			"action": {
+				"text": "Pergi ke halaman pengaturan",
+				"url_text": "Pengaturan"
+			}
+		},
+		"copied_id": {
+			"title": "ID Disalin",
+			"description": "ID: {{id}} untuk {{name}}"
+		},
+		"failed_copy_id": {
+			"title": "Gagal menyalin ID",
+			"description": "Silakan coba lagi nanti."
+		},
+		"copied_command": {
+			"title": "Perintah Disalin",
+			"description": "Perintah: {{command}}"
+		},
+		"failed_copy_command": {
+			"title": "Gagal menyalin perintah",
+			"description": "Silakan coba lagi nanti."
+		},
+		"apply_command_no_configured": {
+			"title": "Kesalahan",
+			"description": "Anda harus memasukkan UID, kode, dan server terlebih dahulu. Silakan pergi ke halaman pengaturan.",
+			"action": {
+				"text": "Pergi ke halaman pengaturan",
+				"url_text": "Pergi ke pengaturan"
+			}
+		}
+	}
 }

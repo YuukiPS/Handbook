@@ -1,51 +1,51 @@
 {
-    "title": "プレイヤー設定",
-    "failed_check_account_title": "アカウント確認失敗",
-    "failed_check_account_description": "`AxiosError: Network Error`というエラーが表示された場合、これは正常です。まず、<0>このウェブサイト</0>にアクセスしてください。reCaptchaが表示される場合、CloudflareやCORSポリシーによる通常の問題である可能性があります。現在、この問題に対する解決策はありません。",
-    "uid_account": "UIDアカウント",
-    "uid_code": "コード",
-    "get_uid_and_code": "UIDとコードを取得",
-    "check_account_button": "確認",
-    "check_account_button_checking": "確認中...",
-    "save_account_button": "保存",
-    "cancel_button": "キャンセル",
-    "list_server_available": {
-        "toast": {
-            "title": "UIDが必要です",
-            "description": "UIDを入力してください"
-        },
-        "label": "リストにサーバーが表示されていませんか？",
-        "button": "手動で追加",
-        "select_server": "サーバーを選択",
-        "search_placeholder": "サーバーを検索",
-        "tooltip": {
-            "online": "オンライン",
-            "offline": "オフライン"
-        },
-        "dialog": {
-            "title": "UIDを入力してください",
-            "description": "これはゲームのUIDであり、YuukiPSのUIDではありません",
-            "input_placeholder": "UIDを入力",
-            "button": {
-                "save": "保存",
-                "cancel": "キャンセル"
-            }
-        }
-    },
-    "output": {
-        "button": "出力をクリア",
-        "successfully_checked_account": "UID {{uid}} の確認に成功しました。このUIDに登録されているアカウントは {{list_total}} 件です。",
-        "no_account_registered": "提供されたUIDに関連するアカウントが見つかりませんでした。",
-        "error_occurred": "アカウントの確認中にエラーが発生しました: {{error}}",
-        "successfully_selected_account": "サーバー {{name}} が正常に保存されました。",
-        "input_unexpected_error": "入力にエラーがありました。未定義の変数: {{error}}",
-        "uid_code_saved": "UIDとコードが正常に保存されました。",
-        "uid_code_empty": "UIDまたはコードが空です",
-        "uid_must_be_5_digits": "UIDは5桁である必要があります",
-        "code_must_be_4_digits": "コードは4桁である必要があります"
-    },
-    "select_account": {
-        "button_trigger": "アカウントを選択",
-        "menu_label": "サーバー | ニックネーム | UID"
-    }
+	"title": "プレイヤー設定",
+	"failed_check_account_title": "アカウント確認失敗",
+	"failed_check_account_description": "`AxiosError: Network Error`というエラーが表示された場合、これは正常です。まず、<0>このウェブサイト</0>にアクセスしてください。reCaptchaが表示される場合、CloudflareやCORSポリシーによる通常の問題である可能性があります。現在、この問題に対する解決策はありません。",
+	"uid_account": "UIDアカウント",
+	"uid_code": "コード",
+	"get_uid_and_code": "UIDとコードを取得",
+	"check_account_button": "確認",
+	"check_account_button_checking": "確認中...",
+	"save_account_button": "保存",
+	"cancel_button": "キャンセル",
+	"list_server_available": {
+		"toast": {
+			"title": "UIDが必要です",
+			"description": "UIDを入力してください"
+		},
+		"label": "リストにサーバーが表示されていませんか？",
+		"button": "手動で追加",
+		"select_server": "サーバーを選択",
+		"search_placeholder": "サーバーを検索",
+		"tooltip": {
+			"online": "オンライン",
+			"offline": "オフライン"
+		},
+		"dialog": {
+			"title": "UIDを入力してください",
+			"description": "これはゲームのUIDであり、YuukiPSのUIDではありません",
+			"input_placeholder": "UIDを入力",
+			"button": {
+				"save": "保存",
+				"cancel": "キャンセル"
+			}
+		}
+	},
+	"output": {
+		"button": "出力をクリア",
+		"successfully_checked_account": "UID {{uid}} の確認に成功しました。このUIDに登録されているアカウントは {{list_total}} 件です。",
+		"no_account_registered": "提供されたUIDに関連するアカウントが見つかりませんでした。",
+		"error_occurred": "アカウントの確認中にエラーが発生しました: {{error}}",
+		"successfully_selected_account": "サーバー {{name}} が正常に保存されました。",
+		"input_unexpected_error": "入力にエラーがありました。未定義の変数: {{error}}",
+		"uid_code_saved": "UIDとコードが正常に保存されました。",
+		"uid_code_empty": "UIDまたはコードが空です",
+		"uid_must_be_5_digits": "UIDは5桁である必要があります",
+		"code_must_be_4_digits": "コードは4桁である必要があります"
+	},
+	"select_account": {
+		"button_trigger": "アカウントを選択",
+		"menu_label": "サーバー | ニックネーム | UID"
+	}
 }

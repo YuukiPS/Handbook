@@ -1,111 +1,111 @@
 {
-    "search_for_something": "ค้นหาบางสิ่ง",
-    "search_for_item": "ค้นหาไอเทมโดยพิมพ์ในช่องค้นหาด้านบน",
-    "no_results_found": "ไม่พบผลลัพธ์",
-    "no_results_for_query": "ไม่พบผลลัพธ์สำหรับคำค้นหาของคุณ: ",
-    "error_occurred": "เกิดข้อผิดพลาด",
-    "error_message": "ข้อความแสดงข้อผิดพลาด: ",
-    "load_more": "โหลดเพิ่มเติม",
-    "output": {
-        "response_command": "การตอบสนอง: {{message}} | {{code}}",
-        "websocket_not_established": "ไม่สามารถเชื่อมต่อ WebSocket ได้ กรุณารีเฟรชหน้าเว็บ",
-        "executing_command": "กำลังดำเนินการคำสั่ง: {{command}}"
-    },
-    "search": {
-        "input_placeholder": "ค้นหา",
-        "kbd": {
-            "enter": "<0>Enter</0> เพื่อค้นหา",
-            "escape": "<0>Esc</0> เพื่อล้าง"
-        },
-        "tooltip_menu": {
-            "open": "เปิดเมนู",
-            "close": "ปิดเมนู"
-        },
-        "label": {
-            "api_settings": "ตั้งค่า API",
-            "games": "เกม",
-            "category": "หมวดหมู่",
-            "category_all": "ทั้งหมด",
-            "language": "ภาษา",
-            "results": "ผลลัพธ์: "
-        },
-        "checkbox": {
-            "image": "รูปภาพ",
-            "commands": "คำสั่ง"
-        }
-    },
-    "card": {
-        "title": {
-            "gc": "GC",
-            "gio": "GIO",
-            "lc": "LC"
-        },
-        "description": {
-            "gc": "คำสั่งสำหรับ GC (Grasscutter) เวอร์ชัน 4.7 หรือต่ำกว่า",
-            "gio": "คำสั่งสำหรับ GIO เวอร์ชัน 3.2",
-            "lc": "คำสั่งสำหรับ LC (LunarCore) เวอร์ชัน 2.4 หรือต่ำกว่า"
-        },
-        "tabs_title": {
-            "gc": "GC",
-            "gio": "GIO"
-        },
-        "show_the_commands": "แสดงคำสั่ง",
-        "next_mission": "ภารกิจถัดไป: {{id}}",
-        "button": {
-            "copy_id": "คัดลอก ID",
-            "clear_output": "ล้างผลลัพธ์",
-            "apply_command": "ใช้งาน",
-            "close": "ปิด"
-        },
-        "dialog": {
-            "title": "ใช้งานคำสั่ง",
-            "description": {
-                "without_values": "คำสั่ง ({{command}}) จะถูกดำเนินการ",
-                "with_values": "คำสั่ง ({{command}}) จะถูกดำเนินการพร้อมค่า ({{list}})"
-            },
-            "account": "UID: {{uid}} | เซิร์ฟเวอร์: {{server}}"
-        }
-    },
-    "toast": {
-        "command_copied": {
-            "title": "คัดลอกคำสั่งไปยังคลิปบอร์ดแล้ว",
-            "description": "คำสั่ง: {{command}}"
-        },
-        "command_copied_error": {
-            "title": "ไม่สามารถคัดลอกคำสั่งไปยังคลิปบอร์ดได้",
-            "description": "กรุณาลองอีกครั้งในภายหลัง"
-        },
-        "invalid_input": {
-            "title": "พารามิเตอร์ไม่ถูกต้อง",
-            "description": "ไม่ได้ใส่ UID, รหัส หรือเซิร์ฟเวอร์ กรุณาไปที่หน้าตั้งค่า",
-            "action": {
-                "text": "ไปที่หน้าตั้งค่า",
-                "url_text": "ตั้งค่า"
-            }
-        },
-        "copied_id": {
-            "title": "คัดลอก ID แล้ว",
-            "description": "ID: {{id}} สำหรับ {{name}}"
-        },
-        "failed_copy_id": {
-            "title": "ไม่สามารถคัดลอก ID ได้",
-            "description": "กรุณาลองอีกครั้งในภายหลัง"
-        },
-        "copied_command": {
-            "title": "คัดลอกคำสั่งแล้ว",
-            "description": "คำสั่ง: {{command}}"
-        },
-        "failed_copy_command": {
-            "title": "ไม่สามารถคัดลอกคำสั่งได้",
-            "description": "กรุณาลองอีกครั้งในภายหลัง"
-        },
-        "apply_command_no_configured": {
-            "title": "ข้อผิดพลาด",
-            "description": "คุณต้องใส่ UID, รหัส และเซิร์ฟเวอร์ก่อน กรุณาไปที่หน้าตั้งค่า",
-            "action": {
-                "text": "ไปที่หน้าตั้งค่า",
-                "url_text": "ไปที่การตั้งค่า"
-            }
-        }
-    }
+	"search_for_something": "ค้นหาบางสิ่ง",
+	"search_for_item": "ค้นหาไอเทมโดยพิมพ์ในช่องค้นหาด้านบน",
+	"no_results_found": "ไม่พบผลลัพธ์",
+	"no_results_for_query": "ไม่พบผลลัพธ์สำหรับคำค้นหาของคุณ: ",
+	"error_occurred": "เกิดข้อผิดพลาด",
+	"error_message": "ข้อความแสดงข้อผิดพลาด: ",
+	"load_more": "โหลดเพิ่มเติม",
+	"output": {
+		"response_command": "การตอบสนอง: {{message}} | {{code}}",
+		"websocket_not_established": "ไม่สามารถเชื่อมต่อ WebSocket ได้ กรุณารีเฟรชหน้าเว็บ",
+		"executing_command": "กำลังดำเนินการคำสั่ง: {{command}}"
+	},
+	"search": {
+		"input_placeholder": "ค้นหา",
+		"kbd": {
+			"enter": "<0>Enter</0> เพื่อค้นหา",
+			"escape": "<0>Esc</0> เพื่อล้าง"
+		},
+		"tooltip_menu": {
+			"open": "เปิดเมนู",
+			"close": "ปิดเมนู"
+		},
+		"label": {
+			"api_settings": "ตั้งค่า API",
+			"games": "เกม",
+			"category": "หมวดหมู่",
+			"category_all": "ทั้งหมด",
+			"language": "ภาษา",
+			"results": "ผลลัพธ์: "
+		},
+		"checkbox": {
+			"image": "รูปภาพ",
+			"commands": "คำสั่ง"
+		}
+	},
+	"card": {
+		"title": {
+			"gc": "GC",
+			"gio": "GIO",
+			"lc": "LC"
+		},
+		"description": {
+			"gc": "คำสั่งสำหรับ GC (Grasscutter) เวอร์ชัน 4.7 หรือต่ำกว่า",
+			"gio": "คำสั่งสำหรับ GIO เวอร์ชัน 3.2",
+			"lc": "คำสั่งสำหรับ LC (LunarCore) เวอร์ชัน 2.4 หรือต่ำกว่า"
+		},
+		"tabs_title": {
+			"gc": "GC",
+			"gio": "GIO"
+		},
+		"show_the_commands": "แสดงคำสั่ง",
+		"next_mission": "ภารกิจถัดไป: {{id}}",
+		"button": {
+			"copy_id": "คัดลอก ID",
+			"clear_output": "ล้างผลลัพธ์",
+			"apply_command": "ใช้งาน",
+			"close": "ปิด"
+		},
+		"dialog": {
+			"title": "ใช้งานคำสั่ง",
+			"description": {
+				"without_values": "คำสั่ง ({{command}}) จะถูกดำเนินการ",
+				"with_values": "คำสั่ง ({{command}}) จะถูกดำเนินการพร้อมค่า ({{list}})"
+			},
+			"account": "UID: {{uid}} | เซิร์ฟเวอร์: {{server}}"
+		}
+	},
+	"toast": {
+		"command_copied": {
+			"title": "คัดลอกคำสั่งไปยังคลิปบอร์ดแล้ว",
+			"description": "คำสั่ง: {{command}}"
+		},
+		"command_copied_error": {
+			"title": "ไม่สามารถคัดลอกคำสั่งไปยังคลิปบอร์ดได้",
+			"description": "กรุณาลองอีกครั้งในภายหลัง"
+		},
+		"invalid_input": {
+			"title": "พารามิเตอร์ไม่ถูกต้อง",
+			"description": "ไม่ได้ใส่ UID, รหัส หรือเซิร์ฟเวอร์ กรุณาไปที่หน้าตั้งค่า",
+			"action": {
+				"text": "ไปที่หน้าตั้งค่า",
+				"url_text": "ตั้งค่า"
+			}
+		},
+		"copied_id": {
+			"title": "คัดลอก ID แล้ว",
+			"description": "ID: {{id}} สำหรับ {{name}}"
+		},
+		"failed_copy_id": {
+			"title": "ไม่สามารถคัดลอก ID ได้",
+			"description": "กรุณาลองอีกครั้งในภายหลัง"
+		},
+		"copied_command": {
+			"title": "คัดลอกคำสั่งแล้ว",
+			"description": "คำสั่ง: {{command}}"
+		},
+		"failed_copy_command": {
+			"title": "ไม่สามารถคัดลอกคำสั่งได้",
+			"description": "กรุณาลองอีกครั้งในภายหลัง"
+		},
+		"apply_command_no_configured": {
+			"title": "ข้อผิดพลาด",
+			"description": "คุณต้องใส่ UID, รหัส และเซิร์ฟเวอร์ก่อน กรุณาไปที่หน้าตั้งค่า",
+			"action": {
+				"text": "ไปที่หน้าตั้งค่า",
+				"url_text": "ไปที่การตั้งค่า"
+			}
+		}
+	}
 }

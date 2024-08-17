@@ -1,111 +1,111 @@
 {
-    "search_for_something": "Поиск чего-нибудь.",
-    "search_for_item": "Введите запрос в строку поиска выше, чтобы найти предмет.",
-    "no_results_found": "Ничего не найдено.",
-    "no_results_for_query": "По вашему запросу ничего не найдено: ",
-    "error_occurred": "Произошла ошибка.",
-    "error_message": "Сообщение об ошибке: ",
-    "load_more": "Загрузить ещё",
-    "output": {
-        "response_command": "Ответ: {{message}} | {{code}}",
-        "websocket_not_established": "Соединение WebSocket не установлено. Пожалуйста, обновите страницу.",
-        "executing_command": "Выполнение команды: {{command}}"
-    },
-    "search": {
-        "input_placeholder": "Поиск",
-        "kbd": {
-            "enter": "<0>Enter</0> для поиска",
-            "escape": "<0>Esc</0> для очистки"
-        },
-        "tooltip_menu": {
-            "open": "Открыть меню",
-            "close": "Закрыть меню"
-        },
-        "label": {
-            "api_settings": "Настройки API",
-            "games": "Игры",
-            "category": "Категория",
-            "category_all": "Все",
-            "language": "Язык",
-            "results": "Результаты: "
-        },
-        "checkbox": {
-            "image": "Изображение",
-            "commands": "Команды"
-        }
-    },
-    "card": {
-        "title": {
-            "gc": "GC",
-            "gio": "GIO",
-            "lc": "LC"
-        },
-        "description": {
-            "gc": "Команды для GC (Grasscutter) для версий 4.7 или ниже",
-            "gio": "Команды для GIO версии 3.2",
-            "lc": "Команды для LC (LunarCore) для версий 2.4 или ниже"
-        },
-        "tabs_title": {
-            "gc": "GC",
-            "gio": "GIO"
-        },
-        "show_the_commands": "Показать команды",
-        "next_mission": "Следующая миссия: {{id}}",
-        "button": {
-            "copy_id": "Копировать ID",
-            "clear_output": "Очистить вывод",
-            "apply_command": "Применить",
-            "close": "Закрыть"
-        },
-        "dialog": {
-            "title": "Применить команду",
-            "description": {
-                "without_values": "Команда ({{command}}) будет выполнена",
-                "with_values": "Команда ({{command}}) будет выполнена со значениями ({{list}})"
-            },
-            "account": "UID: {{uid}} | Сервер: {{server}}"
-        }
-    },
-    "toast": {
-        "command_copied": {
-            "title": "Команда скопирована в буфер обмена",
-            "description": "Команда: {{command}}"
-        },
-        "command_copied_error": {
-            "title": "Не удалось скопировать команду в буфер обмена",
-            "description": "Пожалуйста, попробуйте позже"
-        },
-        "invalid_input": {
-            "title": "Неверные входные параметры",
-            "description": "Не введен UID, код или сервер. Пожалуйста, перейдите на страницу настроек",
-            "action": {
-                "text": "Перейти на страницу настроек",
-                "url_text": "Настройки"
-            }
-        },
-        "copied_id": {
-            "title": "ID скопирован",
-            "description": "ID: {{id}} для {{name}}"
-        },
-        "failed_copy_id": {
-            "title": "Не удалось скопировать ID",
-            "description": "Пожалуйста, попробуйте позже."
-        },
-        "copied_command": {
-            "title": "Команда скопирована",
-            "description": "Команда: {{command}}"
-        },
-        "failed_copy_command": {
-            "title": "Не удалось скопировать команду",
-            "description": "Пожалуйста, попробуйте позже."
-        },
-        "apply_command_no_configured": {
-            "title": "Ошибка",
-            "description": "Сначала необходимо ввести UID, код и сервер. Пожалуйста, перейдите на страницу настроек.",
-            "action": {
-                "text": "Перейти на страницу настроек",
-                "url_text": "Перейти к настройкам"
-            }
-        }
-    }
+	"search_for_something": "Поиск чего-нибудь.",
+	"search_for_item": "Введите запрос в строку поиска выше, чтобы найти предмет.",
+	"no_results_found": "Ничего не найдено.",
+	"no_results_for_query": "По вашему запросу ничего не найдено: ",
+	"error_occurred": "Произошла ошибка.",
+	"error_message": "Сообщение об ошибке: ",
+	"load_more": "Загрузить ещё",
+	"output": {
+		"response_command": "Ответ: {{message}} | {{code}}",
+		"websocket_not_established": "Соединение WebSocket не установлено. Пожалуйста, обновите страницу.",
+		"executing_command": "Выполнение команды: {{command}}"
+	},
+	"search": {
+		"input_placeholder": "Поиск",
+		"kbd": {
+			"enter": "<0>Enter</0> для поиска",
+			"escape": "<0>Esc</0> для очистки"
+		},
+		"tooltip_menu": {
+			"open": "Открыть меню",
+			"close": "Закрыть меню"
+		},
+		"label": {
+			"api_settings": "Настройки API",
+			"games": "Игры",
+			"category": "Категория",
+			"category_all": "Все",
+			"language": "Язык",
+			"results": "Результаты: "
+		},
+		"checkbox": {
+			"image": "Изображение",
+			"commands": "Команды"
+		}
+	},
+	"card": {
+		"title": {
+			"gc": "GC",
+			"gio": "GIO",
+			"lc": "LC"
+		},
+		"description": {
+			"gc": "Команды для GC (Grasscutter) для версий 4.7 или ниже",
+			"gio": "Команды для GIO версии 3.2",
+			"lc": "Команды для LC (LunarCore) для версий 2.4 или ниже"
+		},
+		"tabs_title": {
+			"gc": "GC",
+			"gio": "GIO"
+		},
+		"show_the_commands": "Показать команды",
+		"next_mission": "Следующая миссия: {{id}}",
+		"button": {
+			"copy_id": "Копировать ID",
+			"clear_output": "Очистить вывод",
+			"apply_command": "Применить",
+			"close": "Закрыть"
+		},
+		"dialog": {
+			"title": "Применить команду",
+			"description": {
+				"without_values": "Команда ({{command}}) будет выполнена",
+				"with_values": "Команда ({{command}}) будет выполнена со значениями ({{list}})"
+			},
+			"account": "UID: {{uid}} | Сервер: {{server}}"
+		}
+	},
+	"toast": {
+		"command_copied": {
+			"title": "Команда скопирована в буфер обмена",
+			"description": "Команда: {{command}}"
+		},
+		"command_copied_error": {
+			"title": "Не удалось скопировать команду в буфер обмена",
+			"description": "Пожалуйста, попробуйте позже"
+		},
+		"invalid_input": {
+			"title": "Неверные входные параметры",
+			"description": "Не введен UID, код или сервер. Пожалуйста, перейдите на страницу настроек",
+			"action": {
+				"text": "Перейти на страницу настроек",
+				"url_text": "Настройки"
+			}
+		},
+		"copied_id": {
+			"title": "ID скопирован",
+			"description": "ID: {{id}} для {{name}}"
+		},
+		"failed_copy_id": {
+			"title": "Не удалось скопировать ID",
+			"description": "Пожалуйста, попробуйте позже."
+		},
+		"copied_command": {
+			"title": "Команда скопирована",
+			"description": "Команда: {{command}}"
+		},
+		"failed_copy_command": {
+			"title": "Не удалось скопировать команду",
+			"description": "Пожалуйста, попробуйте позже."
+		},
+		"apply_command_no_configured": {
+			"title": "Ошибка",
+			"description": "Сначала необходимо ввести UID, код и сервер. Пожалуйста, перейдите на страницу настроек.",
+			"action": {
+				"text": "Перейти на страницу настроек",
+				"url_text": "Перейти к настройкам"
+			}
+		}
+	}
 }

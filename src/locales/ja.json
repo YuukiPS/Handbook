@@ -1,17 +1,17 @@
 {
-    "page_not_found": {
-        "title": "ページが見つかりません",
-        "description": "お探しのページは存在しません。道に迷った旅人のように、新たな道を見つけましょう。",
-        "button": "ホームに移動"
-    },
-    "drawer": {
-        "search_id": "ID検索",
-        "generate": "生成",
-        "player_settings": "プレイヤー設定",
-        "theme_mode": {
-            "light": "ライト",
-            "dark": "ダーク",
-            "system": "システム"
-        }
-    }
+	"page_not_found": {
+		"title": "ページが見つかりません",
+		"description": "お探しのページは存在しません。道に迷った旅人のように、新たな道を見つけましょう。",
+		"button": "ホームに移動"
+	},
+	"drawer": {
+		"search_id": "ID検索",
+		"generate": "生成",
+		"player_settings": "プレイヤー設定",
+		"theme_mode": {
+			"light": "ライト",
+			"dark": "ダーク",
+			"system": "システム"
+		}
+	}
 }

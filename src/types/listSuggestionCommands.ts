@@ -1,6 +1,6 @@
 export interface ListSuggestionCommands {
-    name: string;
-    command: string;
-    description: string;
-    type: 'gc' | 'gio' | 'lc';
+	name: string
+	command: string
+	description: string
+	type: 'gc' | 'gio' | 'lc'
 }

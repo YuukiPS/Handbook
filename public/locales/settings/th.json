@@ -1,51 +1,51 @@
 {
-    "title": "การตั้งค่าผู้เล่น",
-    "failed_check_account_title": "ตรวจสอบบัญชีไม่สำเร็จ",
-    "failed_check_account_description": "หากคุณได้รับข้อผิดพลาด `AxiosError: Network Error` นี่เป็นเรื่องปกติ ก่อนอื่นให้ไปที่ <0>เว็บไซต์นี้</0> หากมี reCaptcha นี่อาจเป็นปัญหาปกติเนื่องจาก Cloudflare หรือนโยบาย CORS เรายังไม่มีวิธีแก้ไขสำหรับปัญหานี้",
-    "uid_account": "บัญชี UID",
-    "uid_code": "รหัส",
-    "get_uid_and_code": "รับ UID และรหัส",
-    "check_account_button": "ตรวจสอบ",
-    "check_account_button_checking": "กำลังตรวจสอบ...",
-    "save_account_button": "บันทึก",
-    "cancel_button": "ยกเลิก",
-    "list_server_available": {
-        "toast": {
-            "title": "ต้องระบุ UID",
-            "description": "กรุณาใส่ UID ของคุณ"
-        },
-        "label": "ไม่เห็นเซิร์ฟเวอร์ของคุณในรายการ?",
-        "button": "เพิ่มด้วยตนเอง",
-        "select_server": "เลือกเซิร์ฟเวอร์",
-        "search_placeholder": "ค้นหาเซิร์ฟเวอร์",
-        "tooltip": {
-            "online": "ออนไลน์",
-            "offline": "ออฟไลน์"
-        },
-        "dialog": {
-            "title": "ใส่ UID ของคุณ",
-            "description": "นี่คือ UID เกมของคุณ ไม่ใช่ UID ของ YuukiPS",
-            "input_placeholder": "ใส่ UID ของคุณ",
-            "button": {
-                "save": "บันทึก",
-                "cancel": "ยกเลิก"
-            }
-        }
-    },
-    "output": {
-        "button": "ล้างผลลัพธ์",
-        "successfully_checked_account": "ตรวจสอบ UID {{uid}} สำเร็จ มีบัญชีที่ลงทะเบียนด้วย UID นี้ทั้งหมด {{list_total}} บัญชี",
-        "no_account_registered": "ไม่พบบัญชีสำหรับ UID ที่ระบุ",
-        "error_occurred": "เกิดข้อผิดพลาดขณะตรวจสอบบัญชี: {{error}}",
-        "successfully_selected_account": "บันทึกเซิร์ฟเวอร์ {{name}} เรียบร้อยแล้ว",
-        "input_unexpected_error": "เกิดข้อผิดพลาดในการป้อนข้อมูล ตัวแปรที่ไม่ได้กำหนด: {{error}}",
-        "uid_code_saved": "บันทึก UID และรหัสเรียบร้อยแล้ว",
-        "uid_code_empty": "UID หรือรหัสว่างเปล่า",
-        "uid_must_be_5_digits": "UID ต้องมี 5 หลัก",
-        "code_must_be_4_digits": "รหัสต้องมี 4 หลัก"
-    },
-    "select_account": {
-        "button_trigger": "เลือกบัญชี",
-        "menu_label": "เซิร์ฟเวอร์ | ชื่อในเกม | UID"
-    }
+	"title": "การตั้งค่าผู้เล่น",
+	"failed_check_account_title": "ตรวจสอบบัญชีไม่สำเร็จ",
+	"failed_check_account_description": "หากคุณได้รับข้อผิดพลาด `AxiosError: Network Error` นี่เป็นเรื่องปกติ ก่อนอื่นให้ไปที่ <0>เว็บไซต์นี้</0> หากมี reCaptcha นี่อาจเป็นปัญหาปกติเนื่องจาก Cloudflare หรือนโยบาย CORS เรายังไม่มีวิธีแก้ไขสำหรับปัญหานี้",
+	"uid_account": "บัญชี UID",
+	"uid_code": "รหัส",
+	"get_uid_and_code": "รับ UID และรหัส",
+	"check_account_button": "ตรวจสอบ",
+	"check_account_button_checking": "กำลังตรวจสอบ...",
+	"save_account_button": "บันทึก",
+	"cancel_button": "ยกเลิก",
+	"list_server_available": {
+		"toast": {
+			"title": "ต้องระบุ UID",
+			"description": "กรุณาใส่ UID ของคุณ"
+		},
+		"label": "ไม่เห็นเซิร์ฟเวอร์ของคุณในรายการ?",
+		"button": "เพิ่มด้วยตนเอง",
+		"select_server": "เลือกเซิร์ฟเวอร์",
+		"search_placeholder": "ค้นหาเซิร์ฟเวอร์",
+		"tooltip": {
+			"online": "ออนไลน์",
+			"offline": "ออฟไลน์"
+		},
+		"dialog": {
+			"title": "ใส่ UID ของคุณ",
+			"description": "นี่คือ UID เกมของคุณ ไม่ใช่ UID ของ YuukiPS",
+			"input_placeholder": "ใส่ UID ของคุณ",
+			"button": {
+				"save": "บันทึก",
+				"cancel": "ยกเลิก"
+			}
+		}
+	},
+	"output": {
+		"button": "ล้างผลลัพธ์",
+		"successfully_checked_account": "ตรวจสอบ UID {{uid}} สำเร็จ มีบัญชีที่ลงทะเบียนด้วย UID นี้ทั้งหมด {{list_total}} บัญชี",
+		"no_account_registered": "ไม่พบบัญชีสำหรับ UID ที่ระบุ",
+		"error_occurred": "เกิดข้อผิดพลาดขณะตรวจสอบบัญชี: {{error}}",
+		"successfully_selected_account": "บันทึกเซิร์ฟเวอร์ {{name}} เรียบร้อยแล้ว",
+		"input_unexpected_error": "เกิดข้อผิดพลาดในการป้อนข้อมูล ตัวแปรที่ไม่ได้กำหนด: {{error}}",
+		"uid_code_saved": "บันทึก UID และรหัสเรียบร้อยแล้ว",
+		"uid_code_empty": "UID หรือรหัสว่างเปล่า",
+		"uid_must_be_5_digits": "UID ต้องมี 5 หลัก",
+		"code_must_be_4_digits": "รหัสต้องมี 4 หลัก"
+	},
+	"select_account": {
+		"button_trigger": "เลือกบัญชี",
+		"menu_label": "เซิร์ฟเวอร์ | ชื่อในเกม | UID"
+	}
 }

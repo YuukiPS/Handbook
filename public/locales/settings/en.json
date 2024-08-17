@@ -1,51 +1,51 @@
 {
-    "title": "Player Settings",
-    "failed_check_account_title": "Failed Check Account",
-    "failed_check_account_description": "If you get the error `AxiosError: Network Error`, this is normal. First, go to <0>this website</0>. If there is a reCaptcha, this might be a normal issue because of Cloudflare or CORS Policy. We don't have a solution for this yet.",
-    "uid_account": "UID Account",
-    "uid_code": "Code",
-    "get_uid_and_code": "Get UID and Code",
-    "check_account_button": "Check",
-    "check_account_button_checking": "Checking...",
-    "save_account_button": "Save",
-    "cancel_button": "Cancel",
-    "list_server_available": {
-        "toast": {
-            "title": "UID is required",
-            "description": "Please enter your UID"
-        },
-        "label": "Don't see your server on the list?",
-        "button": "Add Manual",
-        "select_server": "Select Server",
-        "search_placeholder": "Search server",
-        "tooltip": {
-            "online": "Online",
-            "offline": "Offline"
-        },
-        "dialog": {
-            "title": "Enter your UID",
-            "description": "This is your UID games not YuukiPS UID",
-            "input_placeholder": "Enter your UID",
-            "button": {
-                "save": "Save",
-                "cancel": "Cancel"
-            }
-        }
-    },
-    "output": {
-        "button": "Clear output",
-        "successfully_checked_account": "Successfully checked UID {{uid}}. There are {{list_total}} accounts registered with this UID.",
-        "no_account_registered": "No accounts found for the provided UID.",
-        "error_occurred": "An error occurred while checking the account: {{error}}",
-        "successfully_selected_account": "Server {{name}} has been successfully saved.",
-        "input_unexpected_error": "There was an error in the input. Undefined variables: {{error}}",
-        "uid_code_saved": "UID and Code have been successfully saved.",
-        "uid_code_empty": "UID or Code empty",
-        "uid_must_be_5_digits": "UID must be 5 digits",
-        "code_must_be_4_digits": "Code must be 4 digits"
-    },
-    "select_account": {
-        "button_trigger": "Select Account",
-        "menu_label": "Server | Nickname | UID"
-    }
+	"title": "Player Settings",
+	"failed_check_account_title": "Failed Check Account",
+	"failed_check_account_description": "If you get the error `AxiosError: Network Error`, this is normal. First, go to <0>this website</0>. If there is a reCaptcha, this might be a normal issue because of Cloudflare or CORS Policy. We don't have a solution for this yet.",
+	"uid_account": "UID Account",
+	"uid_code": "Code",
+	"get_uid_and_code": "Get UID and Code",
+	"check_account_button": "Check",
+	"check_account_button_checking": "Checking...",
+	"save_account_button": "Save",
+	"cancel_button": "Cancel",
+	"list_server_available": {
+		"toast": {
+			"title": "UID is required",
+			"description": "Please enter your UID"
+		},
+		"label": "Don't see your server on the list?",
+		"button": "Add Manual",
+		"select_server": "Select Server",
+		"search_placeholder": "Search server",
+		"tooltip": {
+			"online": "Online",
+			"offline": "Offline"
+		},
+		"dialog": {
+			"title": "Enter your UID",
+			"description": "This is your UID games not YuukiPS UID",
+			"input_placeholder": "Enter your UID",
+			"button": {
+				"save": "Save",
+				"cancel": "Cancel"
+			}
+		}
+	},
+	"output": {
+		"button": "Clear output",
+		"successfully_checked_account": "Successfully checked UID {{uid}}. There are {{list_total}} accounts registered with this UID.",
+		"no_account_registered": "No accounts found for the provided UID.",
+		"error_occurred": "An error occurred while checking the account: {{error}}",
+		"successfully_selected_account": "Server {{name}} has been successfully saved.",
+		"input_unexpected_error": "There was an error in the input. Undefined variables: {{error}}",
+		"uid_code_saved": "UID and Code have been successfully saved.",
+		"uid_code_empty": "UID or Code empty",
+		"uid_must_be_5_digits": "UID must be 5 digits",
+		"code_must_be_4_digits": "Code must be 4 digits"
+	},
+	"select_account": {
+		"button_trigger": "Select Account",
+		"menu_label": "Server | Nickname | UID"
+	}
 }
