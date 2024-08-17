@@ -4,13 +4,14 @@ use serde::Serialize;
 
 use crate::{
     structure::handbook::{
-        category::Category, commands::Command, gi::artifacts::Artifact, sr::relics::RelicElement,
-        Language,
+        category::Category, gi::artifacts::Artifact, sr::relics::RelicElement, Language,
     },
     utility::TextMap,
 };
 
-use super::{commands::generate_command, output_log, GameExcelReader, ResultData};
+use super::{
+    commands::generate_command, commands::CommandMap, output_log, GameExcelReader, ResultData,
+};
 
 #[derive(Serialize)]
 pub struct ArtifactResult {
@@ -20,7 +21,7 @@ pub struct ArtifactResult {
     pub image: String,
     pub category: Category,
     pub rarity: i64,
-    pub commands: Command,
+    pub commands: CommandMap,
 }
 
 struct ArtifactData {
@@ -30,10 +31,17 @@ struct ArtifactData {
     rarity: String,
     icon: String,
     category: Category,
+    commands: CommandMap,
 }
 
 impl ArtifactData {
     fn from_genshin(genshin_art: Artifact) -> Self {
+        let command = generate_command(
+            Category::Artifacts,
+            genshin_art.id as u32,
+            "/give",
+            super::commands::GameType::GenshinImpact,
+        );
         Self {
             id: genshin_art.id,
             name: genshin_art.name_text_map_hash,
@@ -41,10 +49,17 @@ impl ArtifactData {
             icon: genshin_art.icon,
             rarity: genshin_art.rank_level.to_string(),
             category: Category::Artifacts,
+            commands: command,
         }
     }
 
     fn from_star_rail(star_rail_relic: RelicElement) -> Self {
+        let command = generate_command(
+            Category::Artifacts,
+            star_rail_relic.id as u32,
+            "/give",
+            super::commands::GameType::HonkaiStarRail,
+        );
         Self {
             id: star_rail_relic.id,
             name: star_rail_relic.item_name.hash,
@@ -54,6 +69,7 @@ impl ArtifactData {
                 .replace("SpriteOutput/ItemIcon/RelicIcons/", ""),
             rarity: star_rail_relic.rarity.to_string(),
             category: Category::Relics,
+            commands: command,
         }
     }
 }
@@ -100,7 +116,6 @@ where
         let name = text_map.get(&artifact.name.to_string()).cloned();
         let desc = text_map.get(&artifact.description.to_string()).cloned();
 
-        let command = generate_command(Category::Materials, artifact.id as u32, "/give");
         let image = get_image("genshin-impact", &artifact.icon, "artifacts");
 
         let artifact_result = result
@@ -133,7 +148,7 @@ where
                 rarity: artifact.rarity.parse::<i64>().unwrap_or(0),
                 image,
                 category: artifact.category.clone(),
-                commands: command,
+                commands: artifact.commands.clone(),
             }))
         }
     }

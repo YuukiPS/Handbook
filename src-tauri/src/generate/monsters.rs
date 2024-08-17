@@ -4,7 +4,6 @@ use std::collections::HashMap;
 use crate::{
     structure::handbook::{
         category::Category,
-        commands::Command,
         gi::monsters::{Monster as GIMonster, MonsterDescribeElement},
         sr::monster::Monster as SRMonster,
         Language,
@@ -12,7 +11,7 @@ use crate::{
     utility::TextMap,
 };
 
-use super::{commands::generate_command, output_log, GameExcelReader, ResultData};
+use super::{commands::CommandMap, output_log, GameExcelReader, ResultData};
 
 #[derive(Serialize)]
 pub struct MonstersResult {
@@ -24,7 +23,7 @@ pub struct MonstersResult {
     pub image: Option<String>,
     pub category: Category,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub commands: Option<Command>,
+    pub commands: Option<CommandMap>,
 }
 
 struct MonsterData {
@@ -33,6 +32,7 @@ struct MonsterData {
     description: Option<i64>,
     icon: Option<String>,
     category: Category,
+    commands: Option<CommandMap>,
 }
 
 impl MonsterData {
@@ -43,6 +43,7 @@ impl MonsterData {
             description: None,
             icon: gi_describe.and_then(|desc| Some(desc.icon.clone())),
             category: Category::Monsters,
+            commands: None,
         }
     }
 
@@ -53,6 +54,7 @@ impl MonsterData {
             description: Some(sr_monster.monster_introduction.hash),
             icon: None,
             category: Category::Monsters,
+            commands: None,
         }
     }
 }
@@ -120,15 +122,6 @@ where
             .icon
             .as_ref()
             .map(|icon| get_image("genshin-impact", icon, "monsters"));
-        let commands = if matches!(excel_reader, GameExcelReader::GenshinImpact(_)) {
-            Some(generate_command(
-                Category::Monsters,
-                monster.id as u32,
-                "/spawn",
-            ))
-        } else {
-            None
-        };
 
         let monster_result = result
             .iter_mut()
@@ -165,7 +158,7 @@ where
                 description: descriptions,
                 image,
                 category: monster.category.clone(),
-                commands,
+                commands: monster.commands.clone(),
             }))
         }
     }

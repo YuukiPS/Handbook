@@ -4,13 +4,15 @@ use serde::Serialize;
 
 use crate::{
     structure::handbook::{
-        category::Category, commands::Command, gi::weapons::Weapon, sr::light_cones::LightCones,
-        Language,
+        category::Category, gi::weapons::Weapon, sr::light_cones::LightCones, Language,
     },
     utility::TextMap,
 };
 
-use super::{commands::generate_command, output_log, GameExcelReader, ResultData};
+use super::{
+    commands::{generate_command, CommandMap},
+    output_log, GameExcelReader, ResultData,
+};
 
 #[derive(Serialize)]
 pub struct WeaponResult {
@@ -20,7 +22,7 @@ pub struct WeaponResult {
     pub icon: String,
     pub rarity: i64,
     pub category: Category,
-    pub commands: Command,
+    pub commands: CommandMap,
 }
 
 struct WeaponsData {
@@ -30,22 +32,36 @@ struct WeaponsData {
     description: Option<i64>,
     icon: String,
     category: Category,
+    commands: CommandMap,
 }
 
 impl WeaponsData {
     fn from_genshin(genshin_weapon: Weapon) -> Self {
-        WeaponsData {
+        let commands = generate_command(
+            Category::Weapons,
+            genshin_weapon.id as u32,
+            "/give",
+            super::commands::GameType::GenshinImpact,
+        );
+        Self {
             rarity: genshin_weapon.rank_level,
             id: genshin_weapon.id,
             name: genshin_weapon.name_text_map_hash,
             description: Some(genshin_weapon.desc_text_map_hash),
             icon: genshin_weapon.icon,
             category: Category::Weapons,
+            commands,
         }
     }
 
     fn from_star_rail(star_rail_weapon: LightCones) -> Self {
-        WeaponsData {
+        let commands = generate_command(
+            Category::Weapons,
+            star_rail_weapon.equipment_id as u32,
+            "/give",
+            super::commands::GameType::HonkaiStarRail,
+        );
+        Self {
             rarity: star_rail_weapon.rarity.to_string().parse::<i64>().unwrap(),
             id: star_rail_weapon.equipment_id,
             name: star_rail_weapon.equipment_name.hash,
@@ -54,6 +70,7 @@ impl WeaponsData {
                 .image_path
                 .replace("SpriteOutput/LightConeMaxFigures/", ""),
             category: Category::LightCones,
+            commands,
         }
     }
 }
@@ -102,7 +119,6 @@ where
             .map(|hash| text_map.get(&hash.to_string()).cloned())
             .unwrap_or_default();
 
-        let command = generate_command(Category::Weapons, weapon.id as u32, "/give");
         let image = get_image("genshin-impact", &weapon.icon, "weapons");
 
         let weapon_result = result
@@ -134,7 +150,7 @@ where
                 description: descriptions,
                 rarity: weapon.rarity,
                 category: weapon.category.clone(),
-                commands: command,
+                commands: weapon.commands.clone(),
                 icon: image,
             }))
         }

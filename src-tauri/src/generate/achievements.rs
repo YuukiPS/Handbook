@@ -3,20 +3,18 @@ use std::collections::HashMap;
 use serde::Serialize;
 
 use crate::{
-    structure::handbook::{
-        category::Category, commands::Command, gi::achievement::Achievements, Language,
-    },
+    structure::handbook::{category::Category, gi::achievement::Achievements, Language},
     utility::{TextMap, TextMapError},
 };
 
-use super::{commands::generate_command, output_log, ResultData};
+use super::{commands::generate_command, commands::CommandMap, output_log, ResultData};
 
 #[derive(Serialize)]
 pub struct AchievementResult {
     pub id: i64,
     pub name: HashMap<Language, String>,
     pub description: HashMap<Language, String>,
-    pub commands: Command,
+    pub commands: CommandMap,
     pub category: Category,
 }
 
@@ -51,7 +49,12 @@ where
             .get(&achievement.desc_text_map_hash.to_string())
             .cloned();
 
-        let command = generate_command(Category::Achievements, achievement.id as u32, "/am grant");
+        let command = generate_command(
+            Category::Achievements,
+            achievement.id as u32,
+            "/am grant",
+            super::commands::GameType::GenshinImpact,
+        );
 
         let achievement_result = result
             .iter_mut()

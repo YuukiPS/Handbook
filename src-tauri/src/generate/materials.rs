@@ -3,12 +3,11 @@ use std::collections::HashMap;
 use serde::Serialize;
 
 use crate::structure::handbook::category::Category;
-use crate::structure::handbook::commands::Command;
 use crate::structure::handbook::Language;
 use crate::structure::handbook::{gi::materials::Material, sr::items::Items};
 use crate::utility::TextMap;
 
-use super::commands::generate_command;
+use super::commands::{generate_command, CommandMap};
 use super::{output_log, GameExcelReader, ResultData};
 
 #[derive(Serialize)]
@@ -20,7 +19,7 @@ pub struct MaterialsResult {
     pub category: Category,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rarity: Option<i64>,
-    pub commands: Command,
+    pub commands: CommandMap,
 }
 
 struct MaterialData {
@@ -30,10 +29,17 @@ struct MaterialData {
     description: i64,
     icon: String,
     category: Category,
+    commands: CommandMap,
 }
 
 impl MaterialData {
     fn from_genshin(genshin_mat: Material) -> Self {
+        let command = generate_command(
+            Category::Materials,
+            genshin_mat.id as u32,
+            "/give",
+            super::commands::GameType::GenshinImpact,
+        );
         MaterialData {
             rarity: genshin_mat.rank_level,
             id: genshin_mat.id,
@@ -41,10 +47,17 @@ impl MaterialData {
             description: genshin_mat.desc_text_map_hash,
             icon: genshin_mat.icon,
             category: Category::Materials,
+            commands: command,
         }
     }
 
     fn from_star_rail(star_rail_mat: Items) -> Self {
+        let command = generate_command(
+            Category::Materials,
+            star_rail_mat.id as u32,
+            "/give",
+            super::commands::GameType::HonkaiStarRail,
+        );
         MaterialData {
             rarity: Some(star_rail_mat.rarity.to_string().parse::<i64>().unwrap()),
             id: star_rail_mat.id,
@@ -54,6 +67,7 @@ impl MaterialData {
                 .item_icon_path
                 .replace("SpriteOutput/ItemIcon/", ""),
             category: Category::Items,
+            commands: command,
         }
     }
 }
@@ -99,7 +113,6 @@ where
 
         total_materials += 1;
 
-        let command = generate_command(Category::Materials, material.id as u32, "/give");
         let image = get_image("genshin-impact", &material.icon, "materials");
 
         let material_result = result
@@ -132,7 +145,7 @@ where
                 rarity: material.rarity,
                 image,
                 category: material.category.clone(),
-                commands: command,
+                commands: material.commands.clone(),
             }))
         }
     }

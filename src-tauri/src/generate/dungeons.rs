@@ -3,13 +3,14 @@ use std::collections::HashMap;
 use serde::Serialize;
 
 use crate::{
-    structure::handbook::{
-        category::Category, commands::Command, gi::dungeons::Dungeons, Language,
-    },
+    structure::handbook::{category::Category, gi::dungeons::Dungeons, Language},
     utility::{TextMap, TextMapError},
 };
 
-use super::{commands::generate_command, output_log, ResultData};
+use super::{
+    commands::{generate_command, CommandMap},
+    output_log, ResultData,
+};
 
 #[derive(Serialize)]
 pub struct DungeonsResult {
@@ -17,7 +18,7 @@ pub struct DungeonsResult {
     pub name: HashMap<Language, String>,
     pub description: HashMap<Language, String>,
     pub category: Category,
-    pub commands: Command,
+    pub commands: CommandMap,
 }
 
 pub fn generate_dungeons<F>(
@@ -52,7 +53,12 @@ where
             .get(&dungeon.desc_text_map_hash.to_string())
             .cloned();
 
-        let command = generate_command(Category::Dungeons, dungeon.id as u32, "/tp");
+        let command = generate_command(
+            Category::Dungeons,
+            dungeon.id as u32,
+            "/tp",
+            super::commands::GameType::GenshinImpact,
+        );
 
         let dungeon_result = result
             .iter_mut()

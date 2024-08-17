@@ -1,16 +1,53 @@
+use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-use crate::structure::handbook::{
-    category::Category,
-    commands::{Command, Commands},
-};
+use crate::structure::handbook::{category::Category, commands::Commands};
 
-pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Command {
-    let mut commands_map: BTreeMap<String, BTreeMap<String, Commands>> = BTreeMap::new();
-    let mut commands_map_gc = BTreeMap::new();
-    let mut commands_map_gio = BTreeMap::new();
+pub enum GameType {
+    GenshinImpact,
+    HonkaiStarRail,
+}
 
-    let commands_gc = match category {
+#[derive(Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CommandMap {
+    GenshinImpact(BTreeMap<String, BTreeMap<String, Commands>>),
+    HonkaiStarRail(BTreeMap<String, Commands>),
+}
+
+impl Clone for CommandMap {
+    fn clone(&self) -> Self {
+        match self {
+            CommandMap::GenshinImpact(map) => CommandMap::GenshinImpact(map.clone()),
+            CommandMap::HonkaiStarRail(map) => CommandMap::HonkaiStarRail(map.clone()),
+        }
+    }
+}
+
+pub(crate) fn generate_command(
+    category: Category,
+    id: u32,
+    prefix: &str,
+    game_type: GameType,
+) -> CommandMap {
+    match game_type {
+        GameType::GenshinImpact => {
+            let mut commands_map = BTreeMap::new();
+            commands_map.insert(
+                "gc".to_string(),
+                generate_gc_commands(&category, id, prefix),
+            );
+            commands_map.insert("gio".to_string(), generate_gio_commands(&category, id));
+            CommandMap::GenshinImpact(commands_map)
+        }
+        GameType::HonkaiStarRail => {
+            CommandMap::HonkaiStarRail(generate_hsr_commands(&category, id))
+        }
+    }
+}
+
+fn generate_gc_commands(category: &Category, id: u32, prefix: &str) -> BTreeMap<String, Commands> {
+    let commands = match category {
         Category::Characters => vec![
             ("Normal", ""),
             ("With Level", "lv<level>"),
@@ -22,7 +59,7 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
             ),
         ],
         Category::Materials => vec![("Normal", ""), ("With Amount", "x<amount>")],
-        Category::Weapons => vec![
+        Category::Weapons | Category::Artifacts => vec![
             ("Normal", ""),
             ("With Level", "lv<level>"),
             ("With Refinement", "r<refinement>"),
@@ -32,24 +69,13 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
                 "lv<level> r<refinement> x<amount>",
             ),
         ],
-        Category::Artifacts => vec![
-            ("Normal", ""),
-            ("With Level", "lv<level>"),
-            ("With Amount", "x<amount>"),
-            ("With Refinement", "r<refinement>"),
-            (
-                "With Level, Amount, and Refinement",
-                "lv<level> x<amount> r<refinement>",
-            ),
-        ],
         Category::Achievements => vec![("Normal", "")],
         Category::Quests => vec![
             ("Add Quest", "add"),
             ("Remove Quest", "remove"),
             ("Start Quest", "start"),
         ],
-        Category::Dungeons => vec![("Normal", "")],
-        Category::Scenes => vec![("Normal", "")],
+        Category::Dungeons | Category::Scenes => vec![("Normal", "")],
         Category::Monsters => vec![
             ("Normal", ""),
             ("With Custom HP", "hp<HealthPoint>"),
@@ -60,12 +86,33 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
                 "hp<HealthPoint> lv<level> x<amount>",
             ),
         ],
-        _ => vec![],
+        _ => vec![("Not Available", "This category is not available for GC")],
     };
 
-    let commands_gio = match category {
+    commands
+        .into_iter()
+        .enumerate()
+        .map(|(i, (name, suffix))| {
+            let command = match category {
+                Category::Quests => format!("{} {} {}", prefix, suffix, id),
+                Category::Dungeons | Category::Scenes => format!("{} 0 0 0 {}", prefix, id),
+                _ => format!("{} {} {}", prefix, id, suffix.trim()),
+            };
+            (
+                format!("command_{}", i + 1),
+                Commands {
+                    name: name.to_string(),
+                    command: command.trim().to_string(),
+                },
+            )
+        })
+        .collect()
+}
+
+fn generate_gio_commands(category: &Category, id: u32) -> BTreeMap<String, Commands> {
+    let commands = match category {
         Category::Characters => vec![("Normal", format!("avatar add {}", id))],
-        Category::Artifacts => vec![
+        Category::Artifacts | Category::Materials | Category::Weapons => vec![
             ("Normal", format!("item add {}", id)),
             ("With Amount", format!("item add {} <amount>", id)),
         ],
@@ -74,57 +121,78 @@ pub(crate) fn generate_command(category: Category, id: u32, prefix: &str) -> Com
             ("Accept Quest", format!("quest accept {}", id)),
             ("Finish Quest", format!("quest finish {}", id)),
         ],
-        Category::Materials => vec![
-            ("Normal", format!("item add {}", id)),
-            ("With Amount", format!("item add {} <amount>", id)),
-        ],
-        Category::Achievements => vec![(
+        _ => vec![(
             "Not Available",
             "This category is not available for GIO".to_string(),
         )],
-        Category::Scenes => vec![(
-            "Not Available",
-            "This category is not available for GIO".to_string(),
-        )],
-        Category::Dungeons => vec![(
-            "Not Available",
-            "This category is not available for GIO".to_string(),
-        )],
-        Category::Monsters => vec![(
-            "Not Available",
-            "This category is not available for GIO".to_string(),
-        )],
-        Category::Weapons => vec![
-            ("Normal", format!("item add {}", id)),
-            ("With Amount", format!("item add {} <amount>", id)),
-        ],
-        _ => vec![],
     };
 
-    for (i, (name, command_suffix)) in commands_gc.into_iter().enumerate() {
-        let command = Commands {
-            name: name.to_string(),
-            command: match category {
-                Category::Quests => format!("{} {} {}", prefix, command_suffix, id),
-                Category::Dungeons | Category::Scenes => format!("{} 0 0 0 {}", prefix, id),
-                _ => format!("{} {} {}", prefix, id, command_suffix.trim()),
-            }
-            .trim()
-            .to_string(),
-        };
-        commands_map_gc.insert(format!("command_{}", i + 1), command);
-    }
+    commands
+        .into_iter()
+        .enumerate()
+        .map(|(i, (name, command))| {
+            (
+                format!("command_{}", i + 1),
+                Commands {
+                    name: name.to_string(),
+                    command: command.trim().to_string(),
+                },
+            )
+        })
+        .collect()
+}
 
-    for (i, (name, command_suffix)) in commands_gio.into_iter().enumerate() {
-        let command = Commands {
-            name: name.to_string(),
-            command: command_suffix.trim().to_string(),
-        };
-        commands_map_gio.insert(format!("command_{}", i + 1), command);
-    }
+fn generate_hsr_commands(category: &Category, id: u32) -> BTreeMap<String, Commands> {
+    let commands = match category {
+        Category::Characters => vec![
+            ("Normal", format!("/give {}", id)),
+            ("With Level", format!("/give {} lv<level>", id)),
+            ("With Skill Level", format!("/give {} sl<SkillLevel>", id)),
+            ("With Eidolon", format!("/give {} r<eidolon>", id)),
+            (
+                "With Level, Skill Level, and Eidolon",
+                format!("/give {} lv<level> sl<SkillLevel> r<eidolon>", id),
+            ),
+        ],
+        Category::Relics => vec![
+            ("Normal", format!("/give {}", id)),
+            ("With Level", format!("/give {} lv<level>", id)),
+        ],
+        Category::LightCones => vec![
+            ("Normal", format!("/give {}", id)),
+            ("With Level", format!("/give {} lv<level>", id)),
+            (
+                "With Superimposition",
+                format!("/give {} si<superimposition>", id),
+            ),
+            ("With Amount", format!("/give {} x<amount>", id)),
+            (
+                "With Level, Superimposition, and Amount",
+                format!("/give {} lv<level> si<superimposition> x<amount>", id),
+            ),
+        ],
+        Category::Monsters => vec![
+            ("Normal", format!("/spawn {}", id)),
+            ("With Amount", format!("/spawn {} x<amount>", id)),
+            ("With Staged ID", format!("/spawn {} s<StageID>", id)),
+        ],
+        _ => vec![(
+            "Not Available",
+            "This category is not available for Star Rail".to_string(),
+        )],
+    };
 
-    commands_map.insert("gc".to_string(), commands_map_gc);
-    commands_map.insert("gio".to_string(), commands_map_gio);
-
-    commands_map
+    commands
+        .into_iter()
+        .enumerate()
+        .map(|(i, (name, command))| {
+            (
+                format!("command_{}", i + 1),
+                Commands {
+                    name: name.to_string(),
+                    command: command.trim().to_string(),
+                },
+            )
+        })
+        .collect()
 }

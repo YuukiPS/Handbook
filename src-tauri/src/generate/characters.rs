@@ -3,13 +3,16 @@ use std::collections::HashMap;
 use serde::Serialize;
 
 use crate::{
-    structure::handbook::category::Category, structure::handbook::commands::Command,
+    structure::handbook::category::Category,
     structure::handbook::gi::characters::Characters as CharactersGI,
     structure::handbook::sr::characters::CharacterList as CharacterListSR,
     structure::handbook::Language, utility::TextMap,
 };
 
-use super::{commands::generate_command, output_log, GameExcelReader, ResultData};
+use super::{
+    commands::{generate_command, CommandMap},
+    output_log, GameExcelReader, ResultData,
+};
 
 struct CharacterData {
     id: i64,
@@ -18,10 +21,17 @@ struct CharacterData {
     rarity: String,
     icon: String,
     category: Category,
+    commands: CommandMap,
 }
 
 impl CharacterData {
     fn from_genshin(genshin_char: CharactersGI) -> Self {
+        let command = generate_command(
+            Category::Characters,
+            genshin_char.id as u32,
+            "/give",
+            super::commands::GameType::GenshinImpact,
+        );
         CharacterData {
             id: genshin_char.id,
             name: genshin_char.name_text_map_hash,
@@ -29,10 +39,17 @@ impl CharacterData {
             rarity: genshin_char.quality_type.to_string(),
             icon: genshin_char.icon_name,
             category: Category::Characters,
+            commands: command,
         }
     }
 
     fn from_star_rail(star_rail_char: CharacterListSR) -> Self {
+        let command = generate_command(
+            Category::Characters,
+            star_rail_char.avatar_id as u32,
+            "/give",
+            super::commands::GameType::HonkaiStarRail,
+        );
         CharacterData {
             id: star_rail_char.avatar_id,
             name: star_rail_char.avatar_name.hash,
@@ -42,6 +59,7 @@ impl CharacterData {
                 .default_avatar_head_icon_path
                 .replace("SpriteOutput/AvatarIcon/Avatar/", ""),
             category: Category::Characters,
+            commands: command,
         }
     }
 }
@@ -56,7 +74,7 @@ pub struct CharacterResult {
     pub category: Category,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rarity: Option<u8>,
-    pub commands: Command,
+    pub commands: CommandMap,
 }
 
 pub(crate) fn generate_character<G>(
@@ -111,7 +129,6 @@ where
             .cloned()
             .unwrap_or_default();
 
-        let command = generate_command(Category::Characters, character.id as u32, "/give");
         let image = get_image("genshin-impact", &character.icon, "characters");
 
         let character_result = result
@@ -151,7 +168,7 @@ where
                 rarity: Some(character.rarity.parse::<u8>().unwrap_or_default()),
                 image,
                 category: character.category.clone(),
-                commands: command,
+                commands: character.commands.clone(),
             }))
         }
     }

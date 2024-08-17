@@ -3,13 +3,15 @@ use serde::Serialize;
 use crate::{
     structure::handbook::{
         category::Category,
-        commands::Command,
         gi::scenes::{SceneType, Scenes},
     },
     utility::TextMapError,
 };
 
-use super::{commands::generate_command, output_log, ResultData};
+use super::{
+    commands::{generate_command, CommandMap},
+    output_log, ResultData,
+};
 
 #[derive(Serialize)]
 pub struct ScenesResult {
@@ -18,7 +20,7 @@ pub struct ScenesResult {
     pub scene_type: SceneType,
     pub name: String,
     pub category: Category,
-    pub commands: Command,
+    pub commands: CommandMap,
 }
 
 pub fn generate_scenes<F>(
@@ -44,7 +46,12 @@ where
     for scene in scenes.iter() {
         total_scenes += 1;
         let name = scene.script_data.clone();
-        let command = generate_command(Category::Scenes, scene.id as u32, "/tp");
+        let command = generate_command(
+            Category::Scenes,
+            scene.id as u32,
+            "/tp",
+            super::commands::GameType::GenshinImpact,
+        );
         result.push(ResultData::Scenes(ScenesResult {
             id: scene.id,
             name,

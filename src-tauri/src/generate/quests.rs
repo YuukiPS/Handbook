@@ -4,13 +4,15 @@ use serde::Serialize;
 
 use crate::{
     structure::handbook::{
-        category::Category, commands::Command, gi::main_quests::MainQuest,
-        sr::mission::MissionElement, Language,
+        category::Category, gi::main_quests::MainQuest, sr::mission::MissionElement, Language,
     },
     utility::TextMap,
 };
 
-use super::{commands::generate_command, output_log, GameExcelReader, ResultData};
+use super::{
+    commands::{generate_command, CommandMap},
+    output_log, GameExcelReader, ResultData,
+};
 
 #[derive(Serialize)]
 pub struct MainQuestResult {
@@ -18,29 +20,44 @@ pub struct MainQuestResult {
     pub name: HashMap<Language, String>,
     pub description: HashMap<Language, String>,
     pub category: Category,
-    pub commands: Command,
+    pub commands: CommandMap,
 }
 
 struct MissionData {
     id: i64,
     name: i64,
     description: Option<i64>,
+    commands: CommandMap,
 }
 
 impl MissionData {
     fn from_genshin(genshin_quest: MainQuest) -> Self {
+        let commands = generate_command(
+            Category::Quests,
+            genshin_quest.id as u32,
+            "/q",
+            super::commands::GameType::GenshinImpact,
+        );
         Self {
             id: genshin_quest.id,
             name: genshin_quest.title_text_map_hash,
             description: Some(genshin_quest.desc_text_map_hash),
+            commands,
         }
     }
 
     fn from_star_rail(star_rail_mission: MissionElement) -> Self {
+        let commands = generate_command(
+            Category::Quests,
+            star_rail_mission.main_mission_id as u32,
+            "/q",
+            super::commands::GameType::HonkaiStarRail,
+        );
         Self {
             id: star_rail_mission.main_mission_id,
             name: star_rail_mission.name.hash,
             description: None,
+            commands,
         }
     }
 }
@@ -86,8 +103,6 @@ pub(crate) fn generate_quests(
             .as_ref()
             .and_then(|desc| text_map.get(&desc.to_string()).cloned());
 
-        let command = generate_command(Category::Quests, main_quest.id as u32, "/q");
-
         let main_quest_result = result
             .iter_mut()
             .find(|r| matches!(r, ResultData::Quests(m) if m.id == main_quest.id))
@@ -116,7 +131,7 @@ pub(crate) fn generate_quests(
                 name: names,
                 description: descriptions,
                 category: Category::Quests,
-                commands: command,
+                commands: main_quest.commands.clone(),
             }))
         }
     }

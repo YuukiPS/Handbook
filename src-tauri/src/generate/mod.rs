@@ -251,7 +251,7 @@ where
                 valid_selections.into_iter().map(Result::unwrap).collect();
             let invalid_selections: Vec<String> = invalid_selections
                 .into_iter()
-                .map(|e| e.unwrap_err().to_string())
+                .map(|e| format!("{}", e.unwrap_err()))
                 .collect();
 
             if !invalid_selections.is_empty() {

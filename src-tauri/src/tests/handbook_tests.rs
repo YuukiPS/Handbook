@@ -2,12 +2,19 @@ use std::collections::BTreeMap;
 
 use pretty_assertions::assert_eq;
 
+use crate::generate::commands::{CommandMap, GameType};
+
 #[test]
 fn test_generate_command() {
     use crate::generate::commands::generate_command;
     use crate::structure::handbook::{category::Category, commands::Commands};
     // Test for Characters
-    let character_commands = generate_command(Category::Characters, 10000007, "/give");
+    let character_commands = generate_command(
+        Category::Characters,
+        10000007,
+        "/give",
+        crate::generate::commands::GameType::GenshinImpact,
+    );
     let character_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -61,11 +68,17 @@ fn test_generate_command() {
             )]),
         ),
     ]);
-    assert_eq!(character_commands.len(), 2);
-    assert_eq!(character_commands, character_expected);
+    match character_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, character_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Materials
-    let material_commands = generate_command(Category::Materials, 123, "/give");
+    let material_commands =
+        generate_command(Category::Materials, 123, "/give", GameType::GenshinImpact);
     let material_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -106,11 +119,17 @@ fn test_generate_command() {
             ]),
         ),
     ]);
-    assert_eq!(material_commands.len(), 2);
-    assert_eq!(material_commands, material_expected);
+    match material_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, material_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Weapons
-    let weapon_commands = generate_command(Category::Weapons, 456, "/give");
+    let weapon_commands =
+        generate_command(Category::Weapons, 456, "/give", GameType::GenshinImpact);
     let weapon_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -172,11 +191,17 @@ fn test_generate_command() {
             ]),
         ),
     ]);
-    assert_eq!(weapon_commands.len(), 2);
-    assert_eq!(weapon_commands, weapon_expected);
+    match weapon_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, weapon_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Artifacts
-    let artifact_commands = generate_command(Category::Artifacts, 789, "/give");
+    let artifact_commands =
+        generate_command(Category::Artifacts, 789, "/give", GameType::GenshinImpact);
     let artifact_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -238,11 +263,21 @@ fn test_generate_command() {
             ]),
         ),
     ]);
-    assert_eq!(artifact_commands.len(), 2);
-    assert_eq!(artifact_commands, artifact_expected);
+    match artifact_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, artifact_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Achievements
-    let achievement_commands = generate_command(Category::Achievements, 1000, "/am grant");
+    let achievement_commands = generate_command(
+        Category::Achievements,
+        1000,
+        "/am grant",
+        GameType::GenshinImpact,
+    );
     let achievement_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -265,11 +300,16 @@ fn test_generate_command() {
             )]),
         ),
     ]);
-    assert_eq!(achievement_commands.len(), 2);
-    assert_eq!(achievement_commands, achievement_expected);
+    match achievement_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, achievement_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Quests
-    let quests_commands = generate_command(Category::Quests, 1, "/q");
+    let quests_commands = generate_command(Category::Quests, 1, "/q", GameType::GenshinImpact);
     let quests_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -324,11 +364,16 @@ fn test_generate_command() {
             ]),
         ),
     ]);
-    assert_eq!(quests_commands.len(), 2);
-    assert_eq!(quests_commands, quests_expected);
+    match quests_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, quests_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Dungeons
-    let dungeons_commands = generate_command(Category::Dungeons, 1, "/tp");
+    let dungeons_commands = generate_command(Category::Dungeons, 1, "/tp", GameType::GenshinImpact);
     let dungeons_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -351,11 +396,16 @@ fn test_generate_command() {
             )]),
         ),
     ]);
-    assert_eq!(dungeons_commands.len(), 2);
-    assert_eq!(dungeons_commands, dungeons_expected);
+    match dungeons_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, dungeons_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Scenes
-    let scenes_commands = generate_command(Category::Scenes, 20, "/tp");
+    let scenes_commands = generate_command(Category::Scenes, 20, "/tp", GameType::GenshinImpact);
     let scenes_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -378,11 +428,17 @@ fn test_generate_command() {
             )]),
         ),
     ]);
-    assert_eq!(scenes_commands.len(), 2);
-    assert_eq!(scenes_commands, scenes_expected);
+    match scenes_commands {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, scenes_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 
     // Test for Monsters
-    let monsters_command = generate_command(Category::Monsters, 2000, "/spawn");
+    let monsters_command =
+        generate_command(Category::Monsters, 2000, "/spawn", GameType::GenshinImpact);
     let monsters_expected = BTreeMap::from([
         (
             "gc".to_string(),
@@ -435,6 +491,11 @@ fn test_generate_command() {
             )]),
         ),
     ]);
-    assert_eq!(monsters_command.len(), 2);
-    assert_eq!(monsters_command, monsters_expected);
+    match monsters_command {
+        CommandMap::GenshinImpact(map) => {
+            assert_eq!(map.len(), 2);
+            assert_eq!(map, monsters_expected);
+        }
+        CommandMap::HonkaiStarRail(map) => assert_eq!(map.len(), 0),
+    }
 }

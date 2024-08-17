@@ -18,6 +18,12 @@ pub enum GmError {
     EmptySearchTerm,
     #[error("Failed to read handbook content")]
     ReadHandbookContentError,
+    #[error("Path cannot be empty")]
+    PathEmpty,
+    #[error("Path is the same as the current path. No need to update.")]
+    PathNotUpdated,
+    #[error("Failed to write handbook content: {0}")]
+    WriteHandbookContentError(String),
 }
 
 impl From<serde_json::Error> for GmError {
@@ -36,7 +42,7 @@ impl From<GmError> for InvokeError {
 pub fn find(search: &str, language: &str, limit: Option<i64>) -> Result<Gmhandbook, String> {
     if search.is_empty() {
         // return Err(GmError::EmptySearchTerm);
-        return Err("Search term cannot be empty".to_string());
+        return Err(GmError::EmptySearchTerm.to_string());
     }
 
     let handbook_content = HANDBOOK_CONTENT
@@ -76,17 +82,15 @@ pub fn find(search: &str, language: &str, limit: Option<i64>) -> Result<Gmhandbo
 #[tauri::command(async)]
 pub fn update_path_handbook(path: &str, force: bool) -> Result<(), String> {
     if path.is_empty() {
-        return Err("Path cannot be empty".to_string());
+        return Err(GmError::PathEmpty.to_string());
     }
     if !force && path == *HANDBOOK_PATH.read().unwrap() {
-        return Err("Path is the same as the current path. No need to update.".to_string());
+        return Err(GmError::PathNotUpdated.to_string());
     }
     if force {
         warn!("Force updating handbook path to: {}", path);
     }
-    let mut handbook_content = HANDBOOK_CONTENT
-        .write()
-        .map_err(|_| "Failed to write handbook content")?;
+    let mut handbook_content = HANDBOOK_CONTENT.write().map_err(|e| e.to_string())?;
     let file = File::open(path).map_err(|e| format!("Failed to open file: {}", e))?;
     let reader = BufReader::new(file);
     let parse_json: Gmhandbook =
