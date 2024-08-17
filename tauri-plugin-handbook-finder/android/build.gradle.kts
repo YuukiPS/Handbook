@@ -9,6 +9,8 @@ android {
 
     defaultConfig {
         minSdk = 24
+        // I think I should keep this thing here
+        targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -16,7 +18,6 @@ android {
 
     lint {
         baseline = file("lint-baseline.xml")
-        targetSdk = 34
     }
 
     buildTypes {
