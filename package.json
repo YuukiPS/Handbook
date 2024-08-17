@@ -58,7 +58,7 @@
         "vite-plugin-multi-pages": "^0.0.14"
     },
     "devDependencies": {
-        "@biomejs/biome": "1.8.3",
+        "@biomejs/biome": "^1.8.3",
         "@tauri-apps/cli": ">=2.0.0-rc.0",
         "@types/lodash": "^4.17.7",
         "@types/node": "^22.3.0",
