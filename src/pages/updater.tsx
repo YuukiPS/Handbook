@@ -1,3 +1,4 @@
+import { isTauri } from "@tauri-apps/api/core";
 import { check, type Update } from "@tauri-apps/plugin-updater";
 import { useEffect, useState } from "react";
 
@@ -11,17 +12,16 @@ const Updater: React.FC = (): JSX.Element => {
 
     useEffect(() => {
         const checkForUpdates = async () => {
-            if (isAlreadyChecking) return;
+            if (isAlreadyChecking || !isTauri()) return;
 
             try {
                 const update = await check();
-                if (update) {
-                    setUpdateAvailable(true);
-                    setUpdateInfo(update);
-                    console.log(
-                        `Found update ${update.version} from ${update.date} with notes ${update.body}`
-                    );
-                }
+                if (!update) return;
+                setUpdateAvailable(true);
+                setUpdateInfo(update);
+                console.log(
+                    `Found update ${update.version} from ${update.date} with notes ${update.body}`
+                );
             } catch (error) {
                 console.error("Error checking for updates:", error);
             }

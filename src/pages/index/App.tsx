@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ElaXanAPI from "@/api/elaxanApi";
 import { useCookies } from "react-cookie";
 import Search from "./components/Search";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import type { CurrentType, State } from "./components/types";
 import YuukiPS from "@/api/yuukips";
 import { useTranslation } from "react-i18next";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke, isTauri } from "@tauri-apps/api/core";
 import type { Description, GmhandbookGI } from "@/types/gm";
 import { error } from "@tauri-apps/plugin-log";
 
@@ -58,11 +58,23 @@ function App() {
             mainDataSR: [],
         }));
         try {
-            const response = await invoke<GmhandbookGI[]>("find", {
-                search: state.searchTerm.trim(),
-                language: currentLanguage,
-                limit: state.currentLimit,
-            });
+            let response: GmhandbookGI[] = [];
+            if (isTauri()) {
+                response = await invoke<GmhandbookGI[]>("find", {
+                    search: state.searchTerm.trim(),
+                    language: currentLanguage,
+                    limit: state.currentLimit,
+                });
+            } else {
+                response = await ElaXanAPI.getHandbook("gi", {
+                    search: state.searchTerm.trim(),
+                    limit: state.currentLimit,
+                    category: searchCategory,
+                    command: state.showCommands,
+                    image: state.showImage,
+                    language: currentLanguage.toLowerCase(),
+                });
+            }
             setState((prevState) => ({
                 ...prevState,
                 loading: false,
@@ -96,7 +108,7 @@ function App() {
                 search: state.searchTerm.trim(),
                 limit: state.currentLimit,
                 category: searchCategory,
-                language: currentLanguage,
+                language: currentLanguage.toLowerCase(),
             });
             setState((prevState) => ({
                 ...prevState,
@@ -146,41 +158,63 @@ function App() {
     useEffect(() => {
         const getCategory = async () => {
             try {
-                const response = await invoke<string[]>("get_category");
+                const server: string = cookies.type || "Genshin Impact";
+                let response: string[];
+                if (isTauri()) {
+                    response = await invoke<string[]>("get_category");
+                } else {
+                    const currentType = server.includes("Genshin Impact")
+                        ? "gi"
+                        : "sr";
+                    const { data } = await ElaXanAPI.getCategoryList(
+                        currentType
+                    );
+                    response = data || [];
+                }
                 setState((prevState) => ({
                     ...prevState,
                     listCategory: response,
                 }));
             } catch (e) {
-                error(`There was an error while get a list of category: ${e}`);
+                await error(`Error getting category list: ${e}`);
             }
         };
-
         getCategory();
-    }, []);
+    }, [cookies.type]);
 
     useEffect(() => {
         if (!cookies.server) return;
+
         const server = cookies.server as string;
-        let type: CurrentType | undefined;
-        if (server.includes("gio") || server.includes("gc")) {
-            type = "Genshin Impact";
-        } else if (server.includes("lc")) {
-            type = "Star Rail";
-        }
+        const type: CurrentType =
+            server.includes("gio") || server.includes("gc")
+                ? "Genshin Impact"
+                : server.includes("lc")
+                ? "Star Rail"
+                : "Genshin Impact";
+
         setState((prevState) => ({
             ...prevState,
             currentType: type || prevState.currentType,
         }));
     }, [cookies.server]);
 
-    const noResult =
-        !state.loading &&
-        (state.currentType === "Genshin Impact"
-            ? state.mainData
-            : state.mainDataSR
-        ).length === 0 &&
-        state.searchInputValue !== "";
+    const noResult = useMemo(() => {
+        return (
+            !state.loading &&
+            (state.currentType === "Genshin Impact"
+                ? state.mainData
+                : state.mainDataSR
+            ).length === 0 &&
+            state.searchInputValue !== ""
+        );
+    }, [
+        state.loading,
+        state.currentType,
+        state.mainData,
+        state.mainDataSR,
+        state.searchInputValue,
+    ]);
 
     return (
         <div

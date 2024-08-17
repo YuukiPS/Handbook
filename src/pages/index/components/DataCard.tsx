@@ -28,6 +28,8 @@ import { Label } from "@/components/ui/label.tsx";
 import CommandList from "@/pages/index/components/CommandList.tsx";
 import type { State } from "./types";
 import { useTranslation } from "react-i18next";
+import { isTauri } from "@tauri-apps/api/core";
+import { writeText } from "@tauri-apps/plugin-clipboard-manager";
 
 const ImageComponent = memo(({ data }: { data: GmhandbookGI }) => {
     const defaultImage =
@@ -112,8 +114,7 @@ const DataCard: React.FC<DataCardProps> = ({
         (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             const { value } = e.currentTarget;
             const [name, id] = value.split(" || ");
-            navigator.clipboard
-                .writeText(id)
+            (isTauri() ? writeText(id) : navigator.clipboard.writeText(id))
                 .then(() => {
                     toast({
                         title: tToast("copied_id.title"),
@@ -227,8 +228,8 @@ const DataCard: React.FC<DataCardProps> = ({
                             </div>
                         </div>
                         {stateApp.showCommands &&
-                            "commands" in data &&
-                            data.commands && (
+                            ("commands" in data || "command" in data) &&
+                            (data.commands || data.command) && (
                                 <div
                                     className={
                                         "mb-4 flex justify-center bg-gray-300 dark:bg-slate-800"

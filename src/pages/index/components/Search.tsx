@@ -1,5 +1,5 @@
 import type React from "react";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { useCookies } from "react-cookie";
 import { IoMdSearch, IoMdClose } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -33,7 +33,7 @@ import { Button } from "@/components/ui/button";
 import { open, type OpenDialogOptions } from "@tauri-apps/plugin-dialog";
 import { FolderIcon } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke, isTauri } from "@tauri-apps/api/core";
 import { platform } from "@tauri-apps/plugin-os";
 
 interface SearchProps {
@@ -133,10 +133,21 @@ const Search: React.FC<SearchProps> = ({
             const response = await invoke<string>("get_path_handbook");
             setPathHandbook(response);
         };
-        getPath();
+        if (isTauri()) {
+            getPath();
+        }
     }, []);
 
     const selectHandbook = useCallback(async () => {
+        if (!isTauri()) {
+            toast({
+                title: "Error",
+                description:
+                    "This feature is only available on desktop and mobile applications. It is not supported in web browsers.",
+                variant: "destructive",
+            });
+            return;
+        }
         const currentPlatform = platform();
         if (currentPlatform === "android") {
             try {
@@ -175,14 +186,17 @@ const Search: React.FC<SearchProps> = ({
             }
         }
 
-        const options: OpenDialogOptions = {
-            directory: false,
-            title: "Select GM Handbook path",
-            filters:
-                currentPlatform === "windows"
-                    ? [{ name: "GM Handbook", extensions: ["json"] }]
-                    : undefined,
-        };
+        const options: OpenDialogOptions = useMemo(() => {
+            const currentPlatform = platform();
+            return {
+                directory: false,
+                title: "Select GM Handbook path",
+                filters:
+                    currentPlatform === "windows"
+                        ? [{ name: "GM Handbook", extensions: ["json"] }]
+                        : undefined,
+            };
+        }, []);
 
         const path = await open(options);
         if (!path) {
@@ -204,8 +218,8 @@ const Search: React.FC<SearchProps> = ({
             const listCategory = await invoke<string[]>("get_category");
             setState((prev) => ({
                 ...prev,
-                listCategory
-            }))
+                listCategory,
+            }));
             toast({
                 title: "Path updated",
                 description: "Path updated successfully",
@@ -255,18 +269,21 @@ const Search: React.FC<SearchProps> = ({
         }
     };
 
-    const setShowCommandsMapping = {
-        "Genshin Impact": () =>
-            setState((prevState) => ({
-                ...prevState,
-                showCommands: !prevState.showCommands,
-            })),
-        "Star Rail": () =>
-            setState((prevState) => ({
-                ...prevState,
-                showCommandsSR: !prevState.showCommandsSR,
-            })),
-    };
+    const setShowCommandsMapping = useMemo(
+        () => ({
+            "Genshin Impact": () =>
+                setState((prevState) => ({
+                    ...prevState,
+                    showCommands: !prevState.showCommands,
+                })),
+            "Star Rail": () =>
+                setState((prevState) => ({
+                    ...prevState,
+                    showCommandsSR: !prevState.showCommandsSR,
+                })),
+        }),
+        [setState]
+    );
 
     return (
         <div className="mt-5 flex justify-center">

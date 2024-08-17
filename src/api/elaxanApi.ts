@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { GmhandbookGI } from '@/types/gm'
+import type { APIElaXan, GmhandbookGI } from '@/types/gm'
 import type { Hsr } from '@/types/hsr'
 import type { Category } from '@/types/category'
 
@@ -32,23 +32,25 @@ const instance = axios.create({
 	baseURL: baseUrl,
 })
 
-function getHandbook(type: 'gi', data: HandbookGi): Promise<GmhandbookGI>
+function getHandbook(type: 'gi', data: HandbookGi): Promise<GmhandbookGI[]>
 function getHandbook(type: 'sr', data: HandbookSr): Promise<Hsr>
-async function getHandbook(type: 'gi' | 'sr', data: HandbookGi | HandbookSr): Promise<GmhandbookGI | Hsr> {
+async function getHandbook(type: 'gi' | 'sr', data: HandbookGi | HandbookSr): Promise<GmhandbookGI[] | Hsr> {
 	const endpoint = endpoints[type]
 	const payload = type === 'sr' ? { type: 1, ...data } : data
 
-	const res = await instance.post<GmhandbookGI | Hsr>(endpoint, payload)
-	return res.data
+	const res = await instance.post<APIElaXan | Hsr>(endpoint, payload)
+	if (type === 'gi') {
+		return res.data.data as GmhandbookGI[]
+	}
+	return res.data as Hsr
 }
 
 async function getCategoryList(type: 'gi' | 'sr'): Promise<Category> {
-	const res = await instance
-		.get(endpoints.category, {
-			params: {
-				type,
-			},
-		})
+	const res = await instance.get(endpoints.category, {
+		params: {
+			type,
+		},
+	})
 	return res.data
 }
 

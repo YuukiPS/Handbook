@@ -28,6 +28,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import type { State } from "./types";
 import { useTranslation } from "react-i18next";
+import { isTauri } from "@tauri-apps/api/core";
+import { writeText } from "@tauri-apps/plugin-clipboard-manager";
 
 const defaultImage =
     "https://api.elaxan.com/images/genshin-impact/not-found.png";
@@ -119,8 +121,8 @@ const DataCardSR: React.FC<DataCardSRProps> = ({
                     toast({
                         title: tToast("copied_id.title"),
                         description: tToast("copied_id.description", {
-                            id: id,
-                            name: name,
+                            id,
+                            name,
                         }),
                     });
                 })
@@ -138,8 +140,10 @@ const DataCardSR: React.FC<DataCardSRProps> = ({
 
     const handleCommandCopy = useCallback(
         (command: string) => {
-            navigator.clipboard
-                .writeText(command)
+            (isTauri()
+                ? writeText(command)
+                : navigator.clipboard.writeText(command)
+            )
                 .then(() => {
                     toast({
                         title: tToast("copied_command.title"),
@@ -227,32 +231,38 @@ const DataCardSR: React.FC<DataCardSRProps> = ({
     const commandList = (data: Command) => {
         return (
             <div className="rounded-box border-base-300 p-6">
-                {Object.entries(data).map(([key, value]) => (
-                    <div key={key}>
-                        <h3 className="font-bold">{value.name}</h3>
-                        <div className="mt-2 flex items-center justify-between rounded-lg bg-gray-300 p-2 dark:bg-gray-700">
-                            <div className="group flex w-full items-center justify-between">
-                                <code>{value.value}</code>
-                                <div className="flex items-center">
-                                    <div className="mr-2 cursor-pointer rounded-lg border-2 border-gray-600 p-2 transition-opacity duration-300 group-hover:opacity-100 md:opacity-0 lg:opacity-0">
-                                        <RiSlashCommands2
-                                            onClick={() =>
-                                                handleApplyCommand(value.value)
-                                            }
-                                        />
-                                    </div>
-                                    <div className="cursor-pointer rounded-lg border-2 border-gray-600 p-2 transition-opacity duration-300 group-hover:opacity-100 md:opacity-0 lg:opacity-0">
-                                        <MdOutlineContentCopy
-                                            onClick={() =>
-                                                handleCommandCopy(value.value)
-                                            }
-                                        />
+                {Object.entries(data).map(
+                    ([key, value]: [string, Command[keyof Command]]) => (
+                        <div key={key}>
+                            <h3 className="font-bold">{value?.name}</h3>
+                            <div className="mt-2 flex items-center justify-between rounded-lg bg-gray-300 p-2 dark:bg-gray-700">
+                                <div className="group flex w-full items-center justify-between">
+                                    <code>{value?.value}</code>
+                                    <div className="flex items-center">
+                                        <div className="mr-2 cursor-pointer rounded-lg border-2 border-gray-600 p-2 transition-opacity duration-300 group-hover:opacity-100 md:opacity-0 lg:opacity-0">
+                                            <RiSlashCommands2
+                                                onClick={() =>
+                                                    handleApplyCommand(
+                                                        value?.value || ""
+                                                    )
+                                                }
+                                            />
+                                        </div>
+                                        <div className="cursor-pointer rounded-lg border-2 border-gray-600 p-2 transition-opacity duration-300 group-hover:opacity-100 md:opacity-0 lg:opacity-0">
+                                            <MdOutlineContentCopy
+                                                onClick={() =>
+                                                    handleCommandCopy(
+                                                        value?.value || ""
+                                                    )
+                                                }
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    )
+                )}
             </div>
         );
     };
@@ -283,7 +293,11 @@ const DataCardSR: React.FC<DataCardSRProps> = ({
                                         </div>
                                     )}
                                     <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">
-                                        {item.name[currentLanguage]}
+                                        {
+                                            item.name[
+                                                currentLanguage.toLowerCase() as keyof typeof item.name
+                                            ]
+                                        }
                                         {item.type && (
                                             <span className="ml-2 text-[1rem] font-bold text-gray-400 dark:text-gray-600">
                                                 {item.type}
@@ -302,7 +316,11 @@ const DataCardSR: React.FC<DataCardSRProps> = ({
                                     )}
                                     {item.description && (
                                         <p className="text-gray-500">
-                                            {item.description[currentLanguage]}
+                                            {
+                                                item.description[
+                                                    currentLanguage.toLowerCase() as keyof typeof item.description
+                                                ]
+                                            }
                                         </p>
                                     )}
                                 </div>

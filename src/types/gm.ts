@@ -9,6 +9,12 @@
 //     | 'Dungeons'
 //     | 'Weapons';
 
+export interface APIElaXan {
+	data: GmhandbookGI[]
+	message: string
+	status: number
+}
+
 export interface GmhandbookGI {
 	id: number
 	name: Description | string
@@ -16,7 +22,8 @@ export interface GmhandbookGI {
 	image?: string
 	category: Category
 	rarity?: number
-	commands: Commands
+	commands?: Commands
+	command?: Commands
 	icon?: string
 	type?: Type
 }
@@ -53,7 +60,8 @@ export interface GioCommand {
 
 export interface Command {
 	name: NameEnum
-	command: string
+	command: string | undefined
+	value: string | undefined
 }
 
 export enum NameEnum {
