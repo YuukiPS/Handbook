@@ -129,7 +129,6 @@ fn parse_txt_file(path: &Path) -> Result<Gmhandbook, String> {
             } else {
                 line.trim_start_matches("# ").to_string()
             };
-            info!("Category: {}", current_category);
         } else if !line.is_empty() {
             let parts: Vec<&str> = line.splitn(2, ':').collect();
             if parts.len() == 2 {
