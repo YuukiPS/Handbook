@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fmt;
 use std::fmt::Formatter;
-
+use std::str::FromStr;
 pub type Gmhandbook = Vec<GmhandbookElement>;
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -16,7 +16,8 @@ pub struct GmhandbookElement {
     pub category: Category,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rarity: Option<i64>,
-    pub commands: Commands,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub commands: Option<Commands>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub icon: Option<String>,
     #[serde(rename = "type")]
@@ -35,6 +36,19 @@ pub enum Category {
     Quests,
     Scenes,
     Weapons,
+    Avatars,
+    Items,
+    #[serde(rename = "Props (Spawnable)")]
+    PropsLC,
+    #[serde(rename = "NPC Monsters (Spawnable)")]
+    NPCMonstersLC,
+    #[serde(rename = "Battle Stages")]
+    BattleStages,
+    #[serde(rename = "Battle Monsters")]
+    BattleMonsters,
+    Mazes,
+    Gadgets,
+    Unknown,
 }
 
 impl fmt::Display for Category {
@@ -43,14 +57,50 @@ impl fmt::Display for Category {
             Category::Achievements => "Achievements",
             Category::Artifacts => "Artifacts",
             Category::Characters => "Characters",
+            Category::Avatars => "Characters",
             Category::Dungeons => "Dungeons",
             Category::Materials => "Materials",
             Category::Monsters => "Monsters",
             Category::Quests => "Quests",
             Category::Scenes => "Scenes",
             Category::Weapons => "Weapons",
+            Category::Items => "Items",
+            Category::PropsLC => "Props (Spawnable)",
+            Category::NPCMonstersLC => "NPC Monsters (Spawnable)",
+            Category::BattleStages => "Battle Stages",
+            Category::BattleMonsters => "Battle Monsters",
+            Category::Mazes => "Mazes",
+            Category::Gadgets => "Gadgets",
+            Category::Unknown => "Unknown",
         };
         write!(f, "{}", category_str)
+    }
+}
+
+impl FromStr for Category {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Achievements" => Ok(Category::Achievements),
+            "Artifacts" => Ok(Category::Artifacts),
+            "Characters" => Ok(Category::Characters),
+            "Avatars" => Ok(Category::Avatars),
+            "Dungeons" => Ok(Category::Dungeons),
+            "Materials" => Ok(Category::Materials),
+            "Monsters" => Ok(Category::Monsters),
+            "Quests" => Ok(Category::Quests),
+            "Scenes" => Ok(Category::Scenes),
+            "Weapons" => Ok(Category::Weapons),
+            "Items" => Ok(Category::Items),
+            "Props (Spawnable)" => Ok(Category::PropsLC),
+            "NPC Monsters (Spawnable)" => Ok(Category::NPCMonstersLC),
+            "Battle Stages" => Ok(Category::BattleStages),
+            "Battle Monsters" => Ok(Category::BattleMonsters),
+            "Mazes" => Ok(Category::Mazes),
+            "Gadgets" => Ok(Category::Gadgets),
+            _ => Err(()),
+        }
     }
 }
 

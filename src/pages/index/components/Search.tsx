@@ -167,7 +167,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 			return {
 				directory: false,
 				title: 'Select GM Handbook path',
-				filters: currentPlatform === 'windows' ? [{name: 'GM Handbook', extensions: ['json']}] : undefined,
+				filters: currentPlatform === 'windows' ? [{name: 'GM Handbook', extensions: ['json', 'txt']}] : undefined,
 			}
 		}
 

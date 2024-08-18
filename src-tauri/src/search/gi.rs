@@ -1,10 +1,11 @@
-use std::collections::HashSet;
-use std::fs::File;
-use std::io::BufReader;
-
-use crate::structure::gm::{Gmhandbook, NameUnion};
+use crate::structure::gm::{Category, Gmhandbook, GmhandbookElement, NameUnion};
 use crate::{HANDBOOK_CONTENT, HANDBOOK_PATH};
 use log::{info, warn};
+use std::collections::HashSet;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+use std::path::Path;
+use std::str::FromStr;
 use tauri::ipc::InvokeError;
 use thiserror::Error;
 
@@ -41,7 +42,6 @@ impl From<GmError> for InvokeError {
 #[tauri::command]
 pub fn find(search: &str, language: &str, limit: Option<i64>) -> Result<Gmhandbook, String> {
     if search.is_empty() {
-        // return Err(GmError::EmptySearchTerm);
         return Err(GmError::EmptySearchTerm.to_string());
     }
 
@@ -67,7 +67,7 @@ pub fn find(search: &str, language: &str, limit: Option<i64>) -> Result<Gmhandbo
                 // NameUnion::Object(ref s) => Some(&s.to_string()),
             };
             if name.map_or(false, |n| n.to_lowercase().contains(&search.to_lowercase()))
-                || (item.id.to_string().to_lowercase() == search && language.to_lowercase() == "EN")
+                || (item.id.to_string().to_lowercase() == search && language.to_uppercase() == "EN")
             {
                 return true;
             }
@@ -90,15 +90,68 @@ pub fn update_path_handbook(path: &str, force: bool) -> Result<(), String> {
     if force {
         warn!("Force updating handbook path to: {}", path);
     }
-    let mut handbook_content = HANDBOOK_CONTENT.write().map_err(|e| e.to_string())?;
+
+    let path = Path::new(path);
+    let extension = path.extension().and_then(|ext| ext.to_str()).unwrap_or("");
+
+    let handbook_content = match extension {
+        "json" => parse_json_file(path),
+        "txt" => parse_txt_file(path),
+        _ => {
+            return Err(format!("Unsupported file format: {}", extension));
+        }
+    }?;
+
+    let mut handbook_content_lock = HANDBOOK_CONTENT.write().map_err(|e| e.to_string())?;
+    *handbook_content_lock = handbook_content;
+    *HANDBOOK_PATH.write().unwrap() = path.to_str().unwrap().to_string();
+
+    Ok(())
+}
+
+fn parse_json_file(path: &Path) -> Result<Gmhandbook, String> {
     let file = File::open(path).map_err(|e| format!("Failed to open file: {}", e))?;
     let reader = BufReader::new(file);
-    let parse_json: Gmhandbook =
-        serde_json::from_reader(reader).map_err(|e| format!("Failed to parse JSON: {}", e))?;
+    serde_json::from_reader(reader).map_err(|e| format!("Failed to parse JSON: {}", e))
+}
 
-    *handbook_content = parse_json;
-    *HANDBOOK_PATH.write().unwrap() = path.to_string();
-    Ok(())
+fn parse_txt_file(path: &Path) -> Result<Gmhandbook, String> {
+    let file = File::open(path).map_err(|e| format!("Failed to open file: {}", e))?;
+    let reader = BufReader::new(file);
+    let mut data = Vec::new();
+    let mut current_category = String::new();
+
+    for line in reader.lines() {
+        let line = line.map_err(|e| format!("Failed to read line: {}", e))?;
+        if line.starts_with("# ") || line.starts_with("// ") {
+            current_category = if line.starts_with("// ") {
+                line.trim_start_matches("// ").to_string()
+            } else {
+                line.trim_start_matches("# ").to_string()
+            };
+            info!("Category: {}", current_category);
+        } else if !line.is_empty() {
+            let parts: Vec<&str> = line.splitn(2, ':').collect();
+            if parts.len() == 2 {
+                let id = parts[0].trim().parse().unwrap_or_default();
+                let name = parts[1].trim().to_string();
+                let category = Category::from_str(&current_category).unwrap_or(Category::Unknown);
+                data.push(GmhandbookElement {
+                    id,
+                    name: crate::structure::gm::NameUnion::String(name),
+                    category,
+                    commands: None,
+                    description: None,
+                    gmhandbook_type: None,
+                    icon: None,
+                    image: None,
+                    rarity: None,
+                })
+            }
+        }
+    }
+
+    Ok(data)
 }
 
 #[tauri::command]
