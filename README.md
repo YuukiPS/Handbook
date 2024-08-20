@@ -81,6 +81,28 @@ Build the application for production:
   yarn tauri android build
   ```
 
+## Roadmap
+
+Here's what I'm planning to work on next before I consider this project "done":
+
+### TODO
+
+- [ ] Implement change language feature
+- [ ] Save load GM Handbook path to Cookie or Local Storage
+- [ ] Implement search feature for SR (Currently, it requests to API)
+- [ ] Implement support for images to generate a handbook
+    https://github.com/YuukiPS/Handbook/blob/cfc712e7169ebe2e497ca1a7a28dc834236f3c5d/src-tauri/src/generate/mod.rs#L283-L285
+- [ ] Support for Linux
+- [ ] Generate Handbook as text file
+- [ ] Implement Command Line Interface (CLI) to generate a handbook or run a server
+
+### Completed
+
+- [x] Support for Web
+- [x] Support for Android
+- [x] Select folder for Android devices
+- [x] Download the Resources (TextMap and Excel) for both games
+
 ## Project Structure
 
 - `src/`: React frontend code
