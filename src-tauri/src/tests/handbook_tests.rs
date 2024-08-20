@@ -151,15 +151,15 @@ fn test_generate_command() {
                 (
                     "command_3".to_string(),
                     Commands {
-                        name: "With Refinement".to_string(),
-                        command: "/give 456 r<refinement>".to_string(),
+                        name: "With Amount".to_string(),
+                        command: "/give 456 x<amount>".to_string(),
                     },
                 ),
                 (
                     "command_4".to_string(),
                     Commands {
-                        name: "With Amount".to_string(),
-                        command: "/give 456 x<amount>".to_string(),
+                        name: "With Refinement".to_string(),
+                        command: "/give 456 r<refinement>".to_string(),
                     },
                 ),
                 (
@@ -237,8 +237,8 @@ fn test_generate_command() {
                 (
                     "command_5".to_string(),
                     Commands {
-                        name: "With Level, Amount, and Refinement".to_string(),
-                        command: "/give 789 lv<level> x<amount> r<refinement>".to_string(),
+                        name: "With Level, Refinement, and Amount".to_string(),
+                        command: "/give 789 lv<level> r<refinement> x<amount>".to_string(),
                     },
                 ),
             ]),

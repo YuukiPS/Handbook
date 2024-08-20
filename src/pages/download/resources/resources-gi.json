@@ -1,0 +1,102 @@
+{
+    "excel": [
+        {
+            "label": "Characters",
+            "value": "AvatarExcelConfigData.json"
+        },
+        {
+            "label": "Materials/Items",
+            "value": "MaterialExcelConfigData.json"
+        },
+        {
+            "label": "Weapons",
+            "value": "WeaponExcelConfigData.json"
+        },
+        {
+            "label": "Artifacts",
+            "value": "ReliquaryExcelConfigData.json"
+        },
+        {
+            "label": "Achievements",
+            "value": "AchievementExcelConfigData.json"
+        },
+        {
+            "label": "Quests",
+            "value": "MainQuestExcelConfigData.json"
+        },
+        {
+            "label": "Dungeons",
+            "value": "DungeonExcelConfigData.json"
+        },
+        {
+            "label": "Scenes",
+            "value": "SceneExcelConfigData.json"
+        },
+        {
+            "label": "Monsters",
+            "value": "MonsterExcelConfigData.json"
+        }
+    ],
+    "textmap": [
+        {
+            "label": "English",
+            "value": "TextMapEN.json"
+        },
+        {
+            "label": "Simplified Chinese",
+            "value": "TextMapCHS.json"
+        },
+        {
+            "label": "Traditional Chinese",
+            "value": "TextMapCHT.json"
+        },
+        {
+            "label": "German",
+            "value": "TextMapDE.json"
+        },
+        {
+            "label": "Spanish",
+            "value": "TextMapES.json"
+        },
+        {
+            "label": "French",
+            "value": "TextMapFR.json"
+        },
+        {
+            "label": "Indonesian",
+            "value": "TextMapID.json"
+        },
+        {
+            "label": "Italian",
+            "value": "TextMapIT.json"
+        },
+        {
+            "label": "Japanese",
+            "value": "TextMapJP.json"
+        },
+        {
+            "label": "Korean",
+            "value": "TextMapKR.json"
+        },
+        {
+            "label": "Portuguese",
+            "value": "TextMapPT.json"
+        },
+        {
+            "label": "Russian",
+            "value": "TextMapRU.json"
+        },
+        {
+            "label": "Thai",
+            "value": "TextMapTH.json"
+        },
+        {
+            "label": "Turkish",
+            "value": "TextMapTR.json"
+        },
+        {
+            "label": "Vietnamese",
+            "value": "TextMapVI.json"
+        }
+    ]
+}

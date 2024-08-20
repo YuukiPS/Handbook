@@ -1,4 +1,5 @@
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+mod download;
 mod generate;
 mod search;
 mod structure;
@@ -6,6 +7,7 @@ mod structure;
 mod tests;
 mod utility;
 
+use crate::download::download_resources;
 use crate::generate::generate_handbook;
 use crate::generate::list::get_list_text_map;
 use crate::search::gi::{find, get_category, get_path_handbook, update_path_handbook};
@@ -25,6 +27,7 @@ lazy_static! {
 pub fn run() {
     #[allow(unused_mut)]
     let mut builder = tauri::Builder::default()
+        .plugin(tauri_plugin_http::init())
         .plugin(
             tauri_plugin_log::Builder::new()
                 .targets([
@@ -47,7 +50,8 @@ pub fn run() {
             update_path_handbook,
             get_path_handbook,
             get_category,
-            get_list_text_map
+            get_list_text_map,
+            download_resources,
         ])
         .setup(|app| {
             let handbook_path = app.path().resolve(

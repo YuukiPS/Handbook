@@ -62,8 +62,8 @@ fn generate_gc_commands(category: &Category, id: u32, prefix: &str) -> BTreeMap<
         Category::Weapons | Category::Artifacts => vec![
             ("Normal", ""),
             ("With Level", "lv<level>"),
-            ("With Refinement", "r<refinement>"),
             ("With Amount", "x<amount>"),
+            ("With Refinement", "r<refinement>"),
             (
                 "With Level, Refinement, and Amount",
                 "lv<level> r<refinement> x<amount>",
