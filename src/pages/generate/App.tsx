@@ -1,5 +1,4 @@
 import { invoke } from "@tauri-apps/api/core";
-import { open } from "@tauri-apps/plugin-dialog";
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { MultiSelect } from "@/components/ui/multi-select";
@@ -9,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { FileIcon, FolderIcon, RocketIcon } from "lucide-react";
 import { listen } from "@tauri-apps/api/event";
 import { error, info } from "@tauri-apps/plugin-log";
-import { platform } from "@tauri-apps/plugin-os";
 import { useToast } from "@/components/ui/use-toast.ts";
 import {
     Select,
@@ -19,15 +17,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import Output, { useOutputVisibility } from "@/components/output";
-
-interface StoragePermissionResponse {
-    status: "Granted" | "Cancelled" | "Denied";
-}
-
-interface SelectFolderResponse {
-    displayName: string | undefined;
-    uri: string | undefined;
-}
+import getPlatformFolderSelector from "@/lib/getPlaformFolderSelector";
 
 const App: React.FC = (): JSX.Element => {
     const { toast } = useToast();
@@ -120,43 +110,6 @@ const App: React.FC = (): JSX.Element => {
         gameType,
         setIsOutputVisible,
     ]);
-
-    const getPlatformFolderSelector = async () => {
-        const currentPlatform = platform();
-        if (currentPlatform === "windows") {
-            return (title: string) =>
-                open({ directory: true, title, multiple: false });
-        }
-        if (currentPlatform === "android") {
-            const checkPermissions = await invoke<StoragePermissionResponse>(
-                "plugin:handbook-finder|checkPermissions"
-            );
-            if (checkPermissions.status === "Denied") {
-                const result = await invoke<StoragePermissionResponse>(
-                    "plugin:handbook-finder|requestStoragePermission"
-                );
-                if (result.status === "Cancelled") {
-                    // Re-check permissions may return 'Cancelled' even when granted
-                    const recheck = await invoke<StoragePermissionResponse>(
-                        "plugin:handbook-finder|checkPermissions"
-                    );
-                    if (recheck.status === "Denied") {
-                        toast({
-                            title: "Storage permission denied",
-                            description:
-                                "Storage permission is required to read the handbook file",
-                        });
-                        return null;
-                    }
-                }
-            }
-            return () =>
-                invoke<SelectFolderResponse>(
-                    "plugin:handbook-finder|openFolderPicker"
-                );
-        }
-        return null;
-    };
 
     const selectFolder = async (
         title: string,
