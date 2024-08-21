@@ -4,12 +4,12 @@ pub mod characters;
 pub mod commands;
 pub mod dungeons;
 // pub mod handbook;
+pub mod list;
 pub mod materials;
 pub mod monsters;
 pub mod quests;
 pub mod scenes;
 pub mod weapons;
-pub mod list;
 
 use std::{
     fmt::{self, Formatter},
@@ -311,11 +311,10 @@ pub fn generate_handbook(
     languages: Option<Vec<String>>,
 ) -> Result<String, String> {
     // Validate paths
-    if !Path::new(args.excel_path).exists() || !Path::new(args.text_map_path).exists() {
-        return Err(format!(
-            "Invalid path: {} or {} does not exist",
-            args.excel_path, args.text_map_path
-        ));
+    for path in [&args.excel_path, &args.text_map_path] {
+        if !Path::new(path).exists() {
+            return Err(format!("Invalid path: {} does not exist", path));
+        }
     }
 
     let parsed_selections = parse_selections::<SelectHandbookArgs>(&selections)?;
@@ -324,7 +323,7 @@ pub fn generate_handbook(
     let excel_reader = match game {
         "genshin-impact" => GameExcelReader::GenshinImpact(GenshinImpactExcelReader),
         "star-rail" => GameExcelReader::StarRail(StarRailExcelReader),
-        _ => return Err("Unsupported game".to_string()),
+        _ => return Err("Unsupported game or game not selected".to_string()),
     };
     let mut result = Vec::new();
 
