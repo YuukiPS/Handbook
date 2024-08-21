@@ -16,6 +16,13 @@ pub enum Language {
     TH,
     Chs,
     Cht,
+    DE,
+    ES,
+    IT,
+    KR,
+    PT,
+    TR,
+    VI,
 }
 
 impl std::fmt::Display for Language {
@@ -29,6 +36,13 @@ impl std::fmt::Display for Language {
             Language::TH => write!(f, "th"),
             Language::Chs => write!(f, "chs"),
             Language::Cht => write!(f, "cht"),
+            Language::DE => write!(f, "de"),
+            Language::ES => write!(f, "es"),
+            Language::IT => write!(f, "it"),
+            Language::KR => write!(f, "kr"),
+            Language::PT => write!(f, "pt"),
+            Language::TR => write!(f, "tr"),
+            Language::VI => write!(f, "vi"),
         }
     }
 }
@@ -46,6 +60,13 @@ impl std::str::FromStr for Language {
             "TH" => Ok(Language::TH),
             "CHS" => Ok(Language::Chs),
             "CHT" => Ok(Language::Cht),
+            "DE" => Ok(Language::DE),
+            "ES" => Ok(Language::ES),
+            "IT" => Ok(Language::IT),
+            "KR" => Ok(Language::KR),
+            "PT" => Ok(Language::PT),
+            "TR" => Ok(Language::TR),
+            "VI" => Ok(Language::VI),
             _ => Err(format!("Unsupported language: {}", s)),
         }
     }
