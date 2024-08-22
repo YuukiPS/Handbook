@@ -43,7 +43,6 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_shell::init())
-        .plugin(tauri_plugin_handbook_finder::init())
         .invoke_handler(tauri::generate_handler![
             find,
             generate_handbook,
@@ -92,6 +91,10 @@ pub fn run() {
     #[cfg(not(any(target_os = "android", target_os = "ios")))]
     {
         builder = builder.plugin(tauri_plugin_updater::Builder::new().build());
+    }
+    #[cfg(target_os = "android")]
+    {
+        builder = builder.plugin(tauri_plugin_handbook_finder::init());
     }
 
     builder
