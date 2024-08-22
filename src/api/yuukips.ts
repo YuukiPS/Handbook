@@ -25,7 +25,7 @@ const removeLeadingSymbol = (input: string): string => {
 
 const generateErrorMessage = (
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: We need to use 'any' here to handle various error types
 	error: any,
 	isAxiosError: boolean
 ): { message: string; retcode: number } => {
