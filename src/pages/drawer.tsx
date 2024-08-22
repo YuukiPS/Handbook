@@ -107,7 +107,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                         ))}
                     </ul>
                     <footer className="mt-auto py-4 text-center text-sm text-muted-foreground dark:text-[#a0aec0]">
-                        Version 0.1.0 (unstable)
+                        Version 0.1.1 (unstable)
                     </footer>
                 </nav>
                 <main className="flex-1 overflow-auto w-full pt-16 lg:pl-64">

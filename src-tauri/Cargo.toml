@@ -1,8 +1,8 @@
 [package]
 name = "handbook-finder"
-version = "0.1.0"
+version = "0.1.1"
 description = "Find ID on Handbook"
-authors = ["you"]
+authors = ["ElaXan <zero@elaxan.com>"]
 edition = "2021"
 license-file = "../LICENSE"
 
