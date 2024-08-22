@@ -6,13 +6,15 @@ import Updater from "./updater";
 
 import "@/i18n";
 import {
+    DownloadIcon,
     MenuIcon,
+    MoonIcon,
+    PickaxeIcon,
+    SearchIcon,
     SunMoonIcon,
     UserIcon,
-    SearchIcon,
-    PickaxeIcon,
-    MoonIcon,
-    DownloadIcon,
+    ChevronLeftIcon,
+    ChevronRightIcon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -26,6 +28,8 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
     });
     const { setTheme, theme } = useTheme();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isDesktopSidebarMinimized, setIsDesktopSidebarMinimized] =
+        useState(false);
 
     const navItems = [
         { href: "/", icon: SearchIcon, label: "search_id" },
@@ -85,11 +89,29 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                     className={`
                         fixed top-[4rem] left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted px-4 py-6 sm:px-6 
                         transition-all duration-300 ease-in-out dark:border-r-[#2d3748] bg-background
-                        lg:fixed lg:top-[4rem] lg:z-30 lg:w-64 lg:translate-x-0
+                        lg:fixed lg:top-[4rem] lg:z-30 lg:translate-x-0
                         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+                        ${isDesktopSidebarMinimized ? "lg:w-20" : "lg:w-64"}
                     `}
                 >
-                    <ul className="grid gap-2">
+                    <div className="relative">
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() =>
+                                setIsDesktopSidebarMinimized((prev) => !prev)
+                            }
+                            className="absolute top-0 -right-10 hidden lg:flex"
+                        >
+                            {isDesktopSidebarMinimized ? (
+                                <ChevronRightIcon className="h-4 w-4" />
+                            ) : (
+                                <ChevronLeftIcon className="h-4 w-4" />
+                            )}
+                            <span className="sr-only">Toggle sidebar</span>
+                        </Button>
+                    </div>
+                    <ul className="grid gap-2 mt-8">
                         {navItems.map(({ href, icon: Icon, label }) => (
                             <li key={href}>
                                 <a
@@ -101,16 +123,37 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                                     }`}
                                 >
                                     <Icon className="h-5 w-5" />
-                                    {t(label)}
+                                    <span
+                                        className={
+                                            isDesktopSidebarMinimized
+                                                ? "lg:hidden"
+                                                : ""
+                                        }
+                                    >
+                                        {t(label)}
+                                    </span>
                                 </a>
                             </li>
                         ))}
                     </ul>
                     <footer className="mt-auto py-4 text-center text-sm text-muted-foreground dark:text-[#a0aec0]">
-                        Version 0.1.1 (pre-release)
+                        <a
+                            href={"https://github.com/YuukiPS/Handbook"}
+                            target={"_blank"}
+                            rel="noreferrer"
+                            className={
+                                isDesktopSidebarMinimized ? "lg:hidden" : ""
+                            }
+                        >
+                            Version 0.1.1 (pre-release)
+                        </a>
                     </footer>
                 </nav>
-                <main className="flex-1 overflow-auto w-full pt-16 lg:pl-64">
+                <main
+                    className={`flex-1 overflow-auto w-full pt-16 transition-all duration-300 ${
+                        isDesktopSidebarMinimized ? "lg:pl-20" : "lg:pl-64"
+                    }`}
+                >
                     <Updater />
                     {children}
                 </main>
