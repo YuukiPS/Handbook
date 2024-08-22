@@ -21,4 +21,6 @@ export interface State {
 	currentLimit: number
 	yuukips: YuukiPS | null
 	output: string[]
+	limitsResult: number
+	isHandbookLoading: boolean
 }

@@ -14,7 +14,6 @@ use crate::search::gi::{find, get_category, get_path_handbook, update_path_handb
 use crate::structure::gm::Gmhandbook;
 use lazy_static::lazy_static;
 use log::error;
-use std::fs;
 use std::sync::RwLock;
 use tauri::Manager;
 
@@ -59,22 +58,6 @@ pub fn run() {
             );
             match handbook_path {
                 Ok(path) => {
-                    let handbook_content = fs::read_to_string(&path).unwrap_or_else(|e| {
-                        error!(
-                            "There was an error while read a gmhandbook.json file: {}",
-                            e
-                        );
-                        String::new()
-                    });
-                    let handbook_json: Gmhandbook = serde_json::from_str(&handbook_content)
-                        .unwrap_or_else(|e| {
-                            error!(
-                                "Failed to parse gmhandbook.json. Using empty vector instead: {}",
-                                e
-                            );
-                            Vec::new()
-                        });
-                    *HANDBOOK_CONTENT.write().unwrap() = handbook_json;
                     *HANDBOOK_PATH.write().unwrap() = path.to_string_lossy().to_string();
                 }
                 Err(e) => {
