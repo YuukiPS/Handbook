@@ -13,6 +13,7 @@
 			"light": "浅色",
 			"dark": "深色",
 			"system": "跟随系统"
-		}
+		},
+		"select_language": "选择语言"
 	}
 }

@@ -13,6 +13,7 @@
 			"light": "Terang",
 			"dark": "Gelap",
 			"system": "Sistem"
-		}
+		},
+		"select_language": "Pilih Bahasa"
 	}
 }

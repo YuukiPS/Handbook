@@ -11,7 +11,9 @@ import { GlobeIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const LanguageSwitcher: React.FC = memo(() => {
-    const { t } = useTranslation();
+    const { t } = useTranslation("default", {
+        keyPrefix: "drawer",
+    });
     const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
     const languages = [

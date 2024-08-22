@@ -13,6 +13,7 @@
 			"light": "ライト",
 			"dark": "ダーク",
 			"system": "システム"
-		}
+		},
+		"select_language": "言語を選択"
 	}
 }
