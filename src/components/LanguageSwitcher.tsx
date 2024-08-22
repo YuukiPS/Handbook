@@ -1,53 +1,67 @@
-import { memo } from 'react'
-import i18n from '@/i18n'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select.tsx'
+import { memo, useEffect, useState } from "react";
+import i18n from "@/i18n";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { GlobeIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const LanguageSwitcher: React.FC = memo(() => {
-	const language = [
-		{
-			id: 'en',
-			name: 'English',
-		},
-		{
-			id: 'id',
-			name: 'Indonesia',
-		},
-		{
-			id: 'ja',
-			name: 'Japan',
-		},
-		{
-			id: 'zh',
-			name: 'Chinese',
-		},
-		{
-			id: 'ru',
-			name: 'Russian',
-		},
-		{
-			id: 'th',
-			name: 'Thai',
-		},
-	]
+    const { t } = useTranslation();
+    const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
-	const changeLanguage = (language: string) => {
-		i18n.changeLanguage(language)
-	}
+    const languages = [
+        { id: "en", name: "English" },
+        { id: "id", name: "Indonesia" },
+        { id: "ja", name: "日本語" },
+        { id: "zh", name: "中文" },
+        { id: "ru", name: "Русский" },
+        { id: "th", name: "ไทย" },
+    ];
 
-	return (
-		<Select onValueChange={changeLanguage} defaultValue={i18n.language}>
-			<SelectTrigger>
-				<SelectValue placeholder={'Select Language'} />
-			</SelectTrigger>
-			<SelectContent>
-				{language.map((language) => (
-					<SelectItem value={language.id} key={language.id}>
-						{language.name}
-					</SelectItem>
-				))}
-			</SelectContent>
-		</Select>
-	)
-})
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
+        setCurrentLanguage(language);
+    };
 
-export default LanguageSwitcher
+    useEffect(() => {
+        const handleLanguageChanged = () => {
+            setCurrentLanguage(i18n.language);
+        };
+
+        i18n.on("languageChanged", handleLanguageChanged);
+
+        return () => {
+            i18n.off("languageChanged", handleLanguageChanged);
+        };
+    }, []);
+
+    const getCurrentLanguageName = () => {
+        return (
+            languages.find((lang) => lang.id === currentLanguage)?.name ||
+            t("select_language")
+        );
+    };
+
+    return (
+        <Select onValueChange={changeLanguage} value={currentLanguage}>
+            <SelectTrigger className="w-full">
+                <GlobeIcon className="mr-2 h-4 w-4" />
+                <SelectValue>{getCurrentLanguageName()}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+                {languages.map((language) => (
+                    <SelectItem value={language.id} key={language.id}>
+                        {language.name}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
+});
+
+export default LanguageSwitcher;

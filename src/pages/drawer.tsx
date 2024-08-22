@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import type React from "react";
 import { memo, useState } from "react";
 import Updater from "./updater";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 import "@/i18n";
 import {
@@ -15,6 +16,7 @@ import {
     UserIcon,
     ChevronLeftIcon,
     ChevronRightIcon,
+    GlobeIcon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -36,6 +38,13 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
         { href: "/settings", icon: UserIcon, label: "player_settings" },
         { href: "/generate", icon: PickaxeIcon, label: "generate" },
         { href: "/download", icon: DownloadIcon, label: "download" },
+        {
+            href: "#",
+            icon: GlobeIcon,
+            label: "language",
+            onClick: () => setIsDesktopSidebarMinimized(false),
+            isLanguageSwitcher: true,
+        },
     ];
 
     return (
@@ -112,29 +121,46 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                         </Button>
                     </div>
                     <ul className="grid gap-2 mt-8">
-                        {navItems.map(({ href, icon: Icon, label }) => (
-                            <li key={href}>
-                                <a
-                                    href={href}
-                                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-[#2d3748] ${
-                                        window.location.pathname === href
-                                            ? "bg-primary text-primary-foreground dark:bg-[#4c51bf] dark:text-[#e5e7eb]"
-                                            : "text-muted-foreground hover:text-foreground dark:text-[#a0aec0] dark:hover:text-[#e5e7eb]"
-                                    }`}
-                                >
-                                    <Icon className="h-5 w-5" />
-                                    <span
-                                        className={
-                                            isDesktopSidebarMinimized
-                                                ? "lg:hidden"
-                                                : ""
-                                        }
-                                    >
-                                        {t(label)}
-                                    </span>
-                                </a>
-                            </li>
-                        ))}
+                        {navItems.map(
+                            ({
+                                href,
+                                icon: Icon,
+                                label,
+                                onClick,
+                                isLanguageSwitcher,
+                            }) => (
+                                <li key={href}>
+                                    {isLanguageSwitcher &&
+                                    !isDesktopSidebarMinimized ? (
+                                        <div className="px-3 py-2">
+                                            <LanguageSwitcher />
+                                        </div>
+                                    ) : (
+                                        <a
+                                            href={href}
+                                            onClick={onClick}
+                                            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-[#2d3748] ${
+                                                window.location.pathname ===
+                                                href
+                                                    ? "bg-primary text-primary-foreground dark:bg-[#4c51bf] dark:text-[#e5e7eb]"
+                                                    : "text-muted-foreground hover:text-foreground dark:text-[#a0aec0] dark:hover:text-[#e5e7eb]"
+                                            }`}
+                                        >
+                                            <Icon className="h-5 w-5" />
+                                            <span
+                                                className={
+                                                    isDesktopSidebarMinimized
+                                                        ? "lg:hidden"
+                                                        : ""
+                                                }
+                                            >
+                                                {t(label)}
+                                            </span>
+                                        </a>
+                                    )}
+                                </li>
+                            )
+                        )}
                     </ul>
                     <footer className="mt-auto py-4 text-center text-sm text-muted-foreground dark:text-[#a0aec0]">
                         <a

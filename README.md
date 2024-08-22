@@ -87,7 +87,6 @@ Here's what I'm planning to work on next before I consider this project "done":
 
 ### TODO
 
-- [ ] Implement change language feature
 - [ ] Save load GM Handbook path to Cookie or Local Storage
 - [ ] Implement search feature for SR (Currently, it requests to API)
 - [ ] Implement support for images to generate a handbook
@@ -102,6 +101,7 @@ Here's what I'm planning to work on next before I consider this project "done":
 - [x] Support for Android
 - [x] Select folder for Android devices
 - [x] Download the Resources (TextMap and Excel) for both games
+- [x] Implement change language feature
 
 ## Project Structure
 
