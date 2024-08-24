@@ -36,6 +36,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose, IoMdSearch } from "react-icons/io";
 import type { State } from "./types";
 import { Spinner } from "@/components/ui/spinner";
+import { useCookies } from "react-cookie";
+import expiresInAMonth from "./cookieExpires";
 
 interface SearchProps {
     currentLanguage: string;
@@ -189,6 +191,17 @@ const Search: React.FC<SearchProps> = ({
             }));
         }, 1000),
         []
+    );
+
+    const [, setCookie] = useCookies(["language"]);
+
+    const setCurrentLanguage = useCallback(
+        (value: string) => {
+            setCookie("language", value, {
+                expires: expiresInAMonth(),
+            });
+        },
+        [setCookie]
     );
 
     useEffect(() => {
@@ -522,10 +535,7 @@ const Search: React.FC<SearchProps> = ({
                         <Select
                             value={currentLanguage}
                             onValueChange={(e) => {
-                                setState((prevState) => ({
-                                    ...prevState,
-                                    currentLanguage: e,
-                                }));
+                                setCurrentLanguage(e);
                             }}
                             disabled={isHandbookLoading}
                         >
