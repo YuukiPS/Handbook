@@ -1,7 +1,8 @@
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import type React from "react";
-import { memo, useState } from "react";
+import { useEffect, useState } from "react";
+import { memo } from "react";
 import Updater from "./updater";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -29,9 +30,22 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
         keyPrefix: "drawer",
     });
     const { setTheme, theme } = useTheme();
+    const [systemTheme, setSystemTheme] = useState<"light" | "dark">("light");
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isDesktopSidebarMinimized, setIsDesktopSidebarMinimized] =
         useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        setSystemTheme(mediaQuery.matches ? "dark" : "light");
+
+        const handler = (e: MediaQueryListEvent) =>
+            setSystemTheme(e.matches ? "dark" : "light");
+        mediaQuery.addEventListener("change", handler);
+        return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
+
+    const currentTheme = theme === "system" ? systemTheme : theme;
 
     const navItems = [
         { href: "/", icon: SearchIcon, label: "search_id" },
@@ -71,20 +85,20 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
                     variant="ghost"
                     size="icon"
                     onClick={() =>
-                        setTheme(theme === "dark" ? "light" : "dark")
+                        setTheme(currentTheme === "dark" ? "light" : "dark")
                     }
                 >
                     <div className="relative w-6 h-6">
                         <SunMoonIcon
                             className={`h-6 w-6 absolute transition-all duration-300 ${
-                                theme === "dark"
+                                currentTheme === "dark"
                                     ? "opacity-100 rotate-0"
                                     : "opacity-0 -rotate-90"
                             }`}
                         />
                         <MoonIcon
                             className={`h-6 w-6 absolute transition-all duration-300 ${
-                                theme === "light"
+                                currentTheme === "light"
                                     ? "opacity-100 rotate-0"
                                     : "opacity-0 rotate-90"
                             }`}
@@ -95,85 +109,87 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
             </div>
             <div className="flex flex-1 relative">
                 <nav
-                    className={`
-                        fixed top-[4rem] left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted px-4 py-6 sm:px-6 
-                        transition-all duration-300 ease-in-out dark:border-r-[#2d3748] bg-background
-                        lg:fixed lg:top-[4rem] lg:z-30 lg:translate-x-0
-                        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-                        ${isDesktopSidebarMinimized ? "lg:w-20" : "lg:w-64"}
-                    `}
+                    className={`fixed top-16 left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-sm lg:fixed lg:top-16 lg:z-30 lg:translate-x-0 ${
+                        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    } ${
+                        isDesktopSidebarMinimized ? "lg:w-20" : "lg:w-64"
+                    } w-64 sm:w-72`}
                 >
-                    <div className="relative">
+                    <div className="relative h-full flex flex-col">
                         <Button
                             variant="ghost"
                             size="icon"
                             onClick={() =>
                                 setIsDesktopSidebarMinimized((prev) => !prev)
                             }
-                            className="absolute top-0 -right-10 hidden lg:flex"
+                            className="absolute top-2 -right-12 hidden lg:flex bg-background/80 hover:bg-muted/80 dark:hover:bg-[#2d3748] transition-colors rounded-full shadow-md"
                         >
                             {isDesktopSidebarMinimized ? (
-                                <ChevronRightIcon className="h-4 w-4" />
+                                <ChevronRightIcon className="h-5 w-5" />
                             ) : (
-                                <ChevronLeftIcon className="h-4 w-4" />
+                                <ChevronLeftIcon className="h-5 w-5" />
                             )}
                             <span className="sr-only">Toggle sidebar</span>
                         </Button>
-                    </div>
-                    <ul className="grid gap-2 mt-8">
-                        {navItems.map(
-                            ({
-                                href,
-                                icon: Icon,
-                                label,
-                                onClick,
-                                isLanguageSwitcher,
-                            }) => (
-                                <li key={href}>
-                                    {isLanguageSwitcher &&
-                                    !isDesktopSidebarMinimized ? (
-                                        <div className="px-3 py-2">
-                                            <LanguageSwitcher />
-                                        </div>
-                                    ) : (
-                                        <a
-                                            href={href}
-                                            onClick={onClick}
-                                            className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted dark:hover:bg-[#2d3748] ${
-                                                window.location.pathname ===
-                                                href
-                                                    ? "bg-primary text-primary-foreground dark:bg-[#4c51bf] dark:text-[#e5e7eb]"
-                                                    : "text-muted-foreground hover:text-foreground dark:text-[#a0aec0] dark:hover:text-[#e5e7eb]"
-                                            }`}
-                                        >
-                                            <Icon className="h-5 w-5" />
-                                            <span
-                                                className={
+                        <ul className="flex-grow overflow-y-auto px-3 py-4 space-y-2">
+                            {navItems.map(
+                                ({
+                                    href,
+                                    icon: Icon,
+                                    label,
+                                    onClick,
+                                    isLanguageSwitcher,
+                                }) => (
+                                    <li key={href}>
+                                        {isLanguageSwitcher &&
+                                        !isDesktopSidebarMinimized ? (
+                                            <div className="px-3 py-2">
+                                                <LanguageSwitcher />
+                                            </div>
+                                        ) : (
+                                            <a
+                                                href={href}
+                                                onClick={onClick}
+                                                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                                                    window.location.pathname ===
+                                                    href
+                                                        ? "bg-primary text-primary-foreground"
+                                                        : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                                                } ${
                                                     isDesktopSidebarMinimized
-                                                        ? "lg:hidden"
+                                                        ? "lg:justify-center"
                                                         : ""
-                                                }
+                                                }`}
                                             >
-                                                {t(label)}
-                                            </span>
-                                        </a>
-                                    )}
-                                </li>
-                            )
-                        )}
-                    </ul>
-                    <footer className="mt-auto py-4 text-center text-sm text-muted-foreground dark:text-[#a0aec0]">
-                        <a
-                            href={"https://github.com/YuukiPS/Handbook"}
-                            target={"_blank"}
-                            rel="noreferrer"
-                            className={
-                                isDesktopSidebarMinimized ? "lg:hidden" : ""
-                            }
-                        >
-                            Version 0.1.1 (pre-release)
-                        </a>
-                    </footer>
+                                                <Icon className="h-5 w-5 flex-shrink-0" />
+                                                <span
+                                                    className={
+                                                        isDesktopSidebarMinimized
+                                                            ? "lg:hidden"
+                                                            : ""
+                                                    }
+                                                >
+                                                    {t(label)}
+                                                </span>
+                                            </a>
+                                        )}
+                                    </li>
+                                )
+                            )}
+                        </ul>
+                        <footer className="mt-auto p-4 text-center text-sm text-muted-foreground">
+                            <a
+                                href="https://github.com/YuukiPS/Handbook"
+                                target="_blank"
+                                rel="noreferrer"
+                                className={
+                                    isDesktopSidebarMinimized ? "lg:hidden" : ""
+                                }
+                            >
+                                Version 0.1.1 (pre-release)
+                            </a>
+                        </footer>
+                    </div>
                 </nav>
                 <main
                     className={`flex-1 overflow-auto w-full pt-16 transition-all duration-300 ${
