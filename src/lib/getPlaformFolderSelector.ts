@@ -15,7 +15,7 @@ interface SelectFolderResponse {
 async function getPlatformFolderSelector() {
 	const currentPlatform = platform()
 
-	if (currentPlatform === 'windows') {
+	if (currentPlatform === 'windows' || currentPlatform === 'linux') {
 		return (title: string) => open({ directory: true, title, multiple: false })
 	}
 
