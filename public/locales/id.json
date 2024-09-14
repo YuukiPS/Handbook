@@ -41,9 +41,9 @@
 			"lc": "LC"
 		},
 		"description": {
-			"gc": "Perintah untuk GC (Grasscutter) untuk versi 4.7 atau lebih rendah",
+			"gc": "Perintah untuk GC (Grasscutter) untuk versi 5.0 atau lebih rendah",
 			"gio": "Perintah untuk GIO versi 3.2",
-			"lc": "Perintah untuk LC (LunarCore) untuk versi 2.4 atau lebih rendah"
+			"lc": "Perintah untuk LC (LunarCore) untuk versi 2.5 atau lebih rendah"
 		},
 		"tabs_title": {
 			"gc": "GC",

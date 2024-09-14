@@ -41,9 +41,9 @@
 			"lc": "LC"
 		},
 		"description": {
-			"gc": "Commands for GC (Grasscutter) for versions 4.7 or lower",
+			"gc": "Commands for GC (Grasscutter) for versions 5.0 or lower",
 			"gio": "Commands for GIO version 3.2",
-			"lc": "Commands for LC (LunarCore) for versions 2.4 or lower"
+			"lc": "Commands for LC (LunarCore) for versions 2.5 or lower"
 		},
 		"tabs_title": {
 			"gc": "GC",
