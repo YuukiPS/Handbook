@@ -53,8 +53,8 @@ pub fn find(search: &str, language: &str, limit: Option<i64>) -> Result<Gmhandbo
         .filter(|item| {
             let name = match &item.name {
                 NameUnion::Description(desc) => match language.to_lowercase().as_str() {
-                    "EN" => desc.get("EN"),
-                    "JP" => desc.get("JP"),
+                    "en" => desc.get("EN"),
+                    "jp" => desc.get("JP"),
                     "id" => desc.get("ID"),
                     "cht" => desc.get("CHT"),
                     "th" => desc.get("TH"),
