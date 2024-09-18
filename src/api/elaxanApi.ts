@@ -4,26 +4,26 @@ import type { Hsr } from "@/types/hsr";
 import type { Category } from "@/types/category";
 
 interface HandbookGi {
-    search: string;
+    search: string[];
     limit: number;
-    category?: string;
+    category?: string[];
     language?: string;
     command?: boolean;
     image?: boolean;
 }
 
 interface HandbookSr {
-    search: string;
+    search: string[];
     limit: number;
-    category?: string;
+    category?: string[];
     language?: string;
 }
 
 const baseUrl = "https://api.elaxan.xyz";
 
 const endpoints = {
-    gi: "/v3/gm",
-    sr: "/v1/sr",
+    gi: "/v4/gm",
+    sr: "/v3/sr",
     category: "/v2/category",
 };
 
@@ -39,9 +39,9 @@ async function getHandbook(
     data: HandbookGi | HandbookSr
 ): Promise<GmhandbookGI[] | Hsr> {
     const endpoint = endpoints[type];
-    const payload = type === "sr" ? { type: 1, ...data } : data;
+    // const payload = type === "sr" ? { type: 1, ...data } : data;
 
-    const res = await instance.post<APIElaXan | Hsr>(endpoint, payload);
+    const res = await instance.post<APIElaXan | Hsr>(endpoint, data);
     if (type === "gi") {
         return res.data.data as GmhandbookGI[];
     }

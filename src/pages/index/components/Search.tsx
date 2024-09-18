@@ -33,6 +33,7 @@ import type { State } from './types'
 import { Spinner } from '@/components/ui/spinner'
 import { useCookies } from 'react-cookie'
 import expiresInAMonth from './cookieExpires'
+import { MultiSelect } from '@/components/ui/multi-select'
 
 interface SearchProps {
 	currentLanguage: string
@@ -118,7 +119,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setState((prevState) => ({
 			...prevState,
-			searchTerm: e.target.value,
+			searchTerm: e.target.value.split(',').map((e) => e.trim()),
 		}))
 	}
 
@@ -126,7 +127,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 		(e: string) => {
 			setState((prevState) => ({
 				...prevState,
-				searchTerm: e,
+				searchTerm: e.split(',').map((e) => e.trim()),
 				searchInputValue: e,
 				error: false,
 			}))
@@ -135,12 +136,12 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 	)
 
 	const handleSearchTrigger = useCallback(() => {
-		if (state.searchTerm === '' || isHandbookLoading) return
+		if (state.searchTerm.length === 0 || isHandbookLoading) return
 		setState((prevState) => ({
 			...prevState,
 			loading: true,
 		}))
-		handleSearch(state.searchTerm)
+		handleSearch(state.searchTerm.join(','))
 		state.currentType === 'Genshin Impact' ? loadGI() : loadSR()
 	}, [state.searchTerm, state.currentType, handleSearch, loadGI, loadSR, setState, isHandbookLoading])
 
@@ -276,7 +277,10 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 			const listCategory = await invoke<string[]>('get_category')
 			setState((prev) => ({
 				...prev,
-				listCategory,
+				listCategory: listCategory.map((item) => ({
+					label: item,
+					value: item,
+				})),
 			}))
 			toast({
 				title: 'Path updated',
@@ -303,8 +307,8 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 			setState((prevState) => ({
 				...prevState,
 				currentType: newType,
-				selectedCategory: 'category',
-				searchTerm: '',
+				selectedCategory: [],
+				searchTerm: [],
 			}))
 			setCookie('type', newType, {
 				path: '/',
@@ -317,16 +321,16 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 
 	const handleSearchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
-			if (state.searchTerm === '') {
+			if (state.searchTerm.length === 0) {
 				return
 			}
-			handleSearch(state.searchTerm)
+			handleSearch(state.searchTerm.join(', '))
 			state.currentType === 'Genshin Impact' ? loadGI() : loadSR()
 		} else if (e.key === 'Escape') {
 			handleSearch('')
 			setState((prevState) => ({
 				...prevState,
-				searchTerm: '',
+				searchTerm: [],
 			}))
 		}
 	}
@@ -432,7 +436,17 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 								</SelectGroup>
 							</SelectContent>
 						</Select>
-						<Select
+						<MultiSelect
+							options={state.listCategory}
+							onValueChange={(e) => {
+								setState((prevState) => ({
+									...prevState,
+									selectedCategory: e,
+								}))
+							}}
+							defaultValue={[]}
+						/>
+						{/* <Select
 							value={state.selectedCategory}
 							onValueChange={(e) =>
 								setState((prevState) => ({
@@ -459,7 +473,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 									))}
 								</SelectGroup>
 							</SelectContent>
-						</Select>
+						</Select> */}
 						<Select
 							value={currentLanguage}
 							onValueChange={(e) => {
