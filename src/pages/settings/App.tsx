@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert.tsx'
 import { CiWarning } from 'react-icons/ci'
-import { Link } from '@/components/ui/link.tsx'
 import type { Server } from '@/types/yuukipsServer'
 import ListServerAvailable from './components/ListServerAvailable'
 import type { State } from './components/types'
@@ -200,10 +199,13 @@ const Settings: React.FC = () => {
 								<Trans
 									i18nKey={'failed_check_account_description'}
 									components={[
-										<Link
+										// biome-ignore lint/a11y/useAnchorContent: It will add a content to the link
+										<a
 											href={'https://ps.yuuki.me'}
-											className={'underline'}
+											className={'underline text-blue-500'}
 											key={'settings-page-alert-link'}
+											target='_blank'
+											rel='noreferrer'
 										/>,
 									]}
 								/>
@@ -240,14 +242,14 @@ const Settings: React.FC = () => {
 						</div>
 
 						<div className='text-left'>
-							<Link
+							<a
 								href='https://ps.yuuki.me/account/code'
 								target='_blank'
 								rel='noreferrer'
 								className='text-blue-600 hover:underline dark:text-blue-400'
 							>
 								{t('get_uid_and_code')}
-							</Link>
+							</a>
 						</div>
 
 						<Button
