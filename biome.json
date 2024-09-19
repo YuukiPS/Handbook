@@ -48,12 +48,7 @@
 				"noDuplicateJsonKeys": "error"
 			}
 		},
-		"ignore": [
-			"node_modules",
-			"src-tauri",
-			"dist",
-			"tauri-plugin-handbook-finder"
-		]
+		"ignore": ["node_modules", "src-tauri", "dist", "tauri-plugin-handbook-finder"]
 	},
 	"formatter": {
 		"enabled": true,

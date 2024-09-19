@@ -1,8 +1,8 @@
-import * as React from 'react'
 import { cn } from '@/lib/utils'
-import { cva } from 'class-variance-authority'
-import { open } from '@tauri-apps/plugin-shell'
 import { isTauri } from '@tauri-apps/api/core'
+import { open } from '@tauri-apps/plugin-shell'
+import { cva } from 'class-variance-authority'
+import * as React from 'react'
 
 type Variant = 'default' | 'no-underline'
 

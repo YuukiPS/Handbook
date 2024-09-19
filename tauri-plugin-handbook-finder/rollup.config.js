@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { cwd } from 'process'
 import typescript from '@rollup/plugin-typescript'
+import { cwd } from 'process'
 
 const pkg = JSON.parse(readFileSync(join(cwd(), 'package.json'), 'utf8'))
 

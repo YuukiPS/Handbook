@@ -1,7 +1,7 @@
+import { toast } from '@/components/ui/use-toast'
 import { invoke } from '@tauri-apps/api/core'
 import { open } from '@tauri-apps/plugin-dialog'
 import { platform } from '@tauri-apps/plugin-os'
-import { toast } from '@/components/ui/use-toast'
 
 interface StoragePermissionResponse {
 	status: 'Granted' | 'Cancelled' | 'Denied'

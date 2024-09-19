@@ -1,7 +1,7 @@
 import React from 'react'
-import { FaGitlab, FaGithub, FaDiscord } from 'react-icons/fa6'
-import { SiBuymeacoffee } from 'react-icons/si'
+import { FaDiscord, FaGithub, FaGitlab } from 'react-icons/fa6'
 import { FiExternalLink } from 'react-icons/fi'
+import { SiBuymeacoffee } from 'react-icons/si'
 
 type LinkProps = {
 	href: string

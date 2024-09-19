@@ -1,7 +1,7 @@
-import axios, { type AxiosError } from 'axios'
-import io, { type Socket } from 'socket.io-client'
 import { Message, type PlayerElement, type YuukiPSAccount } from '@/types/yuukipsAccount'
 import type { Response as ResponseCommand, ResponseWithTicket, Ticket, TicketNotFound } from '@/types/yuukipsCommand'
+import axios, { type AxiosError } from 'axios'
+import io, { type Socket } from 'socket.io-client'
 
 export interface AccountInfo {
 	id: number

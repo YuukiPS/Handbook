@@ -1,9 +1,9 @@
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import type React from 'react'
 import { memo } from 'react'
-import type { State } from './types'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
+import type { State } from './types'
 
 interface OutputProps {
 	state: State

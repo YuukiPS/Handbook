@@ -1,14 +1,14 @@
-import type React from 'react'
-import { memo, useCallback } from 'react'
-import type { GmhandbookGI, Command } from '@/types/gm'
-import { RiSlashCommands2 } from 'react-icons/ri'
-import { MdOutlineContentCopy } from 'react-icons/md'
-import { useToast } from '@/components/ui/use-toast'
 import YuukiPS from '@/api/yuukips'
 import { ToastAction } from '@/components/ui/toast.tsx'
-import { useTranslation } from 'react-i18next'
-import { writeText } from '@tauri-apps/plugin-clipboard-manager'
+import { useToast } from '@/components/ui/use-toast'
+import type { Command, GmhandbookGI } from '@/types/gm'
 import { isTauri } from '@tauri-apps/api/core'
+import { writeText } from '@tauri-apps/plugin-clipboard-manager'
+import type React from 'react'
+import { memo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { MdOutlineContentCopy } from 'react-icons/md'
+import { RiSlashCommands2 } from 'react-icons/ri'
 
 interface CommandListProps {
 	data: GmhandbookGI

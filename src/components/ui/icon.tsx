@@ -1,5 +1,5 @@
-import type { IconType } from 'react-icons'
 import { cn } from '@/lib/utils'
+import type { IconType } from 'react-icons'
 
 export interface IconProps extends React.HTMLAttributes<SVGElement> {
 	icon: IconType

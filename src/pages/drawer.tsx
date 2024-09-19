@@ -1,23 +1,23 @@
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { useTheme } from '@/components/theme-provider'
 import { Button } from '@/components/ui/button'
 import type React from 'react'
 import { useEffect, useState } from 'react'
 import { memo } from 'react'
 import Updater from './updater'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 import '@/i18n'
 import {
+	ChevronLeftIcon,
+	ChevronRightIcon,
 	DownloadIcon,
+	GlobeIcon,
 	MenuIcon,
 	MoonIcon,
 	PickaxeIcon,
 	SearchIcon,
 	SunMoonIcon,
 	UserIcon,
-	ChevronLeftIcon,
-	ChevronRightIcon,
-	GlobeIcon,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 

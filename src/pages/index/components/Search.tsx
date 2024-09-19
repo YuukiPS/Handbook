@@ -4,6 +4,7 @@ import { Icon } from '@/components/ui/icon'
 import { Input } from '@/components/ui/input'
 import { Kbd } from '@/components/ui/kbd'
 import { Label } from '@/components/ui/label'
+import { MultiSelect } from '@/components/ui/multi-select'
 import {
 	Select,
 	SelectContent,
@@ -14,9 +15,11 @@ import {
 	SelectValue,
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
+import { Spinner } from '@/components/ui/spinner'
 import { ToggleIcon } from '@/components/ui/toggle-icon'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useToast } from '@/components/ui/use-toast'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { invoke, isTauri } from '@tauri-apps/api/core'
 import { type OpenDialogOptions, open } from '@tauri-apps/plugin-dialog'
 import { platform } from '@tauri-apps/plugin-os'
@@ -25,15 +28,12 @@ import { FolderIcon } from 'lucide-react'
 import type React from 'react'
 import { memo } from 'react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { useCookies } from 'react-cookie'
 import { Trans, useTranslation } from 'react-i18next'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoMdClose, IoMdSearch } from 'react-icons/io'
-import type { State } from './types'
-import { Spinner } from '@/components/ui/spinner'
-import { useCookies } from 'react-cookie'
 import expiresInAMonth from './cookieExpires'
-import { MultiSelect } from '@/components/ui/multi-select'
+import type { State } from './types'
 
 interface SearchProps {
 	currentLanguage: string

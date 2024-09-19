@@ -1,14 +1,7 @@
-import type React from 'react'
-import { useCallback, memo, useState } from 'react'
-import { FaStar } from 'react-icons/fa'
-import type { Description, GmhandbookGI } from '@/types/gm'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import YuukiPS from '@/api/yuukips'
-import Collapse from '@/components/ui/collapse'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import Collapse from '@/components/ui/collapse'
 import {
 	Dialog,
 	DialogContent,
@@ -17,13 +10,20 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog'
-import { useCookies } from 'react-cookie'
 import { Label } from '@/components/ui/label.tsx'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useToast } from '@/components/ui/use-toast'
 import CommandList from '@/pages/index/components/CommandList.tsx'
-import type { State } from './types'
-import { useTranslation } from 'react-i18next'
+import type { Description, GmhandbookGI } from '@/types/gm'
 import { isTauri } from '@tauri-apps/api/core'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
+import type React from 'react'
+import { memo, useCallback, useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { useTranslation } from 'react-i18next'
+import { FaStar } from 'react-icons/fa'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import type { State } from './types'
 
 const ImageComponent = memo(({ data }: { data: GmhandbookGI }) => {
 	const defaultImage = 'https://api.elaxan.com/images/genshin-impact/not-found.png'

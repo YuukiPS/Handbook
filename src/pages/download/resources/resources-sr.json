@@ -1,82 +1,82 @@
 {
-    "excel": [
-        {
-            "label": "Characters",
-            "value": "AvatarConfig.json"
-        },
-        {
-            "label": "Materials",
-            "value": "ItemConfig.json"
-        },
-        {
-            "label": "Weapons",
-            "value": "EquipmentConfig.json"
-        },
-        {
-            "label": "Artifacts",
-            "value": "ItemConfigRelic.json"
-        },
-        {
-            "label": "Quests",
-            "value": "MainMission.json"
-        },
-        {
-            "label": "Monsters",
-            "value": "MonsterConfig.json"
-        }
-    ],
-    "textmap": [
-        {
-            "label": "Simplified Chinese",
-            "value": "TextMapCHS.json"
-        },
-        {
-            "label": "Traditional Chinese",
-            "value": "TextMapCHT.json"
-        },
-        {
-            "label": "German",
-            "value": "TextMapDE.json"
-        },
-        {
-            "label": "English",
-            "value": "TextMapEN.json"
-        },
-        {
-            "label": "Spanish",
-            "value": "TextMapES.json"
-        },
-        {
-            "label": "French",
-            "value": "TextMapFR.json"
-        },
-        {
-            "label": "Indonesian",
-            "value": "TextMapID.json"
-        },
-        {
-            "label": "Japanese",
-            "value": "TextMapJP.json"
-        },
-        {
-            "label": "Korean",
-            "value": "TextMapKR.json"
-        },
-        {
-            "label": "Portuguese",
-            "value": "TextMapPT.json"
-        },
-        {
-            "label": "Russian",
-            "value": "TextMapRU.json"
-        },
-        {
-            "label": "Thai",
-            "value": "TextMapTH.json"
-        },
-        {
-            "label": "Vietnamese",
-            "value": "TextMapVI.json"
-        }
-    ]
+	"excel": [
+		{
+			"label": "Characters",
+			"value": "AvatarConfig.json"
+		},
+		{
+			"label": "Materials",
+			"value": "ItemConfig.json"
+		},
+		{
+			"label": "Weapons",
+			"value": "EquipmentConfig.json"
+		},
+		{
+			"label": "Artifacts",
+			"value": "ItemConfigRelic.json"
+		},
+		{
+			"label": "Quests",
+			"value": "MainMission.json"
+		},
+		{
+			"label": "Monsters",
+			"value": "MonsterConfig.json"
+		}
+	],
+	"textmap": [
+		{
+			"label": "Simplified Chinese",
+			"value": "TextMapCHS.json"
+		},
+		{
+			"label": "Traditional Chinese",
+			"value": "TextMapCHT.json"
+		},
+		{
+			"label": "German",
+			"value": "TextMapDE.json"
+		},
+		{
+			"label": "English",
+			"value": "TextMapEN.json"
+		},
+		{
+			"label": "Spanish",
+			"value": "TextMapES.json"
+		},
+		{
+			"label": "French",
+			"value": "TextMapFR.json"
+		},
+		{
+			"label": "Indonesian",
+			"value": "TextMapID.json"
+		},
+		{
+			"label": "Japanese",
+			"value": "TextMapJP.json"
+		},
+		{
+			"label": "Korean",
+			"value": "TextMapKR.json"
+		},
+		{
+			"label": "Portuguese",
+			"value": "TextMapPT.json"
+		},
+		{
+			"label": "Russian",
+			"value": "TextMapRU.json"
+		},
+		{
+			"label": "Thai",
+			"value": "TextMapTH.json"
+		},
+		{
+			"label": "Vietnamese",
+			"value": "TextMapVI.json"
+		}
+	]
 }
