@@ -163,7 +163,6 @@ const DataCard: React.FC<DataCardProps> = ({ currentLanguage, code, uid, server,
 										</div>
 									)}
 									<h1 className='text-2xl font-semibold'>
-										{/* {data.name} */}
 										{typeof data.name === 'object' ? data.name[currentLanguage] : data.name}
 									</h1>
 									<p className='font-bold text-gray-400 dark:text-gray-600'>{data.id}</p>

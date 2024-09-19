@@ -446,34 +446,6 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 							}}
 							defaultValue={[]}
 						/>
-						{/* <Select
-							value={state.selectedCategory}
-							onValueChange={(e) =>
-								setState((prevState) => ({
-									...prevState,
-									selectedCategory: e,
-								}))
-							}
-							defaultValue='Select a category'
-							disabled={isHandbookLoading}
-						>
-							<SelectTrigger>
-								<SelectValue placeholder='Select a category' />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectGroup>
-									<SelectLabel>{t('label.category')}</SelectLabel>
-									<SelectItem value='category' defaultChecked>
-										{t('label.category_all')}
-									</SelectItem>
-									{state.listCategory.map((category) => (
-										<SelectItem key={`${category.replace(/ /, '')}`} value={category}>
-											{category}
-										</SelectItem>
-									))}
-								</SelectGroup>
-							</SelectContent>
-						</Select> */}
 						<Select
 							value={currentLanguage}
 							onValueChange={(e) => {

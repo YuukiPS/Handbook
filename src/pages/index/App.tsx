@@ -47,10 +47,6 @@ function App() {
 		isHandbookLoading: false,
 	})
 	const currentLanguage: keyof Description = cookies.language || 'EN'
-	// const searchCategory =
-	//     state.selectedCategory === "category"
-	//         ? undefined
-	//         : state.selectedCategory;
 
 	const loadGI = async () => {
 		setState((prevState) => ({

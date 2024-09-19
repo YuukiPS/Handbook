@@ -36,7 +36,6 @@ function getHandbook(type: 'gi', data: HandbookGi): Promise<GmhandbookGI[]>
 function getHandbook(type: 'sr', data: HandbookSr): Promise<Hsr>
 async function getHandbook(type: 'gi' | 'sr', data: HandbookGi | HandbookSr): Promise<GmhandbookGI[] | Hsr> {
 	const endpoint = endpoints[type]
-	// const payload = type === "sr" ? { type: 1, ...data } : data;
 
 	const res = await instance.post<APIElaXan | Hsr>(endpoint, data)
 	if (type === 'gi') {
