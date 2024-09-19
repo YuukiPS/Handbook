@@ -6,14 +6,61 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
-		}
+			"style": {
+				"recommended": true
+			},
+			"performance": {
+				"recommended": true
+			},
+			"suspicious": {
+				"noLabelVar": "error",
+				"noThenProperty": "error",
+				"noDebugger": "error",
+				"noArrayIndexKey": "error",
+				"noConstEnum": "error",
+				"noExplicitAny": "error",
+				"noEmptyInterface": "warn",
+				"noEmptyBlockStatements": "error",
+				"useAwait": "error",
+				"noDuplicateCase": "error",
+				"noDuplicateJsxProps": "error",
+				"noDuplicateObjectKeys": "error",
+				"noDuplicateParameters": "error",
+				"noDuplicateClassMembers": "error",
+				"noDuplicateTestHooks": "error"
+			},
+			"complexity": {
+				"noForEach": "error"
+			},
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedLabels": "error",
+				"noUnusedVariables": "error",
+				"noUnusedPrivateClassMembers": "error"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "error",
+				"noDangerouslySetInnerHtmlWithChildren": "error"
+			},
+			"nursery": {
+				"noDuplicateElseIf": "error",
+				"noDuplicateAtImportRules": "error",
+				"noDuplicateJsonKeys": "error"
+			}
+		},
+		"ignore": [
+			"node_modules",
+			"src-tauri",
+			"dist",
+			"tauri-plugin-handbook-finder"
+		]
 	},
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": false,
 		"indentWidth": 4,
-		"lineWidth": 120
+		"lineWidth": 120,
+		"lineEnding": "lf"
 	},
 	"javascript": {
 		"formatter": {

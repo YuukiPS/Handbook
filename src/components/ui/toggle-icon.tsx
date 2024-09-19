@@ -12,7 +12,7 @@ const ToggleIcon = React.forwardRef<HTMLDivElement, ToggleIconProps>(
 	({ className, originalIcon: OriginalIcon, toggledIcon: ToggledIcon, onClick, ...props }, ref) => {
 		const [isToggled, setIsToggled] = React.useState(false)
 
-		const handleClick = async (event: React.MouseEvent<HTMLDivElement>) => {
+		const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 			setIsToggled(!isToggled)
 			if (onClick) {
 				onClick(event)
