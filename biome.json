@@ -43,9 +43,7 @@
 				"noDangerouslySetInnerHtmlWithChildren": "error"
 			},
 			"nursery": {
-				"noDuplicateElseIf": "error",
-				"noDuplicateAtImportRules": "error",
-				"noDuplicateJsonKeys": "error"
+				"noDuplicateElseIf": "error"
 			}
 		},
 		"ignore": ["node_modules", "src-tauri", "dist", "tauri-plugin-handbook-finder"]
