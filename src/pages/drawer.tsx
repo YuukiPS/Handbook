@@ -33,19 +33,6 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 	const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light')
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 	const [isDesktopSidebarMinimized, setIsDesktopSidebarMinimized] = useState(false)
-	const [showBanner, setShowBanner] = useState(true)
-
-	useEffect(() => {
-		const bannerPreference = localStorage.getItem('hideBanner')
-		if (bannerPreference === 'true') {
-			setShowBanner(false)
-		}
-	}, [])
-
-	const handleHideBanner = () => {
-		setShowBanner(false)
-		localStorage.setItem('hideBanner', 'true')
-	}
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -173,25 +160,6 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 					}`}
 				>
 					<Updater />
-					{showBanner && (
-						<div className='bg-white dark:bg-gray-800 shadow-md rounded p-4 mx-4 my-2 text-center'>
-							<p className='text-gray-800 dark:text-gray-200'>
-								We have already moved to a new domain! Please use{' '}
-								<a href='https://gm.elaxan.xyz' className='underline text-gray-800 dark:text-gray-200'>
-									gm.elaxan.xyz
-								</a>{' '}
-								for future visits. Note that <strong>gm.elaxan.com</strong> will not be available after
-								25 September 2024.
-							</p>
-							<button
-								type='button'
-								onClick={handleHideBanner}
-								className='mt-2 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded'
-							>
-								Don't show again
-							</button>
-						</div>
-					)}
 					{children}
 				</main>
 				{isSidebarOpen && (
