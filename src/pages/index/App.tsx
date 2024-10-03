@@ -29,7 +29,7 @@ function App() {
 	const [state, setState] = useState<State>({
 		mainData: [],
 		mainDataSR: [],
-		searchTerm: [],
+		searchTerm: '',
 		searchInputValue: '',
 		loading: false,
 		error: false,
@@ -59,13 +59,13 @@ function App() {
 			let response: GmhandbookGI[] = []
 			if (isTauri()) {
 				response = await invoke<GmhandbookGI[]>('find', {
-					search: state.searchTerm,
+					search: state.searchTerm.split(',').map((e) => e.trim()),
 					language: currentLanguage,
 					limit: state.currentLimit,
 				})
 			} else {
 				response = await ElaXanAPI.getHandbook('gi', {
-					search: state.searchTerm,
+					search: state.searchTerm.split(',').map((e) => e.trim()),
 					limit: state.currentLimit,
 					category: state.selectedCategory,
 					command: state.showCommands,
@@ -103,7 +103,7 @@ function App() {
 		}))
 		try {
 			const response = await ElaXanAPI.getHandbook('sr', {
-				search: state.searchTerm,
+				search: state.searchTerm.split(',').map((e) => e.trim()),
 				limit: state.currentLimit,
 				category: state.selectedCategory,
 				language: currentLanguage.toLowerCase(),

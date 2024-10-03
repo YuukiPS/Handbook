@@ -1,4 +1,4 @@
-import Output, { useOutputVisibility } from '@/components/output'
+import Output, { useOutputVisibility, type OutputType } from '@/components/output'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,7 +21,7 @@ const App: React.FC = (): JSX.Element => {
 	const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
 	const [outputPath, setOutputPath] = useState<string>('')
 	const [filename, setFilename] = useState<string>('')
-	const [outputLog, setOutputLog] = useState<Output[]>([])
+	const [outputLog, setOutputLog] = useState<OutputType[]>([])
 	const [loading, setLoading] = useState(false)
 	const [gameType, setGameType] = useState<string>('')
 	const { isOutputVisible, setIsOutputVisible } = useOutputVisibility()
@@ -29,7 +29,7 @@ const App: React.FC = (): JSX.Element => {
 	useEffect(() => {
 		const unlisten = listen('handbook', (event) => {
 			const { payload } = event
-			setOutputLog((prev) => [...prev, payload as Output])
+			setOutputLog((prev) => [...prev, payload as OutputType])
 		})
 		return () => {
 			unlisten.then((f) => f())

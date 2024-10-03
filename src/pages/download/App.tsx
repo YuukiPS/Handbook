@@ -1,4 +1,4 @@
-import Output, { useOutputVisibility } from '@/components/output'
+import Output, { useOutputVisibility, type OutputType } from '@/components/output'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { MultiSelect } from '@/components/ui/multi-select'
@@ -28,7 +28,7 @@ const Download: React.FC = (): JSX.Element => {
 	const [downloadSpeed, setDownloadSpeed] = useState<number>(0)
 	const [selectedTextMapsGI, setSelectedTextMapsGI] = useState<string[]>([])
 	const [selectedTextMapsSR, setSelectedTextMapsSR] = useState<string[]>([])
-	const [outputLog, setOutputLog] = useState<Output[]>([])
+	const [outputLog, setOutputLog] = useState<OutputType[]>([])
 	const [textMapGI, setTextMapGI] = useState<ResourcesMap[]>([])
 	const [textMapSR, setTextMapSR] = useState<ResourcesMap[]>([])
 	const [excelFilesGI, setExcelFilesGI] = useState<ResourcesMap[]>([])
@@ -87,7 +87,7 @@ const Download: React.FC = (): JSX.Element => {
 				}
 			)
 
-			const unlistenOutput = await listen<Output>('download-output', ({ payload }) => {
+			const unlistenOutput = await listen<OutputType>('download-output', ({ payload }) => {
 				setOutputLog((prev) => [...prev, payload])
 			})
 

@@ -3,14 +3,14 @@ import { useState } from 'react'
 import React from 'react'
 import { Button } from './ui/button'
 
-interface Output {
+interface OutputType {
 	log_level: string
 	message: string
 }
 
 interface OutputProps {
-	outputLog: Output[]
-	setOutputLog: (outputLog: Output[]) => void
+	outputLog: OutputType[]
+	setOutputLog: (outputLog: OutputType[]) => void
 	isOutputVisible: boolean
 	setIsOutputVisible: (isVisible: boolean) => void
 }
@@ -96,6 +96,7 @@ const Output: React.FC<OutputProps> = ({ outputLog, setOutputLog, isOutputVisibl
 }
 
 export default Output
+export type { OutputType }
 
 export function useOutputVisibility() {
 	const [isOutputVisible, setIsOutputVisible] = useState<boolean>(false)

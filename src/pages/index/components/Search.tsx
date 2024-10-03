@@ -119,7 +119,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setState((prevState) => ({
 			...prevState,
-			searchTerm: e.target.value.split(',').map((e) => e.trim()),
+			searchTerm: e.target.value,
 		}))
 	}
 
@@ -127,7 +127,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 		(e: string) => {
 			setState((prevState) => ({
 				...prevState,
-				searchTerm: e.split(',').map((e) => e.trim()),
+				// searchTerm: e.split(',').map((e) => e.trim()),
 				searchInputValue: e,
 				error: false,
 			}))
@@ -141,7 +141,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 			...prevState,
 			loading: true,
 		}))
-		handleSearch(state.searchTerm.join(','))
+		handleSearch(state.searchTerm)
 		state.currentType === 'Genshin Impact' ? loadGI() : loadSR()
 	}, [state.searchTerm, state.currentType, handleSearch, loadGI, loadSR, setState, isHandbookLoading])
 
@@ -239,17 +239,11 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 			}
 		}
 
-		const options = (): OpenDialogOptions => {
-			const currentPlatform = platform()
-			return {
-				directory: false,
-				title: 'Select GM Handbook path',
-				filters:
-					currentPlatform === 'windows' ? [{ name: 'GM Handbook', extensions: ['json', 'txt'] }] : undefined,
-			}
-		}
-
-		const path = await open(options())
+		const path = await open({
+			directory: false,
+			title: 'Select GM Handbook path',
+			filters: currentPlatform === 'windows' ? [{ name: 'GM Handbook', extensions: ['json', 'txt'] }] : undefined,
+		})
 		if (!path) {
 			toast({
 				title: 'No path selected',
@@ -264,12 +258,13 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 				...prevState,
 				isHandbookLoading: true,
 			}))
+			if (!Array.isArray(path)) return
 			toast({
 				title: 'Updating path',
-				description: `Path: ${path.path}`,
+				description: `Path: ${(path as any).path}`,
 			})
 			await invoke('update_path_handbook', {
-				path: path.path,
+				path: (path as any).path,
 				force: forceUpdatePath,
 			})
 			const newPath = await invoke<string>('get_path_handbook')
@@ -308,7 +303,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 				...prevState,
 				currentType: newType,
 				selectedCategory: [],
-				searchTerm: [],
+				searchTerm: '',
 			}))
 			setCookie('type', newType, {
 				path: '/',
@@ -324,13 +319,13 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 			if (state.searchTerm.length === 0) {
 				return
 			}
-			handleSearch(state.searchTerm.join(', '))
+			handleSearch(state.searchTerm)
 			state.currentType === 'Genshin Impact' ? loadGI() : loadSR()
 		} else if (e.key === 'Escape') {
 			handleSearch('')
 			setState((prevState) => ({
 				...prevState,
-				searchTerm: [],
+				searchTerm: '',
 			}))
 		}
 	}

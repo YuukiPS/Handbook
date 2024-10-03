@@ -7,7 +7,7 @@ export type CurrentType = 'Genshin Impact' | 'Star Rail'
 export interface State {
 	mainData: GmhandbookGI[]
 	mainDataSR: Datum[]
-	searchTerm: string[]
+	searchTerm: string
 	searchInputValue: string
 	loading: boolean
 	error: boolean
