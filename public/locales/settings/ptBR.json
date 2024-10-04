@@ -1,0 +1,51 @@
+{
+    "title": "Configurações do Jogador",
+    "failed_check_account_title": "Falha na Verificação da Conta",
+    "failed_check_account_description": "Se você receber o erro `AxiosError: Network Error`, isso é normal. Primeiro, acesse <0>este site</0>. Se houver um reCaptcha, pode ser um problema comum devido ao Cloudflare ou à Política de CORS. Ainda não temos uma solução para isso.",
+    "uid_account": "Conta UID",
+    "uid_code": "Código",
+    "get_uid_and_code": "Obter UID e Código",
+    "check_account_button": "Verificar",
+    "check_account_button_checking": "Verificando...",
+    "save_account_button": "Salvar",
+    "cancel_button": "Cancelar",
+    "list_server_available": {
+        "toast": {
+            "title": "UID é obrigatório",
+            "description": "Por favor, insira seu UID"
+        },
+        "label": "Não vê seu servidor na lista?",
+        "button": "Adicionar Manualmente",
+        "select_server": "Selecionar Servidor",
+        "search_placeholder": "Pesquisar servidor",
+        "tooltip": {
+            "online": "Online",
+            "offline": "Offline"
+        },
+        "dialog": {
+            "title": "Digite seu UID",
+            "description": "Este é o UID do seu jogo, não o UID do YuukiPS",
+            "input_placeholder": "Digite seu UID",
+            "button": {
+                "save": "Salvar",
+                "cancel": "Cancelar"
+            }
+        }
+    },
+    "output": {
+        "button": "Limpar saída",
+        "successfully_checked_account": "UID {{uid}} verificado com sucesso. Existem {{list_total}} contas registradas com este UID.",
+        "no_account_registered": "Nenhuma conta encontrada para o UID fornecido.",
+        "error_occurred": "Ocorreu um erro ao verificar a conta: {{error}}",
+        "successfully_selected_account": "Servidor {{name}} foi salvo com sucesso.",
+        "input_unexpected_error": "Houve um erro na entrada. Variáveis indefinidas: {{error}}",
+        "uid_code_saved": "UID e Código foram salvos com sucesso.",
+        "uid_code_empty": "UID ou Código vazio",
+        "uid_must_be_5_digits": "O UID deve ter 5 dígitos",
+        "code_must_be_4_digits": "O Código deve ter 4 dígitos"
+    },
+    "select_account": {
+        "button_trigger": "Selecionar Conta",
+        "menu_label": "Servidor | Apelido | UID"
+    }
+}
