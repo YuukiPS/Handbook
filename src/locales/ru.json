@@ -15,5 +15,14 @@
 			"system": "Системная"
 		},
 		"select_language": "Выберите язык"
+	},
+	"components": {
+		"multi_select": {
+			"select_all": "Выбрать все",
+			"no_result": "Ничего не найдено.",
+			"button_clear": "Очистить",
+			"button_close": "Закрыть",
+			"more": "+ {{count}} ещё"
+		}
 	}
 }

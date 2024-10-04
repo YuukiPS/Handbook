@@ -15,5 +15,14 @@
 			"system": "ตามระบบ"
 		},
 		"select_language": "เลือกภาษา"
+	},
+	"components": {
+		"multi_select": {
+			"select_all": "เลือกทั้งหมด",
+			"no_result": "ไม่พบผลลัพธ์",
+			"button_clear": "ล้าง",
+			"button_close": "ปิด",
+			"more": "+ {{count}} อีก"
+		}
 	}
 }

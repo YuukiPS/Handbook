@@ -15,5 +15,14 @@
 			"system": "跟随系统"
 		},
 		"select_language": "选择语言"
+	},
+	"components": {
+		"multi_select": {
+			"select_all": "全选",
+			"no_result": "没有找到结果。",
+			"button_clear": "清除",
+			"button_close": "关闭",
+			"more": "+ {{count}} 更多"
+		}
 	}
 }

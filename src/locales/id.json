@@ -15,5 +15,14 @@
 			"system": "Sistem"
 		},
 		"select_language": "Pilih Bahasa"
+	},
+	"components": {
+		"multi_select": {
+			"select_all": "Pilih Semua",
+			"no_result": "Tidak ada hasil yang ditemukan.",
+			"button_clear": "Bersihkan",
+			"button_close": "Tutup",
+			"more": "+ {{count}} lagi"
+		}
 	}
 }

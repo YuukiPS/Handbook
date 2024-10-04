@@ -15,5 +15,14 @@
 			"system": "システム"
 		},
 		"select_language": "言語を選択"
+	},
+	"components": {
+		"multi_select": {
+			"select_all": "すべて選択",
+			"no_result": "結果が見つかりません。",
+			"button_clear": "クリア",
+			"button_close": "閉じる",
+			"more": "+ {{count}} 件"
+		}
 	}
 }

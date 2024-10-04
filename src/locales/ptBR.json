@@ -14,6 +14,15 @@
             "dark": "Escuro",
             "system": "Sistema"
         },
-        "select_language": "Selecione o idioma"
+        "select_language": "Selecionar idioma"
+    },
+    "components": {
+        "multi_select": {
+            "select_all": "Selecionar tudo",
+            "no_result": "Nenhum resultado encontrado.",
+            "button_clear": "Limpar",
+            "button_close": "Fechar",
+            "more": "+ {{count}} mais"
+        }
     }
 }

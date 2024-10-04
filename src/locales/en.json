@@ -15,5 +15,14 @@
 			"system": "System"
 		},
 		"select_language": "Select Language"
+	},
+	"components": {
+		"multi_select": {
+			"select_all": "Select All",
+			"no_result": "No results found.",
+			"button_clear": "Clear",
+			"button_close": "Close",
+			"more": "+ {{count}} more"
+		}
 	}
 }
