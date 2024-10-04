@@ -32,7 +32,8 @@
 		"checkbox": {
 			"image": "画像",
 			"commands": "コマンド"
-		}
+		},
+		"select_category_placeholder": "カテゴリーを選択"
 	},
 	"card": {
 		"title": {

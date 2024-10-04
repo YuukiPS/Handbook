@@ -32,7 +32,8 @@
 		"checkbox": {
 			"image": "Gambar",
 			"commands": "Perintah"
-		}
+		},
+		"select_category_placeholder": "Pilih Kategori"
 	},
 	"card": {
 		"title": {

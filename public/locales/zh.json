@@ -32,7 +32,8 @@
 		"checkbox": {
 			"image": "图片",
 			"commands": "命令"
-		}
+		},
+		"select_category_placeholder": "选择分类"
 	},
 	"card": {
 		"title": {

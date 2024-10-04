@@ -32,7 +32,8 @@
 		"checkbox": {
 			"image": "Imagem",
 			"commands": "Comandos"
-		}
+		},
+		"select_category_placeholder": "Selecione a Categoria"
 	},
 	"card": {
 		"title": {

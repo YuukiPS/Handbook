@@ -32,7 +32,8 @@
 		"checkbox": {
 			"image": "รูปภาพ",
 			"commands": "คำสั่ง"
-		}
+		},
+		"select_category_placeholder": "เลือกหมวดหมู่"
 	},
 	"card": {
 		"title": {

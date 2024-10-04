@@ -21,7 +21,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useToast } from '@/components/ui/use-toast'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { invoke, isTauri } from '@tauri-apps/api/core'
-import { type OpenDialogOptions, open } from '@tauri-apps/plugin-dialog'
+import { open } from '@tauri-apps/plugin-dialog'
 import { platform } from '@tauri-apps/plugin-os'
 import debounce from 'lodash/debounce'
 import { FolderIcon } from 'lucide-react'
@@ -439,6 +439,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 									selectedCategory: e,
 								}))
 							}}
+							placeholder={t('select_category_placeholder')}
 							defaultValue={[]}
 						/>
 						<Select
