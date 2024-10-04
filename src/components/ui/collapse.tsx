@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
 	title: string
@@ -7,6 +7,19 @@ interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Collapse = React.forwardRef<HTMLDivElement, CollapseProps>(({ children, title, ...props }, ref) => {
 	const [isOpen, setIsOpen] = useState(false)
+	const [height, setHeight] = useState<number | undefined>(undefined)
+	const contentRef = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		if (isOpen) {
+			const contentEl = contentRef.current
+			if (contentEl) {
+				setHeight(contentEl.scrollHeight)
+			}
+		} else {
+			setHeight(0)
+		}
+	}, [isOpen])
 
 	const handleToggle = () => {
 		setIsOpen(!isOpen)
@@ -19,8 +32,13 @@ const Collapse = React.forwardRef<HTMLDivElement, CollapseProps>(({ children, ti
 					{title}
 				</button>
 			</div>
-			<div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
-				<div className='overflow-hidden rounded-md border'>{children}</div>
+			<div
+				className='overflow-hidden transition-all duration-300'
+				style={{ height: height !== undefined ? `${height}px` : 'auto' }}
+			>
+				<div ref={contentRef} className='overflow-hidden rounded-md border'>
+					{children}
+				</div>
 			</div>
 		</div>
 	)
