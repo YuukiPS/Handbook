@@ -17,6 +17,7 @@ const LanguageSwitcher: React.FC = memo(() => {
 		{ id: 'zh', name: '中文' },
 		{ id: 'ru', name: 'Русский' },
 		{ id: 'th', name: 'ไทย' },
+		{ id: 'ptBR', name: 'Português (BR)' },
 	]
 
 	const changeLanguage = (language: string) => {

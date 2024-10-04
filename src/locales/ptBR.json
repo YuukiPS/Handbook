@@ -1,0 +1,19 @@
+{
+    "page_not_found": {
+        "title": "Página não encontrada",
+        "description": "Ops! ",
+        "button": "Início/Home"
+    },
+    "drawer": {
+        "search_id": "ID de pesquisa",
+        "generate": "Gerar",
+        "player_settings": "Configurações do jogador",
+        "download": "Download",
+        "theme_mode": {
+            "light": "Claro",
+            "dark": "Escuro",
+            "system": "Sistema"
+        },
+        "select_language": "Selecione o idioma"
+    }
+}

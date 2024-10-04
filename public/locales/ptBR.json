@@ -1,0 +1,111 @@
+{
+	"search_for_something": "Procure por algo.",
+	"search_for_item": "Pesquise um item digitando na barra de pesquisa acima.",
+	"no_results_found": "Nenhum resultado encontrado.",
+	"no_results_for_query": "Nenhum resultado foi encontrado para sua consulta: ",
+	"error_occurred": "Ocorreu um erro.",
+	"error_message": "Mensagem de erro: ",
+	"load_more": "Carregar mais",
+	"output": {
+		"response_command": "Resposta: {{message}} | {{code}}",
+		"websocket_not_established": "WebSocket não está estabelecido. Por favor, atualize a página.",
+		"executing_command": "Executando comando: {{command}}"
+	},
+	"search": {
+		"input_placeholder": "Procurar",
+		"kbd": {
+			"enter": "<0>Enter</0> pesquisar",
+			"escape": "<0>Esc</0> limpar"
+		},
+		"tooltip_menu": {
+			"open": "Abra o menu",
+			"close": "Fechar o menu"
+		},
+		"label": {
+			"api_settings": "Configurações de API",
+			"games": "Jogos",
+			"category": "Categoria",
+			"category_all": "Todos",
+			"language": "Linguagem",
+			"results": "Resultados: "
+		},
+		"checkbox": {
+			"image": "Imagem",
+			"commands": "Comandos"
+		}
+	},
+	"card": {
+		"title": {
+			"gc": "CG",
+			"gio": "GIO",
+			"lc": "LC"
+		},
+		"description": {
+			"gc": "Comandos para GC (GrassCutter) para versões 5.0 ou inferiores",
+			"gio": "Comandos para GIO versão 3.2",
+			"lc": "Comandos para LC (LunarCore) para versões 2.5 ou inferiores"
+		},
+		"tabs_title": {
+			"gc": "CG",
+			"gio": "GIO"
+		},
+		"show_the_commands": "Mostrar os comandos",
+		"next_mission": "Próxima missão: {{id}}",
+		"button": {
+			"copy_id": "Copiar ID",
+			"clear_output": "Limpar resultado",
+			"apply_command": "Aplicar",
+			"close": "Fechar"
+		},
+		"dialog": {
+			"title": "Aplicar o comando",
+			"description": {
+				"without_values": "Comando ({{command}}) será executado",
+				"with_values": "Comando ({{command}}) será executado com os valores ({{list}})"
+			},
+			"account": "UID: {{uid}} |  {{server}}"
+		}
+	},
+	"toast": {
+		"command_copied": {
+			"title": "O comando foi copiado para a área de transferência",
+			"description": "Comando: {{command}}"
+		},
+		"command_copied_error": {
+			"title": "Falha ao copiar o comando para a área de transferência",
+			"description": "Por favor, tente novamente mais tarde"
+		},
+		"invalid_input": {
+			"title": "Parâmetros de entrada inválidos",
+			"description": "Nenhum UID, código ou servidor inserido. ",
+			"action": {
+				"text": "Vá para a página de configurações",
+				"url_text": "Configurações"
+			}
+		},
+		"copied_id": {
+			"title": "ID copiado",
+			"description": "EU IA: {{id}} para {{name}}"
+		},
+		"failed_copy_id": {
+			"title": "Falha ao copiar ID",
+			"description": "Por favor, tente novamente mais tarde."
+		},
+		"copied_command": {
+			"title": "Comando copiado",
+			"description": "Comando: {{command}}"
+		},
+		"failed_copy_command": {
+			"title": "Falha ao copiar o comando",
+			"description": "Por favor, tente novamente mais tarde."
+		},
+		"apply_command_no_configured": {
+			"title": "Erro",
+			"description": "Você deve inserir seu UID, código e servidor primeiro. ",
+			"action": {
+				"text": "Vá para a página de configurações",
+				"url_text": "Vá para configurações"
+			}
+		}
+	}
+}
