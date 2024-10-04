@@ -98,16 +98,16 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 			</div>
 			<div className='flex flex-1 relative'>
 				<nav
-					className={`fixed top-16 left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-sm lg:fixed lg:top-16 lg:z-30 lg:translate-x-0 ${
+					className={`fixed top-16 left-0 h-[calc(100vh-4rem)] z-50 flex flex-col border-r border-r-muted transition-all duration-300 ease-in-out lg:fixed lg:top-16 lg:z-30 lg:translate-x-0 ${
 						isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-					} ${isDesktopSidebarMinimized ? 'lg:w-20' : 'lg:w-64'} w-64 sm:w-72`}
+					} ${isDesktopSidebarMinimized ? 'lg:w-20' : 'lg:w-64'} w-64 sm:w-72 bg-background`}
 				>
 					<div className='relative h-full flex flex-col'>
 						<Button
 							variant='ghost'
 							size='icon'
 							onClick={() => setIsDesktopSidebarMinimized((prev) => !prev)}
-							className='absolute top-2 -right-12 hidden lg:flex bg-background/80 hover:bg-muted/80 dark:hover:bg-[#2d3748] transition-colors rounded-full shadow-md'
+							className='absolute top-2 -right-12 hidden lg:flex hover:bg-muted/80 dark:hover:bg-[#2d3748] transition-colors rounded-full shadow-md'
 						>
 							{isDesktopSidebarMinimized ? (
 								<ChevronRightIcon className='h-5 w-5' />
