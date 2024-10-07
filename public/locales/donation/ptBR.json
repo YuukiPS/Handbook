@@ -1,0 +1,31 @@
+{
+    "needHelp": "Precisamos da Sua Ajuda",
+    "description": [
+        "E aí, galera incrível!",
+        "Estamos numa situação meio complicada e precisamos muito da ajuda de vocês. Sabe esse site e API que vocês têm usado? Então, os dois estão rodando no mesmo servidor, e as coisas estão ficando meio apertadas por aqui.",
+        "É o seguinte: nossas contas de servidor estão se acumulando mais rápido do que conseguimos lidar. A gente tem bancado tudo sozinho porque realmente acreditamos no que estamos fazendo. Mas, sejamos sinceros - nossas carteiras não estão exatamente transbordando.",
+        "Se não conseguirmos juntar grana suficiente nos próximos meses, talvez tenhamos que tomar algumas decisões difíceis. E por decisões difíceis, queremos dizer possivelmente fechar tudo.",
+        "Estamos fazendo o possível para reduzir os custos. Mudamos para um domínio .xyz mais barato, estamos otimizando nosso código e até cortamos nossas amadas idas ao café (os sacrifícios que fazemos, né?). Mas no final das contas, servidores custam dinheiro, e é aí que estamos enroscados.",
+        "Se você já achou nosso trabalho útil, ou se só quer ajudar uns devs numa roubada, ficaríamos incrivelmente gratos por qualquer contribuição. Sério mesmo, até alguns trocados podem fazer a diferença para manter isso vivo.",
+        "Colocamos nosso coração neste projeto e queremos mantê-lo funcionando. Mais importante ainda, queremos mantê-lo gratuito para todos usarem. Mas chegamos a um ponto em que não podemos mais fazer isso sozinhos.",
+        "Valeu por ler até aqui e por fazer parte da nossa comunidade. Vocês são demais, sério. Qualquer ajuda que puderem oferecer significaria o mundo para nós."
+    ],
+    "buyCoffee": "Pague um Café pra Gente",
+    "coffeeDescription": "Olha, não estamos pedindo muito. Só o suficiente pra um café (ou talvez uma pizza).",
+    "donateButton": "Manda uns Trocados",
+    "saweria": "Saweria",
+    "saweriaDescription": "Se você tá na Indonésia, pode usar essa plataforma local maneira pra nos ajudar.",
+    "saweriaButton": "Manda um Amor",
+    "openSource": "Somos Open Source!",
+    "githubDescription": "A grana tá curta, mas nosso código é sempre de graça. Quer ver o que estamos aprontando? Dá uma olhada no GitHub!",
+    "githubButton": "Ir pro GitHub",
+    "donationUsage": "O Que Sua Grana Suada Vai Fazer",
+    "usageList": [
+        "Manter nosso servidor rodando, hospedando tanto o site quanto a API",
+        "Nos ajudar a recuperar o domínio .com",
+        "Nos dar um tempo crucial pra implementar medidas de economia",
+        "Ajudar na transição pro nosso novo domínio .xyz",
+        "Manter esse projeto vivo pra todo mundo usar"
+    ],
+    "footerMessage": "Sério, vocês são demais. Valeu por ficarem com a gente."
+}

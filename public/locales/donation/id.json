@@ -1,0 +1,31 @@
+{
+    "needHelp": "Kami Butuh Bantuan Kalian",
+    "description": [
+        "Halo, orang-orang keren!",
+        "Kita lagi ada masalah nih, dan butuh banget bantuan kalian. Tau kan website dan API yang kalian pake? Nah, keduanya lagi jalan di server yang sama, dan situasinya mulai agak sempit nih.",
+        "Jadi gini: tagihan server kita numpuk lebih cepet dari yang bisa kita tangani. Selama ini kita bayar sendiri karena kita bener-bener percaya sama apa yang kita lakuin di sini. Tapi jujur aja ya - dompet kita gak seberapa tebelnya.",
+        "Kalo dalam beberapa bulan ke depan kita gak bisa ngumpulin cukup dana, mungkin kita harus ambil keputusan yang berat. Dan maksud kita keputusan berat itu ya... mungkin harus nutup semuanya.",
+        "Kita udah lakuin segala cara buat tekan biaya. Kita pindah ke domain .xyz yang lebih murah, optimasi kode, bahkan ngurangin jatah ngopi kita (pengorbanan yang berat, ya kan?). Tapi ya gitu, ujung-ujungnya server tetep butuh duit, dan di situ kita mandek.",
+        "Kalo kalian pernah ngerasa terbantu sama apa yang kita bikin, atau cuma pengen bantu sesama developer yang lagi kesusahan, kita bakal sangat berterima kasih buat berapapun yang bisa kalian kasih. Serius deh, bahkan cuma beberapa ribu rupiah bisa bikin beda buat ngebuat proyek ini tetep jalan.",
+        "Kita udah curahkan segenap hati ke proyek ini, dan kita pengen terus ngelanjutinnya. Yang lebih penting lagi, kita pengen tetep bisa ngasih akses gratis buat semua orang. Tapi kita udah sampe di titik di mana kita gak bisa ngelakuin ini sendirian lagi.",
+        "Makasih udah baca sampe sini dan udah jadi bagian dari komunitas kita. Kalian semua keren banget, serius. Bantuan apapun yang bisa kalian kasih bakal sangat berarti buat kita."
+    ],
+    "buyCoffee": "Beliin Kita Kopi Dong",
+    "coffeeDescription": "Kita gak minta banyak-banyak kok. Cukup buat beli kopi (atau mungkin pizza) aja.",
+    "donateButton": "Lempar Receh Ke Kita",
+    "saweria": "Saweria",
+    "saweriaDescription": "Kalo kamu di Indonesia, kamu bisa pake platform lokal yang keren ini buat bantu kita.",
+    "saweriaButton": "Sawer kita",
+    "openSource": "Kita Open Source Lho!",
+    "githubDescription": "Duit mungkin lagi tipis, tapi kode kita selalu gratis. Mau liat kita lagi ngapain? Cek GitHub kita yuk!",
+    "githubButton": "Ke GitHub",
+    "donationUsage": "Duit Kalian Bakal Dipake Buat Apa Aja",
+    "usageList": [
+        "Biaya server biar tetep jalan, buat ngehost website dan API",
+        "Bantu kita buat balik ke domain .com",
+        "Kasih kita waktu buat cari cara hemat biaya",
+        "Bantu transisi ke domain .xyz yang baru",
+        "Bikin proyek ini tetep hidup buat semua orang"
+    ],
+    "footerMessage": "Serius deh, kalian tuh the best banget. Makasih udah setia sama kita."
+}

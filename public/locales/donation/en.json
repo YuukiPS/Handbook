@@ -1,0 +1,31 @@
+{
+    "needHelp": "We Need Your Help",
+    "description": [
+        "Hey there, awesome people!",
+        "We've got a bit of a situation on our hands, and we could really use your help. You know this website and API you've been using? Well, they're both running on the same server, and things are getting a little tight.",
+        "Here's the deal: our server bills are piling up faster than we can handle. We've been footing the bill ourselves because we truly believe in what we're doing here. But let's be real - our wallets aren't exactly overflowing.",
+        "If we can't scrape together enough funds in the next couple of months, we might have to make some tough decisions. And by tough decisions, we mean potentially shutting things down.",
+        "We're doing everything we can to keep costs down. We're moving to a cheaper .xyz domain, optimizing our code, and even cutting back on our beloved coffee runs (the sacrifices we make, right?). But at the end of the day, servers cost money, and that's where we're stuck.",
+        "If you've ever found our stuff useful, or if you just want to help some fellow devs out of a jam, we'd be incredibly grateful for anything you can chip in. Seriously, even a few bucks could make a difference in keeping this thing alive.",
+        "We've poured our hearts into this project, and we want to keep it going. More importantly, we want to keep it free for everyone to use. But we've reached a point where we can't do it alone anymore.",
+        "Thanks for reading this far and for being part of our community. You all rock, seriously. Any help you can offer would mean the world to us."
+    ],
+    "buyCoffee": "Buy Us a Coffee",
+    "coffeeDescription": "Look, we're not asking for much. Just enough for a coffee (or maybe a pizza).",
+    "donateButton": "Toss Us Some Change",
+    "saweria": "Saweria",
+    "saweriaDescription": "If you're in Indonesia, you can use this nifty local platform to help us out.",
+    "saweriaButton": "Send Some Love",
+    "openSource": "We're Open Source!",
+    "githubDescription": "Money's tight, but our code is always free. Wanna see what we're up to? Check us out on GitHub!",
+    "githubButton": "Go to GitHub",
+    "donationUsage": "What Your Hard-Earned Cash Will Do",
+    "usageList": [
+        "Keep our server running, hosting both the website and API",
+        "Help us to get .com domain back",
+        "Buy us crucial time to implement cost-saving measures",
+        "Help transition to our new .xyz domain",
+        "Keep this project alive for everyone to use"
+    ],
+    "footerMessage": "Seriously, you guys are the best. Thanks for sticking with us."
+}

@@ -4,11 +4,18 @@
 		"description": "Maaf, halaman yang Anda cari tidak ada. Mungkin sudah pindah ke warung kopi terdekat.",
 		"button": "Ke Beranda"
 	},
+	"web_not_supported": {
+		"title": "Platform Tidak Didukung",
+		"description": "Fitur ini saat ini hanya didukung pada Windows dan Android. Versi browser web yang Anda gunakan tidak didukung.",
+		"button": "Unduh untuk Windows/Android",
+		"button_home": "Ke Beranda"
+	},
 	"drawer": {
 		"search_id": "Cari ID",
 		"generate": "Generate",
 		"player_settings": "Pengaturan Pemain",
 		"download": "Unduh",
+		"donation": "Donasi",
 		"theme_mode": {
 			"light": "Terang",
 			"dark": "Gelap",

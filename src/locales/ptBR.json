@@ -4,11 +4,18 @@
         "description": "Ops! ",
         "button": "Início/Home"
     },
+    "web_not_supported": {
+        "title": "Plataforma não suportada",
+        "description": "Esta funcionalidade atualmente só é suportada no Windows e Android. A versão do seu navegador web não é suportada.",
+        "button": "Baixar para Windows/Android",
+        "button_home": "Início/Home"
+    },
     "drawer": {
         "search_id": "ID de pesquisa",
         "generate": "Gerar",
         "player_settings": "Configurações do jogador",
         "download": "Baixar",
+        "donation": "Doação",
         "theme_mode": {
             "light": "Claro",
             "dark": "Escuro",

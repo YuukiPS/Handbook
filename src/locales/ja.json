@@ -4,11 +4,18 @@
 		"description": "お探しのページは存在しません。道に迷った旅人のように、新たな道を見つけましょう。",
 		"button": "ホームに移動"
 	},
+	"web_not_supported": {
+		"title": "プラットフォームがサポートされていません",
+		"description": "この機能は現在、WindowsとAndroidでのみサポートされています。使用しているWebブラウザのバージョンはサポートされていません。",
+		"button": "Windows/Androidのダウンロード",
+		"button_home": "ホームに移動"
+	},
 	"drawer": {
 		"search_id": "ID検索",
 		"generate": "生成",
 		"player_settings": "プレイヤー設定",
 		"download": "ダウンロード",
+		"donation": "寄付",
 		"theme_mode": {
 			"light": "ライト",
 			"dark": "ダーク",

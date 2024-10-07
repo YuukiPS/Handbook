@@ -4,11 +4,18 @@
 		"description": "Oops! Looks like this page has gone on a digital vacation. It's nowhere to be found in our cyber neighborhood.",
 		"button": "Go to Home"
 	},
+	"web_not_supported": {
+		"title": "Unsupported Platform",
+		"description": "This feature is currently only supported on Windows and Android. The web browser version you're using is not supported.",
+		"button": "Download for Windows/Android",
+		"button_home": "Go to Home"
+	},
 	"drawer": {
 		"search_id": "Search ID",
 		"generate": "Generate",
 		"player_settings": "Player Settings",
 		"download": "Download",
+		"donation": "Donation",
 		"theme_mode": {
 			"light": "Light",
 			"dark": "Dark",

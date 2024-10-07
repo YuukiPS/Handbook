@@ -4,11 +4,18 @@
 		"description": "抱歉，您要找的页面可能已经乘坐时光机穿越了。",
 		"button": "返回首页"
 	},
+	"web_not_supported": {
+		"title": "平台不支持",
+		"description": "此功能目前仅支持Windows和Android。您使用的Web浏览器版本不受支持。",
+		"button": "下载Windows/Android",
+		"button_home": "返回首页"
+	},
 	"drawer": {
 		"search_id": "搜索ID",
 		"generate": "生成",
 		"player_settings": "玩家设置",
 		"download": "下载",
+		"donation": "捐赠",
 		"theme_mode": {
 			"light": "浅色",
 			"dark": "深色",

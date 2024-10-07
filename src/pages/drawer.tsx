@@ -12,6 +12,7 @@ import {
 	ChevronRightIcon,
 	DownloadIcon,
 	GlobeIcon,
+	HeartIcon,
 	MenuIcon,
 	MoonIcon,
 	PickaxeIcon,
@@ -51,6 +52,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 		{ href: '/settings', icon: UserIcon, label: 'player_settings' },
 		{ href: '/generate', icon: PickaxeIcon, label: 'generate' },
 		{ href: '/download', icon: DownloadIcon, label: 'download' },
+		{ href: '/donation', icon: HeartIcon, label: 'donation' },
 		{
 			href: '#',
 			icon: GlobeIcon,
