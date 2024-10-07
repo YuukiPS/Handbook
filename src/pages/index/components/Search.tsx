@@ -24,7 +24,7 @@ import { invoke, isTauri } from '@tauri-apps/api/core'
 import { open } from '@tauri-apps/plugin-dialog'
 import { platform } from '@tauri-apps/plugin-os'
 import debounce from 'lodash/debounce'
-import { FolderIcon } from 'lucide-react'
+import { FolderIcon, HelpCircle } from 'lucide-react'
 import type React from 'react'
 import { memo } from 'react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -34,6 +34,17 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoMdClose, IoMdSearch } from 'react-icons/io'
 import expiresInAMonth from './cookieExpires'
 import type { State } from './types'
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui/dialog'
+import i18n from '@/i18n'
 
 interface SearchProps {
 	currentLanguage: string
@@ -107,13 +118,42 @@ const SelectHandbookPath = memo<SelectHandbookPathProps>(
 	)
 )
 
+const HelpSearch: React.FC = (): JSX.Element => {
+	const { t } = useTranslation('translation', { keyPrefix: 'dialog' })
+	return (
+		<DialogContent className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-2xl'>
+			<DialogHeader>
+				<DialogTitle className='text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200'>
+					{t('help.title')}
+				</DialogTitle>
+				<DialogDescription>
+					{(t('help.description', { returnObjects: true }) as string[]).map((content, index) => (
+						<div key={`${i18n.language}-${index}`} className='flex items-center mb-3'>
+							<span className='mr-3 text-sm font-medium text-gray-500 dark:text-gray-400 select-none'>
+								{index + 1}.
+							</span>
+							<p className='text-gray-700 dark:text-gray-300'>{content}</p>
+						</div>
+					))}
+				</DialogDescription>
+			</DialogHeader>
+			<DialogFooter className='mt-6'>
+				<DialogClose asChild>
+					<Button className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors duration-200'>
+						{t('help.button')}
+					</Button>
+				</DialogClose>
+			</DialogFooter>
+		</DialogContent>
+	)
+}
+
 const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state, setState, isHandbookLoading }) => {
 	const { t } = useTranslation('translation', { keyPrefix: 'search' })
 	const { toast } = useToast()
 	const [sliderValue, setSliderValue] = useState<number[]>([state.limitsResult || 30])
 	const [pathHandbook, setPathHandbook] = useLocalStorage<string>('handbookPath', '')
 	const [forceUpdatePath, setForceUpdatePath] = useState<boolean>(false)
-
 	const [isOpen, setIsOpen] = useState(false)
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -363,24 +403,63 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 							<Trans i18nKey={'kbd.escape'} t={t} components={[<Kbd key={'search-kbd-escape'} />]} />
 						</span>
 					</Label>
-					<div className='flex w-full items-center'>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault()
+							handleSearchTrigger()
+						}}
+						className='relative flex items-center w-full'
+					>
+						<Dialog>
+							<DialogTrigger>
+								<TooltipProvider>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button
+												type='button'
+												variant='ghost'
+												className='absolute rounded-r-none left-0 top-0 h-full px-3 hover:bg-gray-100 dark:hover:bg-gray-700 bg-gray-50 dark:bg-gray-800 z-10 transition-colors duration-200'
+											>
+												<HelpCircle className='h-5 w-5' />
+												<span className='sr-only'>Search help</span>
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent>{t('tooltip.help')}</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
+							</DialogTrigger>
+							<HelpSearch />
+						</Dialog>
 						<Input
 							type='text'
 							placeholder={t('input_placeholder')}
-							className='w-full rounded-l-lg rounded-r-none border-2 border-gray-500 bg-transparent px-4 py-2 outline-none'
+							className='w-full rounded-l-lg border-2 border-gray-500 bg-transparent px-4 py-2 outline-none pl-12 pr-20'
 							value={state.searchTerm}
 							onChange={handleInputChange}
 							onKeyDown={handleSearchInputKeyDown}
 							disabled={isHandbookLoading}
 						/>
-						<Button
-							onClick={handleSearchTrigger}
-							disabled={isHandbookLoading}
-							className='rounded-lg rounded-l-none bg-slate-300 p-2 dark:bg-slate-700'
-						>
-							{isHandbookLoading ? <Spinner size='sm' /> : <Icon icon={IoMdSearch} size={24} />}
-						</Button>
-					</div>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button
+										type='button'
+										onClick={handleSearchTrigger}
+										disabled={isHandbookLoading}
+										variant='ghost'
+										className='absolute right-0 hover:bg-gray-600 dark:hover:bg-gray-400 rounded-l-none bg-gray-500 dark:bg-gray-500 transition-colors duration-200 w-14'
+									>
+										{isHandbookLoading ? (
+											<Spinner size='sm' />
+										) : (
+											<Icon icon={IoMdSearch} className='w-6 h-6' />
+										)}
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent>{t('tooltip.search')}</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+					</form>
 					<div className='mt-2 flex justify-center'>
 						<TooltipProvider delayDuration={500}>
 							<Tooltip>
@@ -393,7 +472,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 									/>
 								</TooltipTrigger>
 								<TooltipContent>
-									{isOpen ? t('tooltip_menu.close') : t('tooltip_menu.open')}
+									{isOpen ? t('tooltip.menu.close') : t('tooltip.menu.open')}
 								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>

@@ -17,9 +17,13 @@
 			"enter": "<0>Enter</0> to search",
 			"escape": "<0>Esc</0> to clear"
 		},
-		"tooltip_menu": {
-			"open": "Open the Menu",
-			"close": "Close the Menu"
+		"tooltip": {
+			"menu": {
+				"open": "Open the Menu",
+				"close": "Close the Menu"
+			},
+			"help": "Help/How to search",
+			"search": "Search"
 		},
 		"label": {
 			"api_settings": "API Settings",
@@ -107,6 +111,19 @@
 				"text": "Go to settings page",
 				"url_text": "Go to settings"
 			}
+		}
+	},
+	"dialog": {
+		"help": {
+			"title": "Help/How to search",
+			"description": [
+				"Search for items by name or ID. For example, type 'Primogem' or '201'.",
+				"Use commas to search for multiple items at once. For example: 'Primogem, Mora, Hero's Wit'.",
+				"You can search across multiple categories simultaneously.",
+				"Refine your search by selecting specific categories from the dropdown menu.",
+				"The search is not case-sensitive, so 'primogem' and 'Primogem' will yield the same results."
+			],
+			"button": "Close"
 		}
 	}
 }

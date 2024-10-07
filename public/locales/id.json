@@ -17,9 +17,13 @@
 			"enter": "<0>Enter</0> untuk mencari",
 			"escape": "<0>Esc</0> untuk menghapus"
 		},
-		"tooltip_menu": {
-			"open": "Buka Menu",
-			"close": "Tutup Menu"
+		"tooltip": {
+			"menu": {
+				"open": "Buka Menu",
+				"close": "Tutup Menu"
+			},
+			"help": "Bantuan/Cara mencari",
+			"search": "Cari"
 		},
 		"label": {
 			"api_settings": "Pengaturan API",
@@ -107,6 +111,19 @@
 				"text": "Pergi ke halaman pengaturan",
 				"url_text": "Pergi ke pengaturan"
 			}
+		}
+	},
+	"dialog": {
+		"help": {
+			"title": "Bantuan/Cara mencari",
+			"description": [
+				"Cari item dengan mengetik nama atau ID. Misalnya, ketik 'Primogem' atau '201'.",
+				"Gunakan koma untuk mencari beberapa item sekaligus. Misalnya: 'Primogem, Mora, Hero's Wit'.",
+				"Anda dapat mencari di beberapa kategori sekaligus.",
+				"Mengurangi pencarian dengan memilih kategori tertentu dari menu dropdown.",
+				"Pencarian tidak case-sensitive, jadi 'primogem' dan 'Primogem' akan menghasilkan hasil yang sama."
+			],
+			"button": "Tutup"
 		}
 	}
 }

@@ -17,9 +17,13 @@
 			"enter": "<0>Enter</0> pesquisar",
 			"escape": "<0>Esc</0> limpar"
 		},
-		"tooltip_menu": {
-			"open": "Abra o menu",
-			"close": "Fechar o menu"
+		"tooltip": {
+			"menu": {
+				"open": "Abrir o menu",
+				"close": "Fechar o menu"
+			},
+			"help": "Ajuda/Como procurar",
+			"search": "Procurar"
 		},
 		"label": {
 			"api_settings": "Configurações de API",
@@ -107,6 +111,19 @@
 				"text": "Vá para a página de configurações",
 				"url_text": "Vá para configurações"
 			}
+		}
+	},
+	"dialog": {
+		"help": {
+			"title": "Ajuda/Como procurar",
+			"description": [
+				"Pesquise por itens digitando o nome ou ID. Por exemplo, digite 'Primogem' ou '201'.",
+				"Use vírgulas para pesquisar vários itens ao mesmo tempo. Por exemplo: 'Primogem, Mora, Hero's Wit'.",
+				"Você pode pesquisar em várias categorias simultaneamente.",
+				"Refine sua pesquisa selecionando categorias específicas do menu suspenso.",
+				"A pesquisa não diferencia maiúsculas de minúsculas, então 'primogem' e 'Primogem' produzem o mesmo resultado."
+			],
+			"button": "Fechar"
 		}
 	}
 }
