@@ -31,5 +31,13 @@
 			"button_close": "Close",
 			"more": "+ {{count}} more"
 		}
+	},
+	"error": {
+		"title": "Oops! Something went wrong",
+		"description": "Sorry about that. We've hit a bump in the road.",
+		"details": "Error Details",
+		"unknown": "Unknown error occurred",
+		"button": "Try again",
+		"report": "If you keep seeing this error, please let us know on <0>GitHub</0>. We appreciate your help in improving our app."
 	}
 }

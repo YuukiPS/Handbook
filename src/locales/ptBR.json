@@ -31,5 +31,13 @@
             "button_close": "Fechar",
             "more": "+ {{count}} mais"
         }
-    }
+	},
+	"error": {
+		"title": "Oops! Algo deu errado",
+		"description": "Desculpe, algo deu errado. Aconteceu um obstáculo.",
+		"details": "Detalhes do erro",
+		"unknown": "Ocorreu um erro desconhecido",
+		"button": "Tentar novamente",
+		"report": "Se você continuar vendo este erro, por favor, nos informe no <0>GitHub</0>. Agradecemos sua ajuda em melhorar nosso aplicativo."
+	}
 }

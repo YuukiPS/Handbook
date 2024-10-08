@@ -31,5 +31,13 @@
 			"button_close": "Tutup",
 			"more": "+ {{count}} lagi"
 		}
+	},
+	"error": {
+		"title": "Oops! Terjadi Kesalahan",
+		"description": "Maaf, sepertinya ada masalah. Kami menemukan sebuah rintangan.",
+		"details": "Detail Kesalahan",
+		"unknown": "Terjadi kesalahan yang tidak diketahui",
+		"button": "Coba lagi",
+		"report": "Jika Anda terus melihat kesalahan ini, harap beri tahu kami di <0>GitHub</0>. Kami menghargai bantuan Anda untuk meningkatkan aplikasi kami."
 	}
 }

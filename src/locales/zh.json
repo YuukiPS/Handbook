@@ -31,5 +31,13 @@
 			"button_close": "关闭",
 			"more": "+ {{count}} 更多"
 		}
+	},
+	"error": {
+		"title": "哎呀！出错了",
+		"description": "抱歉，出错了。发生了障碍。",
+		"details": "错误详情",
+		"unknown": "发生了未知错误",
+		"button": "再试一次",
+		"report": "如果您继续看到此错误，请在 <0>GitHub</0> 上告诉我们。我们感谢您的帮助，以改善我们的应用程序。"
 	}
 }
