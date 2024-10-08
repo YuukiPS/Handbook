@@ -21,6 +21,7 @@ import {
 	UserIcon,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import ErrorHandling from './error'
 
 interface DrawerProps {
 	children: React.ReactNode
@@ -34,6 +35,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 	const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light')
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 	const [isDesktopSidebarMinimized, setIsDesktopSidebarMinimized] = useState(false)
+	const [error, setError] = useState<Error | null>(null)
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -43,6 +45,17 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 		mediaQuery.addEventListener('change', handler)
 
 		return () => mediaQuery.removeEventListener('change', handler)
+	}, [])
+
+	useEffect(() => {
+		const handleError = (e: ErrorEvent) => {
+			e.preventDefault()
+			setError(e.error)
+		}
+
+		window.addEventListener('error', handleError)
+
+		return () => window.removeEventListener('error', handleError)
 	}, [])
 
 	const currentTheme = theme === 'system' ? systemTheme : theme
@@ -162,7 +175,8 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 					}`}
 				>
 					<Updater />
-					{children}
+					{!error && children}
+					{error && <ErrorHandling error={error} />}
 				</main>
 				{isSidebarOpen && (
 					<div
