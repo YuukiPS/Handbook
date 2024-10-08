@@ -541,6 +541,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 									<SelectItem value='CHT'>Traditional Chinese (Hong Kong)</SelectItem>
 									<SelectItem value='TH'>Thai</SelectItem>
 									<SelectItem value='RU'>Russian</SelectItem>
+									<SelectItem value='PT'>Portuguese</SelectItem>
 								</SelectGroup>
 							</SelectContent>
 						</Select>
