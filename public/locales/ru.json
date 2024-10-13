@@ -54,6 +54,7 @@
 			"gc": "GC",
 			"gio": "GIO"
 		},
+		"level_stage": "Уровень {{level}}",
 		"show_the_commands": "Показать команды",
 		"next_mission": "Следующая миссия: {{id}}",
 		"button": {

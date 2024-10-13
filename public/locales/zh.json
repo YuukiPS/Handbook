@@ -54,6 +54,7 @@
 			"gc": "原神",
 			"gio": "星穹铁道"
 		},
+		"level_stage": "等级 {{level}}",
 		"show_the_commands": "显示命令",
 		"next_mission": "下一个任务：{{id}}",
 		"button": {

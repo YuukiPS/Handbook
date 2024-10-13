@@ -239,6 +239,11 @@ const DataCardSR: React.FC<DataCardSRProps> = ({ currentLanguage, code, server, 
 												{item.type}
 											</span>
 										)}
+										{item.level && (
+											<span className='ml-2 text-[1rem] font-bold text-gray-400 dark:text-gray-600'>
+												{t('level_stage', { level: item.level })}
+											</span>
+										)}
 									</h1>
 									<p className='font-bold text-gray-400 dark:text-gray-600'>{item.id}</p>
 									{item.nextMission && (

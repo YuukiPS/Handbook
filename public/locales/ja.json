@@ -54,6 +54,7 @@
 			"gc": "GC",
 			"gio": "GIO"
 		},
+		"level_stage": "レベル {{level}}",
 		"show_the_commands": "コマンドを表示",
 		"next_mission": "次のミッション：{{id}}",
 		"button": {

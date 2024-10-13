@@ -54,6 +54,7 @@
 			"gc": "GC",
 			"gio": "GIO"
 		},
+		"level_stage": "Tingkat {{level}}",
 		"show_the_commands": "Tampilkan Perintah",
 		"next_mission": "Misi selanjutnya: {{id}}",
 		"button": {
