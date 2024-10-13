@@ -418,7 +418,7 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 											<Button
 												type='button'
 												variant='ghost'
-												className='absolute rounded-r-none left-0 top-0 h-full px-3 hover:bg-gray-100 dark:hover:bg-gray-700 bg-gray-50 dark:bg-gray-800 z-10 transition-colors duration-200'
+												className='absolute rounded-r-none left-0 top-0 h-full px-3 hover:bg-gray-600 dark:hover:bg-gray-400 bg-gray-500 dark:bg-gray-500 z-10 transition-colors duration-200'
 											>
 												<HelpCircle className='h-5 w-5' />
 												<span className='sr-only'>Search help</span>
@@ -494,6 +494,12 @@ const Search: React.FC<SearchProps> = ({ loadGI, loadSR, currentLanguage, state,
 					)}
 
 					<div className='m-2 space-y-1'>
+						<Input
+							type='text'
+							value={state.baseURL}
+							onChange={(e) => setState((prevState) => ({ ...prevState, baseURL: e.target.value }))}
+							className='w-full rounded-lg border-2 bg-transparent outline-none'
+						/>
 						<Select
 							value={state.currentType}
 							onValueChange={(e) => handleTypeChange(e)}

@@ -45,6 +45,7 @@ function App() {
 		output: [],
 		limitsResult: cookies.limitsResult || 100,
 		isHandbookLoading: false,
+		baseURL: 'https://api.elaxan.xyz',
 	})
 	const currentLanguage: keyof Description = cookies.language || 'EN'
 
@@ -64,7 +65,7 @@ function App() {
 					limit: state.currentLimit,
 				})
 			} else {
-				response = await ElaXanAPI.getHandbook('gi', {
+				response = await ElaXanAPI.getHandbook(state.baseURL, 'gi', {
 					search: state.searchTerm.split(',').map((e) => e.trim()),
 					limit: state.currentLimit,
 					category: state.selectedCategory,
@@ -102,7 +103,7 @@ function App() {
 			mainDataSR: [],
 		}))
 		try {
-			const response = await ElaXanAPI.getHandbook('sr', {
+			const response = await ElaXanAPI.getHandbook(state.baseURL, 'sr', {
 				search: state.searchTerm.split(',').map((e) => e.trim()),
 				limit: state.currentLimit,
 				category: state.selectedCategory,
@@ -162,7 +163,7 @@ function App() {
 					response = await invoke<string[]>('get_category')
 				} else {
 					const currentType = server.includes('Genshin Impact') ? 'gi' : 'sr'
-					const { data } = await ElaXanAPI.getCategoryList(currentType)
+					const { data } = await ElaXanAPI.getCategoryList(state.baseURL, currentType)
 					response = data || []
 				}
 				setState((prevState) => ({
@@ -177,7 +178,7 @@ function App() {
 			}
 		}
 		getCategory()
-	}, [cookies.type])
+	}, [cookies.type, state.baseURL])
 
 	useEffect(() => {
 		if (!cookies.server) return
