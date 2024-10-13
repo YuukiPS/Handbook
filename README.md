@@ -21,7 +21,7 @@ You can grab a pre-release version of the app from the [Releases](https://github
 ### What you'll need
 
 -   [Node.js](https://nodejs.org/) (v14 or newer)
--   [Rust](https://www.rust-lang.org/) (nightly version)
+-   [Rust](https://www.rust-lang.org/) (stable version)
 -   [Yarn](https://yarnpkg.com/) package manager
 -   For Android development:
     -   [Android SDK](https://developer.android.com/studio)
