@@ -12,6 +12,7 @@
 	},
 	"drawer": {
 		"search_id": "ID検索",
+		"commands": "コマンド",
 		"generate": "生成",
 		"player_settings": "プレイヤー設定",
 		"download": "ダウンロード",

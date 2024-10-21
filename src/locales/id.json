@@ -12,6 +12,7 @@
 	},
 	"drawer": {
 		"search_id": "Cari ID",
+		"commands": "Perintah",
 		"generate": "Generate",
 		"player_settings": "Pengaturan Pemain",
 		"download": "Unduh",

@@ -6,6 +6,7 @@
 	},
 	"drawer": {
 		"search_id": "ค้นหาไอดี",
+		"commands": "คำสั่ง",
 		"generate": "สร้าง",
 		"player_settings": "การตั้งค่าผู้เล่น",
 		"download": "ดาวน์โหลด",

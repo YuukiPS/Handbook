@@ -12,6 +12,7 @@
 	},
 	"drawer": {
 		"search_id": "Поиск ID",
+		"commands": "Команды",
 		"generate": "Генерация",
 		"player_settings": "Настройки игрока",
 		"download": "Скачать",

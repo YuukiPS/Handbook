@@ -12,6 +12,7 @@
 	},
 	"drawer": {
 		"search_id": "搜索ID",
+		"commands": "命令",
 		"generate": "生成",
 		"player_settings": "玩家设置",
 		"download": "下载",

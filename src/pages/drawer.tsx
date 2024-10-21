@@ -17,6 +17,7 @@ import {
 	MoonIcon,
 	PickaxeIcon,
 	SearchIcon,
+	CommandIcon,
 	SunMoonIcon,
 	UserIcon,
 } from 'lucide-react'
@@ -50,6 +51,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 	useEffect(() => {
 		const handleError = (e: ErrorEvent) => {
 			e.preventDefault()
+			console.error(e.error)
 			setError(e.error)
 		}
 
@@ -62,6 +64,7 @@ const Drawer: React.FC<DrawerProps> = memo(({ children }) => {
 
 	const navItems = [
 		{ href: '/', icon: SearchIcon, label: 'search_id' },
+		{ href: '/commands', icon: CommandIcon, label: 'commands' },
 		{ href: '/settings', icon: UserIcon, label: 'player_settings' },
 		{ href: '/generate', icon: PickaxeIcon, label: 'generate' },
 		{ href: '/download', icon: DownloadIcon, label: 'download' },

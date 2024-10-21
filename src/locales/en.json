@@ -12,6 +12,7 @@
 	},
 	"drawer": {
 		"search_id": "Search ID",
+		"commands": "Commands",
 		"generate": "Generate",
 		"player_settings": "Player Settings",
 		"download": "Download",
