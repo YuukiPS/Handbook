@@ -1,4 +1,4 @@
-import { en, id, ja, ru, th, zh, ptBR } from "@/locales";
+import { en, id, ja, ptBR, ru, th, zh } from "@/locales";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import HttpApi, { type HttpBackendOptions } from "i18next-http-backend";
@@ -9,9 +9,9 @@ const getLoadPath = (): string => {
     if (path.startsWith("/settings")) {
         return "/locales/settings/{{lng}}.json";
     }
-    if (path.startsWith("/commands")) {
-        return "/locales/commands/{{lng}}.json";
-    }
+    // if (path.startsWith("/commands")) {
+    //     return "/locales/commands/{{lng}}.json";
+    // }
     if (path.startsWith("/donation")) {
         return "/locales/donation/{{lng}}.json";
     }
