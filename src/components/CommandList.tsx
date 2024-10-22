@@ -14,6 +14,7 @@ import axios from 'axios'
 import { AlertTriangle, Clipboard, Search, Loader2 } from 'lucide-react'
 import type React from 'react'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
+import YuukiPS from '@/api/yuukips'
 
 type Argument = {
 	key: string
@@ -91,7 +92,8 @@ export default function EnhancedInteractiveCommandList() {
 	const [activeTab, setActiveTab] = useState(0)
 
 	const copyToClipboard = (text: string) => {
-		navigator.clipboard.writeText(text).then(() => {
+		const command = YuukiPS.generateResultCommand(text, {})
+		navigator.clipboard.writeText(command).then(() => {
 			toast({
 				title: 'Copied!',
 				description: 'Command copied to clipboard.',
@@ -212,18 +214,18 @@ export default function EnhancedInteractiveCommandList() {
 					we are working on.
 				</AlertDescription>
 			</Alert>
-			{loading && (
-				<div className='flex items-center justify-center w-full h-64'>
-					<Loader2 className='w-8 h-8 animate-spin text-gray-400 dark:text-gray-500' />
-				</div>
-			)}
 			<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
 			<Card className='mb-6'>
 				<CardHeader>
 					<CardTitle>Command List</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<div className='grid gap-4 sm:grid-cols-1 lg:grid-cols-2'>
+					{loading && (
+						<div className='flex items-center justify-center w-full h-64'>
+							<Loader2 className='w-8 h-8 animate-spin text-gray-400 dark:text-gray-500' />
+						</div>
+					)}
+					<div className='grid gap-4 grid-cols-1 md:grid-cols-2'>
 						{commands.map((cmd) => (
 							<Card key={cmd.id} className='flex flex-col justify-between flex-grow'>
 								<CardHeader>
@@ -231,9 +233,6 @@ export default function EnhancedInteractiveCommandList() {
 								</CardHeader>
 								<CardContent className='flex-grow'>
 									<div className='relative mb-4'>
-										<pre className='bg-muted p-2 rounded-md overflow-x-auto'>
-											<code>{getUpdatedCommand(cmd)}</code>
-										</pre>
 										<Button
 											variant='secondary'
 											size='sm'
@@ -242,6 +241,9 @@ export default function EnhancedInteractiveCommandList() {
 										>
 											<Clipboard className='h-4 w-4' />
 										</Button>
+										<pre className='bg-muted p-2 rounded-md whitespace-pre-wrap'>
+											<code>{getUpdatedCommand(cmd)}</code>
+										</pre>
 									</div>
 									{cmd.args && cmd.args.length > 0 && (
 										<Button
