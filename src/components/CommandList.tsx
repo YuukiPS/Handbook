@@ -30,11 +30,9 @@ type Argument = {
 		description: string
 	}>
 	api?: {
-		required: boolean
-		version: string
 		game: 'gi' | 'sr'
 		jsonBody: {
-			[key: string]: string
+			[key: string]: string | Array<string>
 		}
 	}
 }
@@ -163,14 +161,16 @@ export default function EnhancedInteractiveCommandList() {
 					return
 				}
 				const arg = commands.find((cmd) => cmd.id === commandId)?.args?.find((a) => a.key === argKey)
-				if (arg?.type === 'search' && arg.api?.required) {
+				if (arg?.type === 'search' && arg.api) {
 					try {
 						setIsLoading(true)
 						const endpoint = arg.api.game === 'gi' ? 'gm' : 'sr'
-						const url = new URL(`${arg.api.version}/${endpoint}`, 'https://api.elaxan.xyz')
+						const url = new URL(`v4/${endpoint}`, 'https://api.elaxan.xyz')
 						const updatedJsonBody = { ...arg.api.jsonBody }
 						for (const [key, value] of Object.entries(updatedJsonBody)) {
-							if (value === `${arg.key}`) {
+							if (Array.isArray(value)) {
+								updatedJsonBody[key] = value.map((v) => (v === `${arg.key}` ? query : v))
+							} else if (value === `${arg.key}`) {
 								updatedJsonBody[key] = query
 							}
 						}

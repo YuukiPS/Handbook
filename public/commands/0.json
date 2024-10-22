@@ -10,13 +10,15 @@
                 "description": "This command will spawn a monster in your world with a custom amount, level, and health points.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "monster_id",
-                        "category": "Monsters",
+                        "search": [
+                            "monster_id"
+                        ],
+                        "category": [
+                            "Monsters"
+                        ],
+                        "command": false,
                         "limit": 10
                     }
                 }
@@ -103,13 +105,14 @@
                 "description": "The character ID of the avatar you want to add.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "character id",
-                        "category": "Characters",
+                        "search": [
+                            "character id"
+                        ],
+                        "category": [
+                            "Characters"
+                        ],
                         "limit": 20
                     }
                 }
@@ -163,13 +166,14 @@
                 "description": "ID of the quest.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "id",
-                        "category": "Quests",
+                        "search": [
+                            "id"
+                        ],
+                        "category": [
+                            "Quests"
+                        ],
                         "limit": 10
                     }
                 }

@@ -10,13 +10,14 @@
                 "description": "This command will spawn a monster in your world with a custom amount.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "monster_id",
-                        "category": "Monsters",
+                        "search": [
+                            "monster_id"
+                        ],
+                        "category": [
+                            "Monsters"
+                        ],
                         "limit": 10
                     }
                 }
@@ -89,13 +90,14 @@
                 "description": "The character ID of the avatar you want to add.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "character id",
-                        "category": "Characters",
+                        "search": [
+                            "character id"
+                        ],
+                        "category": [
+                            "Characters"
+                        ],
                         "limit": 20
                     }
                 }
@@ -129,13 +131,14 @@
                 "description": "The item ID of the item you want to add.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "item id",
-                        "category": "Materials",
+                        "search": [
+                            "item id"
+                        ],
+                        "category": [
+                            "Materials"
+                        ],
                         "limit": 20
                     }
                 }
@@ -183,13 +186,14 @@
                 "description": "ID of the quest.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "id",
-                        "category": "Quests",
+                        "search": [
+                            "id"
+                        ],
+                        "category": [
+                            "Quests"
+                        ],
                         "limit": 10
                     }
                 }
@@ -364,13 +368,14 @@
                 "description": "The weapon ID of the weapon you want to add.",
                 "type": "search",
                 "api": {
-                    "required": true,
-                    "version": "v3",
                     "game": "gi",
                     "jsonBody": {
-                        "autocomplete": true,
-                        "search": "weapon id",
-                        "category": "Weapons",
+                        "search": [
+                            "weapon id"
+                        ],
+                        "category": [
+                            "Weapons"
+                        ],
                         "limit": 20
                     }
                 }
