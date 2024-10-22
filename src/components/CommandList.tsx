@@ -13,6 +13,8 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import axios from 'axios'
 import { AlertTriangle, Clipboard, Search, Loader2 } from 'lucide-react'
 import type React from 'react'
+import { useCallback, memo } from 'react'
+import { debounce } from 'lodash'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import YuukiPS from '@/api/yuukips'
 
@@ -77,7 +79,7 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab }) => {
 	)
 }
 
-export default function EnhancedInteractiveCommandList() {
+const EnhancedInteractiveCommandList = memo(() => {
 	const [commands, setCommands] = useState<CommandLists[]>([])
 	const [selectedArgs, setSelectedArgs] = useState<{ [key: number]: { [key: string]: string } }>({})
 	const [showResults, setShowResults] = useState(false)
@@ -137,71 +139,67 @@ export default function EnhancedInteractiveCommandList() {
 		fetchCommands()
 	}, [toast, activeTab])
 
-	const getUpdatedCommand = (cmd: CommandLists) => {
-		let updatedCommand = cmd.command
-		if (cmd.args && selectedArgs[cmd.id]) {
-			for (const [key] of Object.entries(selectedArgs[cmd.id])) {
-				const selectedValue = selectedArgs[cmd.id][key]
-				if (selectedValue) {
-					updatedCommand = updatedCommand.replace(`<${key}>`, selectedValue)
-				}
-			}
-		}
-		return updatedCommand
-	}
-
-	const handleSearch = (() => {
-		let debounceTimeout: NodeJS.Timeout
-		return async (commandId: number, argKey: string, query: string) => {
-			clearTimeout(debounceTimeout)
-			debounceTimeout = setTimeout(async () => {
-				if (!query.trim()) {
-					setSearchResults([])
-					setShowResults(false)
-					return
-				}
-				const arg = commands.find((cmd) => cmd.id === commandId)?.args?.find((a) => a.key === argKey)
-				if (arg?.type === 'search' && arg.api) {
-					try {
-						setIsLoading(true)
-						const endpoint = arg.api.game === 'gi' ? 'gm' : 'sr'
-						const url = new URL(`v4/${endpoint}`, 'https://api.elaxan.xyz')
-						const updatedJsonBody = { ...arg.api.jsonBody }
-						for (const [key, value] of Object.entries(updatedJsonBody)) {
-							if (Array.isArray(value)) {
-								updatedJsonBody[key] = value.map((v) => (v === `${arg.key}` ? query : v))
-							} else if (value === `${arg.key}`) {
-								updatedJsonBody[key] = query
-							}
-						}
-						const results = await axios
-							.post<{ status: number; message: string; data: { name: string; value: string }[] }>(
-								url.toString(),
-								updatedJsonBody
-							)
-							.then((res) => res.data)
-						setSearchResults(
-							results.data.map((result) => ({
-								name: result.name,
-								id: result.value,
-							}))
-						)
-						setShowResults(true)
-					} catch (error) {
-						console.error('Failed to fetch search results:', error)
-						toast({
-							title: 'Error',
-							description: 'Failed to fetch search results. Please try again.',
-							variant: 'destructive',
-						})
-						setShowResults(false)
-					} finally {
-						setIsLoading(false)
+	const getUpdatedCommand = useCallback(
+		(cmd: CommandLists) => {
+			let updatedCommand = cmd.command
+			if (cmd.args && selectedArgs[cmd.id]) {
+				for (const [key] of Object.entries(selectedArgs[cmd.id])) {
+					const selectedValue = selectedArgs[cmd.id][key]
+					if (selectedValue) {
+						updatedCommand = updatedCommand.replace(`<${key}>`, selectedValue)
 					}
 				}
-			}, 300)
+			}
+			return updatedCommand
+		},
+		[selectedArgs]
+	)
+	const handleSearch = debounce(async (commandId: number, argKey: string, query: string) => {
+		if (!query.trim()) {
+			setSearchResults([])
+			setShowResults(false)
+			return
 		}
-	})()
+		const arg = commands.find((cmd) => cmd.id === commandId)?.args?.find((a) => a.key === argKey)
+		if (arg?.type === 'search' && arg.api) {
+			try {
+				setIsLoading(true)
+				const endpoint = arg.api.game === 'gi' ? 'gm' : 'sr'
+				const url = new URL(`v4/${endpoint}`, 'https://api.elaxan.xyz')
+				const updatedJsonBody = { ...arg.api.jsonBody }
+				for (const [key, value] of Object.entries(updatedJsonBody)) {
+					if (Array.isArray(value)) {
+						updatedJsonBody[key] = value.map((v) => (v === `${arg.key}` ? query : v))
+					} else if (value === `${arg.key}`) {
+						updatedJsonBody[key] = query
+					}
+				}
+				const results = await axios
+					.post<{ status: number; message: string; data: { name: string; value: string }[] }>(
+						url.toString(),
+						updatedJsonBody
+					)
+					.then((res) => res.data)
+				setSearchResults(
+					results.data.map((result) => ({
+						name: result.name,
+						id: result.value,
+					}))
+				)
+				setShowResults(true)
+			} catch (error) {
+				console.error('Failed to fetch search results:', error)
+				toast({
+					title: 'Error',
+					description: 'Failed to fetch search results. Please try again.',
+					variant: 'destructive',
+				})
+				setShowResults(false)
+			} finally {
+				setIsLoading(false)
+			}
+		}
+	}, 500)
 
 	return (
 		<div className='container mx-auto p-4'>
@@ -468,4 +466,6 @@ export default function EnhancedInteractiveCommandList() {
 			</Card>
 		</div>
 	)
-}
+})
+
+export default EnhancedInteractiveCommandList
