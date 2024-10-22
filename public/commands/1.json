@@ -1,0 +1,400 @@
+[
+    {
+        "id": 1,
+        "name": "Spawn Monster",
+        "command": "/monster <monster_id> <amount> <level>",
+        "args": [
+            {
+                "key": "monster_id",
+                "name": "Monster ID",
+                "description": "This command will spawn a monster in your world with a custom amount.",
+                "type": "search",
+                "api": {
+                    "required": true,
+                    "version": "v3",
+                    "game": "gi",
+                    "jsonBody": {
+                        "autocomplete": true,
+                        "search": "monster_id",
+                        "category": "Monsters",
+                        "limit": 10
+                    }
+                }
+            },
+            {
+                "key": "amount",
+                "name": "Amount",
+                "description": "Amount of monsters to spawn.",
+                "type": "number"
+            },
+            {
+                "key": "level",
+                "name": "Level",
+                "description": "Level of the monster.",
+                "type": "number",
+                "limit": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Openstate Command",
+        "command": "/openstate <state> <value>",
+        "args": [
+            {
+                "key": "state",
+                "name": "State",
+                "description": "This command will list (some of) the openstates in your world.",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "47",
+                        "description": "Inner map border (border between cities)"
+                    },
+                    {
+                        "value": "48",
+                        "description": "Outer map border (world border)"
+                    }
+                ]
+            },
+            {
+                "key": "value",
+                "name": "Value",
+                "description": "Value of the state.",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "1",
+                        "description": "On"
+                    },
+                    {
+                        "value": "0",
+                        "description": "Off"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Adding Avatars",
+        "command": "/avatar add <character id>",
+        "args": [
+            {
+                "key": "character id",
+                "name": "Character ID",
+                "description": "The character ID of the avatar you want to add.",
+                "type": "search",
+                "api": {
+                    "required": true,
+                    "version": "v3",
+                    "game": "gi",
+                    "jsonBody": {
+                        "autocomplete": true,
+                        "search": "character id",
+                        "category": "Characters",
+                        "limit": 20
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Add / Remove Items",
+        "command": "/item <value> <item id> <amount>",
+        "args": [
+            {
+                "key": "value",
+                "name": "Value",
+                "description": "Add or remove.",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "add",
+                        "description": "Add item"
+                    },
+                    {
+                        "value": "clear",
+                        "description": "Remove item"
+                    }
+                ]
+            },
+            {
+                "key": "item id",
+                "name": "Item ID",
+                "description": "The item ID of the item you want to add.",
+                "type": "search",
+                "api": {
+                    "required": true,
+                    "version": "v3",
+                    "game": "gi",
+                    "jsonBody": {
+                        "autocomplete": true,
+                        "search": "item id",
+                        "category": "Items",
+                        "limit": 20
+                    }
+                }
+            },
+            {
+                "key": "amount",
+                "name": "Amount",
+                "description": "Amount of the item to add.",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Quest Command",
+        "command": "/quest <value> <id>",
+        "args": [
+            {
+                "key": "value",
+                "name": "Value",
+                "description": "This command will list all the quests in your world.",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "accept",
+                        "description": "Accept Quest and Start It"
+                    },
+                    {
+                        "value": "add",
+                        "description": "Add Quest"
+                    },
+                    {
+                        "value": "remove",
+                        "description": "Remove Quest"
+                    },
+                    {
+                        "value": "finish",
+                        "description": "Finish Quest (Will bug/break things, complete quests that have rewards by actually playing the final quest in the chain)"
+                    }
+                ]
+            },
+            {
+                "key": "id",
+                "name": "ID",
+                "description": "ID of the quest.",
+                "type": "search",
+                "api": {
+                    "required": true,
+                    "version": "v3",
+                    "game": "gi",
+                    "jsonBody": {
+                        "autocomplete": true,
+                        "search": "id",
+                        "category": "Quests",
+                        "limit": 10
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Set Talent Level",
+        "command": "/talent <value> all",
+        "args": [
+            {
+                "key": "value",
+                "name": "Value",
+                "description": "Lock or unlock.",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "unlock",
+                        "description": "Enable"
+                    },
+                    {
+                        "value": "lock",
+                        "description": "Disable"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Set Ascension Level",
+        "command": "/break <level>",
+        "args": [
+            {
+                "key": "level",
+                "name": "Level",
+                "description": "Level of the ascension.",
+                "type": "number",
+                "limit": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Set Skill Level",
+        "command": "/skill all <level>",
+        "args": [
+            {
+                "key": "level",
+                "name": "Level",
+                "description": "Level of the skill.",
+                "type": "number",
+                "limit": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Set Character Level",
+        "command": "/level <level>",
+        "args": [
+            {
+                "key": "level",
+                "name": "Level",
+                "description": "Level of the character, max is the highest level in the current ascension level. Raise ascension first to set higher levels.",
+                "type": "number",
+                "limit": {
+                    "min": 1,
+                    "max": 90
+                }
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Increase Fetter (Friendship) Level",
+        "command": "/item add 105 <amount>",
+        "args": [
+            {
+                "key": "amount",
+                "name": "Amount",
+                "description": "Amount of friendship exp to add. 50000 will max it.",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Change Weapon Level / Ascension / Refinement",
+        "command": "/weapon <value> <level>",
+        "args": [
+            {
+                "key": "value",
+                "name": "Value",
+                "description": "What level of the weapon to change.",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "level",
+                        "description": "Weapon level"
+                    },
+                    {
+                        "value": "break",
+                        "description": "Ascension level"
+                    },
+                    {
+                        "value": "refine",
+                        "description": "Refinement level"
+                    }
+                ]
+            },
+            {
+                "key": "level",
+                "name": "Level",
+                "description": "Level of the value to set. Level max is 90, break/ascension max is 6, refinement max is 5.",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Add Currencies (Mora, Primogem, Genesis)",
+        "command": "/<currency> <amount>",
+        "args": [
+            {
+                "key": "currency",
+                "name": "Currency",
+                "description": "Which currency to add.",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "scoin",
+                        "description": "Mora"
+                    },
+                    {
+                        "value": "hcoin",
+                        "description": "Primogem"
+                    },
+                    {
+                        "value": "mcoin",
+                        "description": "Genesis Crystal"
+                    },
+                    {
+                        "value": "home_coin",
+                        "description": "Realm Currency"
+                    }
+                ]
+            },
+            {
+                "key": "amount",
+                "name": "Amount",
+                "description": "Amount of the currency to add.",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Add Weapons",
+        "command": "/equip add <weapon id> <level> <promotion>",
+        "args": [
+            {
+                "key": "weapon id",
+                "name": "Weapon ID",
+                "description": "The weapon ID of the weapon you want to add.",
+                "type": "search",
+                "api": {
+                    "required": true,
+                    "version": "v3",
+                    "game": "gi",
+                    "jsonBody": {
+                        "autocomplete": true,
+                        "search": "weapon id",
+                        "category": "Weapons",
+                        "limit": 20
+                    }
+                }
+            },
+            {
+                "key": "level",
+                "name": "Level",
+                "description": "Level of the weapon to add.",
+                "type": "number",
+                "limit": {
+                    "min": 1,
+                    "max": 90
+                }
+            },
+            {
+                "key": "promotion",
+                "name": "Promotion",
+                "description": "Promotion level of the weapon to add.",
+                "type": "number",
+                "limit": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        ]
+    }
+]
