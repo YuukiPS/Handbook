@@ -135,7 +135,7 @@
                     "jsonBody": {
                         "autocomplete": true,
                         "search": "item id",
-                        "category": "Items",
+                        "category": "Materials",
                         "limit": 20
                     }
                 }
