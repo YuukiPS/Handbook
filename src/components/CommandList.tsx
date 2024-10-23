@@ -69,8 +69,7 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab }) => {
 					}
 						flex-1 sm:flex-none px-4 py-2 text-sm font-medium 
 						border-b-2 transition-colors duration-200
-						focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50
-						whitespace-nowrap
+						focus:outline-none whitespace-nowrap
 					`}
 				>
 					{tab}
