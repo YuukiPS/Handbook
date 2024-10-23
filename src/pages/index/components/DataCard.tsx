@@ -34,7 +34,7 @@ const ImageComponent = memo(({ data }: { data: GmhandbookGI }) => {
 		imageSrc = (data.image as unknown as { icon: string }).icon
 		isAvatar = true
 	} else if (data.category !== 'Characters' && 'image' in data) {
-		imageSrc = data.image || defaultImage
+		imageSrc = typeof data.image === 'string' ? data.image : typeof data.image === 'object' ? data.image.icon : defaultImage
 	}
 
 	return (
