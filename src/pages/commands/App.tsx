@@ -6,8 +6,9 @@ import { useToast } from '@/components/ui/use-toast'
 import Tabs from './components/Tabs'
 import axios from 'axios'
 import { AlertTriangle, Loader2, Clipboard } from 'lucide-react'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import ArgumentsContainer from './components/ArgsContainer'
+import { Input } from '@/components/ui/input'
 
 export type Argument = {
 	key: string
@@ -49,6 +50,7 @@ export default function App() {
 	const { toast } = useToast()
 	const [loading, setLoading] = useState(true)
 	const [activeTab, setActiveTab] = useState(0)
+	const [searchQuery, setSearchQuery] = useState('')
 
 	const copyToClipboard = useCallback(
 		(text: string) => {
@@ -116,6 +118,14 @@ export default function App() {
 		[selectedArgs]
 	)
 
+	const filteredCommands = useMemo(() => {
+		return commands.filter(
+			(cmd) =>
+				cmd.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				cmd.command.toLowerCase().includes(searchQuery.toLowerCase())
+		)
+	}, [commands, searchQuery])
+
 	return (
 		<div className='container mx-auto p-4'>
 			<Alert variant='default' className='mb-6'>
@@ -131,6 +141,13 @@ export default function App() {
 			<Card className='mb-6'>
 				<CardHeader>
 					<CardTitle>Command List</CardTitle>
+					<Input
+						type='text'
+						placeholder='Search commands...'
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+						className='w-full'
+					/>
 				</CardHeader>
 				<CardContent>
 					{loading && (
@@ -139,7 +156,7 @@ export default function App() {
 						</div>
 					)}
 					<div className='grid gap-4 grid-cols-1 md:grid-cols-2'>
-						{commands.map((cmd) => (
+						{filteredCommands.map((cmd) => (
 							<Card key={cmd.id} className='flex flex-col justify-between flex-grow'>
 								<CardHeader>
 									<CardTitle className='text-lg'>{cmd.name}</CardTitle>
