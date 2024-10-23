@@ -1,10 +1,10 @@
 import type { CommandLists, Argument } from '@/pages/commands/App'
 import { Input } from '@/components/ui/input'
-import { Checkbox } from '@radix-ui/react-checkbox'
-import { Label } from '@radix-ui/react-label'
-import { Slider } from '@radix-ui/react-slider'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
+import { Slider } from '@/components/ui/slider'
 import { type Dispatch, type SetStateAction, memo } from 'react'
-import { SelectArgs, SearchArgs } from './ArgsType'
+import { SearchArgs, SelectArgs } from './ArgsType'
 
 interface ArgumentsContainerProps {
 	cmd: CommandLists

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@radix-ui/react-scroll-area'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@radix-ui/react-select'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Loader2, Search } from 'lucide-react'
 import { memo, useState, type Dispatch, type SetStateAction } from 'react'
 import type { Argument, CommandLists } from '../App'
@@ -17,25 +17,23 @@ interface SelectArgsProps {
 	selectedArgs: { [key: number]: { [key: string]: string } }
 }
 
-const SelectArgs = memo(({ handleArgSelect, cmd, arg, selectedArgs }: SelectArgsProps) => {
-	return (
-		<Select
-			onValueChange={(value) => handleArgSelect(cmd.id, arg.key, value)}
-			value={selectedArgs[cmd.id]?.[arg.key] || ''}
-		>
-			<SelectTrigger id={`${cmd.id}-${arg.key}`}>
-				<SelectValue placeholder={`Select ${arg.name}`} />
-			</SelectTrigger>
-			<SelectContent>
-				{arg.options?.map((option) => (
-					<SelectItem key={option.value} value={option.value}>
-						{option.description} ({option.value})
-					</SelectItem>
-				))}
-			</SelectContent>
-		</Select>
-	)
-})
+const SelectArgs = memo(({ handleArgSelect, cmd, arg, selectedArgs }: SelectArgsProps) => (
+	<Select
+		onValueChange={(value) => handleArgSelect(cmd.id, arg.key, value)}
+		value={selectedArgs[cmd.id]?.[arg.key] || ''}
+	>
+		<SelectTrigger id={`${cmd.id}-${arg.key}`}>
+			<SelectValue placeholder={`Select ${arg.name}`} />
+		</SelectTrigger>
+		<SelectContent>
+			{arg.options?.map((option) => (
+				<SelectItem key={option.value} value={option.value}>
+					{option.description} ({option.value})
+				</SelectItem>
+			))}
+		</SelectContent>
+	</Select>
+))
 
 interface SearchArgsProps {
 	commands: CommandLists[]
