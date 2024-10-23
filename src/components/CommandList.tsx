@@ -17,6 +17,7 @@ import { useCallback, memo } from 'react'
 import { debounce } from 'lodash'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import YuukiPS from '@/api/yuukips'
+import type { APIElaXan } from '@/types/gm'
 
 type Argument = {
 	key: string
@@ -84,7 +85,9 @@ const EnhancedInteractiveCommandList = memo(() => {
 	const [selectedArgs, setSelectedArgs] = useState<{ [key: number]: { [key: string]: string } }>({})
 	const [showResults, setShowResults] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
-	const [searchResults, setSearchResults] = useState<{ id: string; name: string }[]>([])
+	const [searchResults, setSearchResults] = useState<
+		{ id: string; name: string; description: string | undefined; image: string | undefined }[]
+	>([])
 	const [visibleArgs, setVisibleArgs] = useState<{ [key: number]: boolean }>({})
 	const { toast } = useToast()
 	const [loading, setLoading] = useState(true)
@@ -174,16 +177,18 @@ const EnhancedInteractiveCommandList = memo(() => {
 						updatedJsonBody[key] = query
 					}
 				}
-				const results = await axios
-					.post<{ status: number; message: string; data: { name: string; value: string }[] }>(
-						url.toString(),
-						updatedJsonBody
-					)
-					.then((res) => res.data)
+				const results = await axios.post<APIElaXan>(url.toString(), updatedJsonBody).then((res) => res.data)
 				setSearchResults(
 					results.data.map((result) => ({
 						name: result.name,
-						id: result.value,
+						id: result.id.toString(),
+						description: result.description?.toString(),
+						image:
+							typeof result.image === 'string'
+								? result.image
+								: result.image && typeof result.image === 'object'
+									? result.image.icon || result.image.side
+									: undefined,
 					}))
 				)
 				setShowResults(true)
@@ -363,7 +368,19 @@ const EnhancedInteractiveCommandList = memo(() => {
 																							setShowResults(false)
 																						}}
 																					>
+																						{result.image && (
+																							<img
+																								src={result.image}
+																								alt={result.name}
+																								className='w-6 h-6 mr-2 inline-block rounded-full'
+																							/>
+																						)}
 																						{result.name}
+																						{result.description && (
+																							<p className='text-xs text-gray-500 dark:text-gray-400'>
+																								{result.description}
+																							</p>
+																						)}
 																					</li>
 																				))}
 																			</ScrollArea>
