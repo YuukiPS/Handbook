@@ -48,7 +48,7 @@
 		"description": {
 			"gc": "バージョン5.0以下のGC（Grasscutter）用コマンド",
 			"gio": "バージョン3.2のGIO用コマンド",
-			"lc": "バージョン2.5以下のLC（LunarCore）用コマンド"
+			"lc": "バージョン2.6以下のLC（LunarCore）用コマンド"
 		},
 		"tabs_title": {
 			"gc": "GC",
