@@ -42,7 +42,6 @@ export default function App() {
 	const [commands, setCommands] = useState<CommandLists[]>([])
 	const [selectedArgs, setSelectedArgs] = useState<{ [key: number]: { [key: string]: string } }>({})
 	const [showResults, setShowResults] = useState(false)
-	const [isLoading, setIsLoading] = useState(false)
 	const [searchResults, setSearchResults] = useState<
 		{ id: string; name: string; description: string | undefined; image: string | undefined }[]
 	>([])
@@ -193,10 +192,8 @@ export default function App() {
 													arg={arg}
 													handleArgSelect={handleArgSelect}
 													commands={commands}
-													setIsLoading={setIsLoading}
 													selectedArgs={selectedArgs}
 													showResults={showResults}
-													isLoading={isLoading}
 													searchResults={searchResults}
 													setShowResults={setShowResults}
 													setSearchResults={setSearchResults}

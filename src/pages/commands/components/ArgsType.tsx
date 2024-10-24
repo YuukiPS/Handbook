@@ -41,7 +41,6 @@ interface SearchArgsProps {
 	cmd: CommandLists
 	arg: Argument
 	showResults: boolean
-	isLoading: boolean
 	searchResults: { id: string; name: string; description: string | undefined; image: string | undefined }[]
 	setShowResults: Dispatch<SetStateAction<boolean>>
 	setSearchResults: Dispatch<
@@ -56,7 +55,6 @@ const SearchArgs = memo(
 		cmd,
 		arg,
 		showResults,
-		isLoading,
 		searchResults,
 		setShowResults,
 		setSearchResults,
@@ -274,7 +272,7 @@ const SearchArgs = memo(
 				{showResults && isFocused && searchResults.length > 0 && dropDownResults()}
 
 				{/* No Results Message */}
-				{showResults && isFocused && searchResults.length === 0 && !isLoading && (
+				{showResults && isFocused && searchResults.length === 0 && !localIsLoading && (
 					<div className='absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg'>
 						<div className='px-4 py-2 text-sm text-gray-500 dark:text-gray-400'>No results found</div>
 					</div>

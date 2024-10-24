@@ -12,14 +12,12 @@ interface ArgumentsContainerProps {
 	handleArgSelect: (commandId: number, argKey: string, value: string) => void
 	selectedArgs: { [key: number]: { [key: string]: string } }
 	showResults: boolean
-	isLoading: boolean
 	searchResults: { id: string; name: string; description: string | undefined; image: string | undefined }[]
 	setShowResults: Dispatch<SetStateAction<boolean>>
 	setSearchResults: Dispatch<
 		SetStateAction<{ id: string; name: string; description: string | undefined; image: string | undefined }[]>
 	>
 	commands: CommandLists[]
-	setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 
 const ArgumentsContainer = memo(
@@ -29,12 +27,10 @@ const ArgumentsContainer = memo(
 		handleArgSelect,
 		selectedArgs,
 		showResults,
-		isLoading,
 		searchResults,
 		setShowResults,
 		setSearchResults,
 		commands,
-		setIsLoading,
 	}: ArgumentsContainerProps) => {
 		const renderArgInput = () => {
 			switch (arg.type) {
@@ -49,12 +45,10 @@ const ArgumentsContainer = memo(
 							commands={commands}
 							arg={arg}
 							showResults={showResults}
-							isLoading={isLoading}
 							searchResults={searchResults}
 							setShowResults={setShowResults}
 							setSearchResults={setSearchResults}
 							handleArgSelect={handleArgSelect}
-							setIsLoading={setIsLoading}
 						/>
 					)
 				case 'number':
