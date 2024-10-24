@@ -121,7 +121,17 @@ export default function App() {
 		return commands.filter(
 			(cmd) =>
 				cmd.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				cmd.command.toLowerCase().includes(searchQuery.toLowerCase())
+				cmd.command.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				cmd.args?.some(
+					(arg) =>
+						arg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+						(arg.type === 'select' &&
+							arg.options?.some(
+								(option) =>
+									option.value.toLowerCase().includes(searchQuery.toLowerCase()) ||
+									option.description.toLowerCase().includes(searchQuery.toLowerCase())
+							))
+				)
 		)
 	}, [commands, searchQuery])
 
