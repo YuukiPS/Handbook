@@ -1,0 +1,51 @@
+{
+    "title": "Cài đặt người chơi",
+    "failed_check_account_title": "Kiểm tra tài khoản thất bại",
+    "failed_check_account_description": "Nếu bạn gặp lỗi `AxiosError: Network Error`, đừng lo lắng, đây là chuyện bình thường. Trước tiên, hãy truy cập <0>trang web này</0>. Nếu có reCaptcha xuất hiện, có thể đó là vấn đề thông thường do chính sách Cloudflare hoặc CORS. Chúng tôi vẫn đang tìm cách khắc phục.",
+    "uid_account": "UID tài khoản",
+    "uid_code": "Mã code",
+    "get_uid_and_code": "Lấy UID và Code",
+    "check_account_button": "Kiểm tra",
+    "check_account_button_checking": "Đang kiểm tra...",
+    "save_account_button": "Lưu",
+    "cancel_button": "Hủy",
+    "list_server_available": {
+        "toast": {
+            "title": "Cần nhập UID",
+            "description": "Vui lòng nhập UID của bạn"
+        },
+        "label": "Không thấy máy chủ của bạn trong danh sách?",
+        "button": "Thêm thủ công",
+        "select_server": "Chọn máy chủ",
+        "search_placeholder": "Tìm kiếm máy chủ",
+        "tooltip": {
+            "online": "Đang hoạt động",
+            "offline": "Ngoại tuyến"
+        },
+        "dialog": {
+            "title": "Nhập UID của bạn",
+            "description": "Đây là UID trong game, không phải UID của YuukiPS",
+            "input_placeholder": "Nhập UID của bạn",
+            "button": {
+                "save": "Lưu",
+                "cancel": "Hủy"
+            }
+        }
+    },
+    "output": {
+        "button": "Xóa kết quả",
+        "successfully_checked_account": "Đã kiểm tra thành công UID {{uid}}. Có {{list_total}} tài khoản đã đăng ký với UID này.",
+        "no_account_registered": "Không tìm thấy tài khoản nào với UID đã cung cấp.",
+        "error_occurred": "Đã xảy ra lỗi khi kiểm tra tài khoản: {{error}}",
+        "successfully_selected_account": "Đã lưu thành công máy chủ {{name}}.",
+        "input_unexpected_error": "Có lỗi xảy ra trong quá trình nhập liệu. Biến không xác định: {{error}}",
+        "uid_code_saved": "UID và Code đã được lưu thành công.",
+        "uid_code_empty": "UID hoặc Code không được để trống",
+        "uid_must_be_5_digits": "UID phải có 5 chữ số",
+        "code_must_be_4_digits": "Code phải có 4 chữ số"
+    },
+    "select_account": {
+        "button_trigger": "Chọn tài khoản",
+        "menu_label": "Máy chủ | Biệt danh | UID"
+    }
+}

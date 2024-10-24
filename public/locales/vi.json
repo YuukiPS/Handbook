@@ -1,0 +1,130 @@
+{
+    "search_for_something": "Tìm kiếm gì đó đi nào.",
+    "search_for_item": "Gõ vào thanh tìm kiếm ở trên để tìm một món đồ.",
+    "no_results_found": "Không tìm thấy kết quả nào cả.",
+    "no_results_for_query": "Chẳng có gì cho từ khóa bạn tìm cả: ",
+    "error_occurred": "Ôi không, có lỗi xảy ra rồi.",
+    "error_message": "Thông báo lỗi: ",
+    "load_more": "Xem Thêm",
+    "output": {
+        "response_command": "Phản hồi: {{message}} | {{code}}",
+        "websocket_not_established": "WebSocket chưa được thiết lập. Làm ơn tải lại trang nhé.",
+        "executing_command": "Đang thực hiện lệnh: {{command}}"
+    },
+    "search": {
+        "input_placeholder": "Tìm kiếm",
+        "kbd": {
+            "enter": "<0>Enter</0> để tìm kiếm",
+            "escape": "<0>Esc</0> để xóa"
+        },
+        "tooltip": {
+            "menu": {
+                "open": "Mở Menu",
+                "close": "Đóng Menu"
+            },
+            "help": "Trợ giúp/Cách tìm kiếm",
+            "search": "Tìm kiếm"
+        },
+        "label": {
+            "api_settings": "Cài đặt API",
+            "games": "Trò chơi",
+            "category": "Danh mục",
+            "category_all": "Tất cả",
+            "language": "Ngôn ngữ",
+            "results": "Kết quả: "
+        },
+        "checkbox": {
+            "image": "Hình ảnh",
+            "commands": "Lệnh"
+        },
+        "select_category_placeholder": "Chọn Danh mục"
+    },
+    "card": {
+        "title": {
+            "gc": "GC",
+            "gio": "GIO",
+            "lc": "LC"
+        },
+        "description": {
+            "gc": "Lệnh cho GC (Grasscutter) cho phiên bản 5.0 trở xuống",
+            "gio": "Lệnh cho GIO phiên bản 3.2",
+            "lc": "Lệnh cho LC (LunarCore) cho phiên bản 2.6 trở xuống"
+        },
+        "tabs_title": {
+            "gc": "GC",
+            "gio": "GIO"
+        },
+        "level_stage": "Cấp độ {{level}}",
+        "show_the_commands": "Hiển thị Các Lệnh",
+        "next_mission": "Nhiệm vụ tiếp theo: {{id}}",
+        "button": {
+            "copy_id": "Sao chép ID",
+            "clear_output": "Xóa kết quả",
+            "apply_command": "Áp dụng",
+            "close": "Đóng"
+        },
+        "dialog": {
+            "title": "Áp dụng Lệnh",
+            "description": {
+                "without_values": "Lệnh ({{command}}) sẽ được thực hiện",
+                "with_values": "Lệnh ({{command}}) sẽ được thực hiện với các giá trị ({{list}})"
+            },
+            "account": "UID: {{uid}} | Máy chủ: {{server}}"
+        }
+    },
+    "toast": {
+        "command_copied": {
+            "title": "Lệnh đã được sao chép vào bộ nhớ tạm",
+            "description": "Lệnh: {{command}}"
+        },
+        "command_copied_error": {
+            "title": "Không thể sao chép lệnh vào bộ nhớ tạm",
+            "description": "Thử lại sau nhé"
+        },
+        "invalid_input": {
+            "title": "Thông số đầu vào không hợp lệ",
+            "description": "Chưa nhập UID, mã hoặc máy chủ. Hãy vào trang cài đặt nhé",
+            "action": {
+                "text": "Đi tới trang cài đặt",
+                "url_text": "Cài đặt"
+            }
+        },
+        "copied_id": {
+            "title": "Đã sao chép ID",
+            "description": "ID: {{id}} cho {{name}}"
+        },
+        "failed_copy_id": {
+            "title": "Không thể sao chép ID",
+            "description": "Thử lại sau nhé."
+        },
+        "copied_command": {
+            "title": "Đã sao chép Lệnh",
+            "description": "Lệnh: {{command}}"
+        },
+        "failed_copy_command": {
+            "title": "Không thể sao chép lệnh",
+            "description": "Thử lại sau nhé."
+        },
+        "apply_command_no_configured": {
+            "title": "Lỗi",
+            "description": "Bạn phải nhập UID, mã và máy chủ trước. Hãy vào trang cài đặt nhé.",
+            "action": {
+                "text": "Đi tới trang cài đặt",
+                "url_text": "Đi tới cài đặt"
+            }
+        }
+    },
+    "dialog": {
+        "help": {
+            "title": "Trợ giúp/Cách tìm kiếm",
+            "description": [
+                "Tìm kiếm vật phẩm bằng tên hoặc ID. Ví dụ, gõ 'Nguyên Thạch' hoặc '201'.",
+                "Dùng dấu phẩy để tìm nhiều vật phẩm cùng lúc. Ví dụ: 'Nguyên Thạch, Mora, Sách Kinh Nghiệm Anh Hùng'.",
+                "Bạn có thể tìm kiếm trong nhiều danh mục cùng một lúc.",
+                "Lọc kết quả bằng cách chọn danh mục cụ thể từ menu thả xuống.",
+                "Tìm kiếm không phân biệt chữ hoa chữ thường, nên 'nguyên thạch' và 'Nguyên Thạch' sẽ cho kết quả giống nhau."
+            ],
+            "button": "Đóng"
+        }
+    }
+}

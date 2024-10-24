@@ -6,3 +6,4 @@ export { default as th } from "./th.json";
 export { default as zh } from "./zh.json";
 export { default as ptBR } from "./ptBR.json";
 export { default as fil } from "./fil.json";
+export { default as vi } from "./vi.json";

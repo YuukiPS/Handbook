@@ -1,0 +1,31 @@
+{
+    "needHelp": "Chúng tôi cần sự giúp đỡ của bạn",
+    "description": [
+        "Này các bạn, những người tuyệt vời ơi!",
+        "Chúng tôi đang gặp một chút rắc rối và thực sự cần sự giúp đỡ của các bạn đấy. Các bạn biết cái trang web và API mà các bạn vẫn dùng chứ? Ừ thì, cả hai đang chạy trên cùng một máy chủ, và mọi thứ đang trở nên hơi chật chội rồi.",
+        "Vấn đề là thế này: hóa đơn máy chủ của chúng tôi đang chất đống nhanh hơn khả năng xử lý. Chúng tôi đã tự bỏ tiền túi ra trả vì thực sự tin tưởng vào những gì chúng tôi đang làm ở đây. Nhưng nói thật nhé - ví tiền của chúng tôi đâu có rủng rỉnh gì.",
+        "Nếu chúng tôi không gom góp đủ tiền trong vài tháng tới, có thể chúng tôi sẽ phải đưa ra vài quyết định khó khăn. Mà nói quyết định khó khăn tức là có thể phải đóng cửa mọi thứ đấy.",
+        "Chúng tôi đang cố gắng hết sức để giảm chi phí. Chúng tôi đang chuyển sang dùng tên miền .xyz rẻ hơn, tối ưu hóa code, thậm chí còn cắt giảm cả những buổi đi uống cà phê yêu thích nữa (hy sinh ghê chưa?). Nhưng cuối cùng thì, máy chủ vẫn tốn tiền, và đó là chỗ chúng tôi đang bí.",
+        "Nếu bạn từng thấy mấy thứ của chúng tôi hữu ích, hoặc chỉ đơn giản là muốn giúp mấy anh em dev thoát khỏi tình thế khó khăn, chúng tôi sẽ vô cùng biết ơn nếu bạn có thể góp chút ít. Thật đấy, dù chỉ vài đồng cũng có thể tạo nên sự khác biệt trong việc giữ cho dự án này tiếp tục sống.",
+        "Chúng tôi đã đổ cả tâm huyết vào dự án này và muốn tiếp tục duy trì nó. Quan trọng hơn, chúng tôi muốn giữ cho nó miễn phí để mọi người có thể sử dụng. Nhưng chúng tôi đã đến lúc không thể làm một mình được nữa rồi.",
+        "Cảm ơn các bạn đã đọc đến đây và đã là một phần của cộng đồng chúng tôi. Tất cả các bạn đều tuyệt vời, thật đấy. Bất kỳ sự giúp đỡ nào từ các bạn cũng sẽ có ý nghĩa rất lớn đối với chúng tôi."
+    ],
+    "buyCoffee": "Mời chúng tôi ly cà phê",
+    "coffeeDescription": "Này, chúng tôi đâu có đòi hỏi nhiều. Chỉ đủ cho một ly cà phê (hoặc có thể là một cái pizza) thôi.",
+    "donateButton": "Ủng hộ chúng tôi chút đỉnh",
+    "saweria": "Saweria",
+    "saweriaDescription": "Nếu bạn ở Indonesia, bạn có thể dùng nền tảng địa phương tiện lợi này để giúp đỡ chúng tôi.",
+    "saweriaButton": "Gửi chút tình cảm",
+    "openSource": "Chúng tôi là mã nguồn mở!",
+    "githubDescription": "Tiền thì eo hẹp, nhưng code của chúng tôi luôn miễn phí. Muốn xem chúng tôi đang làm gì không? Ghé thăm GitHub của chúng tôi nhé!",
+    "githubButton": "Đi tới GitHub",
+    "donationUsage": "Đồng tiền mồ hôi nước mắt của bạn sẽ làm được gì",
+    "usageList": [
+        "Giữ cho máy chủ của chúng tôi tiếp tục hoạt động, lưu trữ cả trang web và API",
+        "Giúp chúng tôi lấy lại tên miền .com",
+        "Cho chúng tôi thêm thời gian quý báu để thực hiện các biện pháp tiết kiệm chi phí",
+        "Hỗ trợ chuyển đổi sang tên miền .xyz mới",
+        "Giữ cho dự án này tiếp tục sống để mọi người có thể sử dụng"
+    ],
+    "footerMessage": "Thật lòng đấy, các bạn là những người tuyệt vời nhất. Cảm ơn vì đã luôn ở bên chúng tôi."
+}

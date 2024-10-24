@@ -1,4 +1,4 @@
-import { en, id, ja, ptBR, ru, th, zh, fil } from "@/locales";
+import { en, id, ja, ptBR, ru, th, zh, fil, vi } from "@/locales";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import HttpApi, { type HttpBackendOptions } from "i18next-http-backend";
@@ -54,6 +54,9 @@ i18n.use(HttpApi)
             fil: {
                 default: fil,
             },
+            vi: {
+                default: vi,
+            }
         },
         partialBundledLanguages: true,
         backend: {
