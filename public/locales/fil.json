@@ -1,0 +1,130 @@
+{
+    "search_for_something": "Maghanap ng isang bagay.",
+    "search_for_item": "Maghanap ng isang item sa pamamagitan ng pag-type sa search bar sa itaas.",
+    "no_results_found": "Walang nahanap na resulta.",
+    "no_results_for_query": "Walang nahanap na resulta para sa iyong query: ",
+    "error_occurred": "May naganap na error.",
+    "error_message": "Mensahe ng error: ",
+    "load_more": "Mag-load pa",
+    "output": {
+        "response_command": "Tugon: {{message}} | {{code}}",
+        "websocket_not_established": "Hindi pa naitatag ang WebSocket. Mangyaring i-refresh ang pahina.",
+        "executing_command": "Isinasagawa ang command: {{command}}"
+    },
+    "search": {
+        "input_placeholder": "Maghanap",
+        "kbd": {
+            "enter": "<0>Enter</0> para maghanap",
+            "escape": "<0>Esc</0> para i-clear"
+        },
+        "tooltip": {
+            "menu": {
+                "open": "Buksan ang Menu",
+                "close": "Isara ang Menu"
+            },
+            "help": "Tulong/Paano maghanap",
+            "search": "Maghanap"
+        },
+        "label": {
+            "api_settings": "Mga Setting ng API",
+            "games": "Mga Laro",
+            "category": "Kategorya",
+            "category_all": "Lahat",
+            "language": "Wika",
+            "results": "Mga Resulta: "
+        },
+        "checkbox": {
+            "image": "Larawan",
+            "commands": "Mga Command"
+        },
+        "select_category_placeholder": "Pumili ng Kategorya"
+    },
+    "card": {
+        "title": {
+            "gc": "GC",
+            "gio": "GIO",
+            "lc": "LC"
+        },
+        "description": {
+            "gc": "Mga command para sa GC (Grasscutter) para sa mga bersyon 5.0 o mas mababa",
+            "gio": "Mga command para sa GIO bersyon 3.2",
+            "lc": "Mga command para sa LC (LunarCore) para sa mga bersyon 2.6 o mas mababa"
+        },
+        "tabs_title": {
+            "gc": "GC",
+            "gio": "GIO"
+        },
+        "level_stage": "Antas {{level}}",
+        "show_the_commands": "Ipakita ang Mga Command",
+        "next_mission": "Susunod na misyon: {{id}}",
+        "button": {
+            "copy_id": "Kopyahin ang ID",
+            "clear_output": "I-clear ang output",
+            "apply_command": "Ilapat",
+            "close": "Isara"
+        },
+        "dialog": {
+            "title": "Ilapat ang Command",
+            "description": {
+                "without_values": "Ang command ({{command}}) ay isasagawa",
+                "with_values": "Ang command ({{command}}) ay isasagawa kasama ang mga value ({{list}})"
+            },
+            "account": "UID: {{uid}} | Server: {{server}}"
+        }
+    },
+    "toast": {
+        "command_copied": {
+            "title": "Ang command ay nakopya na sa clipboard",
+            "description": "Command: {{command}}"
+        },
+        "command_copied_error": {
+            "title": "Hindi nakopya ang command sa clipboard",
+            "description": "Pakisubukang muli mamaya"
+        },
+        "invalid_input": {
+            "title": "Di-wastong mga parameter ng input",
+            "description": "Walang inilagay na UID, code, o server. Mangyaring pumunta sa pahina ng mga setting",
+            "action": {
+                "text": "Pumunta sa pahina ng mga setting",
+                "url_text": "Mga Setting"
+            }
+        },
+        "copied_id": {
+            "title": "Nakopya ang ID",
+            "description": "ID: {{id}} para sa {{name}}"
+        },
+        "failed_copy_id": {
+            "title": "Hindi nakopya ang ID",
+            "description": "Pakisubukang muli mamaya."
+        },
+        "copied_command": {
+            "title": "Nakopya ang Command",
+            "description": "Command: {{command}}"
+        },
+        "failed_copy_command": {
+            "title": "Hindi nakopya ang command",
+            "description": "Pakisubukang muli mamaya."
+        },
+        "apply_command_no_configured": {
+            "title": "Error",
+            "description": "Kailangan mong ilagay ang iyong UID, code, at server muna. Mangyaring pumunta sa pahina ng mga setting.",
+            "action": {
+                "text": "Pumunta sa pahina ng mga setting",
+                "url_text": "Pumunta sa mga setting"
+            }
+        }
+    },
+    "dialog": {
+        "help": {
+            "title": "Tulong/Paano maghanap",
+            "description": [
+                "Maghanap ng mga item gamit ang pangalan o ID. Halimbawa, i-type ang 'Primogem' o '201'.",
+                "Gumamit ng mga kuwit para maghanap ng maraming item nang sabay-sabay. Halimbawa: 'Primogem, Mora, Hero's Wit'.",
+                "Maaari kang maghanap sa maraming kategorya nang sabay-sabay.",
+                "I-refine ang iyong paghahanap sa pamamagitan ng pagpili ng mga tiyak na kategorya mula sa dropdown menu.",
+                "Ang paghahanap ay hindi case-sensitive, kaya ang 'primogem' at 'Primogem' ay magbibigay ng parehong mga resulta."
+            ],
+            "button": "Isara"
+        }
+    }
+}

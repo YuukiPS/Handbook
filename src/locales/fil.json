@@ -1,0 +1,44 @@
+{
+    "page_not_found": {
+        "title": "Hindi Nahanap ang Pahina",
+        "description": "Oops! Mukhang ang pahinang ito ay nagbakasyon sa digital na mundo. Hindi ito mahanap sa ating cyber na kapitbahayan.",
+        "button": "Pumunta sa Home"
+    },
+    "web_not_supported": {
+        "title": "Hindi Suportadong Platform",
+        "description": "Ang feature na ito ay kasalukuyang suportado lamang sa Windows at Android. Ang bersyon ng web browser na iyong ginagamit ay hindi suportado.",
+        "button": "I-download para sa Windows/Android",
+        "button_home": "Pumunta sa Home"
+    },
+    "drawer": {
+        "search_id": "Maghanap ng ID",
+        "commands": "Mga Utos",
+        "generate": "Lumikha",
+        "player_settings": "Mga Setting ng Player",
+        "download": "I-download",
+        "donation": "Donasyon",
+        "theme_mode": {
+            "light": "Maliwanag",
+            "dark": "Madilim",
+            "system": "Sistema"
+        },
+        "select_language": "Pumili ng Wika"
+    },
+    "components": {
+        "multi_select": {
+            "select_all": "Piliin Lahat",
+            "no_result": "Walang nahanap na resulta.",
+            "button_clear": "I-clear",
+            "button_close": "Isara",
+            "more": "+ {{count}} pa"
+        }
+    },
+    "error": {
+        "title": "Oops! May nangyaring mali",
+        "description": "Paumanhin sa nangyari. May nakatagpo kaming hadlang sa daan.",
+        "details": "Mga Detalye ng Error",
+        "unknown": "May naganap na hindi kilalang error",
+        "button": "Subukan muli",
+        "report": "Kung patuloy mong nakikita ang error na ito, mangyaring ipaalam sa amin sa <0>GitHub</0>. Pinahahalagahan namin ang iyong tulong sa pagpapabuti ng aming app."
+    }
+}

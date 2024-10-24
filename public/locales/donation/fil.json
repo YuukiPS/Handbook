@@ -1,0 +1,31 @@
+{
+    "needHelp": "Kailangan Namin ang Iyong Tulong",
+    "description": [
+        "Kumusta, mga kahanga-hangang tao!",
+        "May kaunting sitwasyon kami sa aming mga kamay, at talagang kailangan namin ang inyong tulong. Alam mo ba ang website at API na iyong ginagamit? Pareho silang tumatakbo sa iisang server, at medyo nagiging masikip na ang mga bagay.",
+        "Ganito ang sitwasyon: ang aming mga bayarin sa server ay mabilis na dumarami kaysa sa kaya naming hawakan. Kami mismo ang nagbabayad nito dahil talagang naniniwala kami sa ginagawa namin dito. Pero maging totoo tayo - hindi naman talaga umaapaw ang aming mga pitaka.",
+        "Kung hindi kami makakalikom ng sapat na pondo sa susunod na ilang buwan, maaaring kailangan naming gumawa ng ilang mahihirap na desisyon. At ang ibig sabihin ng mahihirap na desisyon ay posibleng pagsasara ng mga bagay-bagay.",
+        "Ginagawa namin ang lahat ng aming makakaya para mabawasan ang mga gastos. Lilipat kami sa mas murang .xyz domain, ino-optimize ang aming code, at kahit binabawasan na namin ang aming minamahal na coffee runs (ang mga sakripisyo na ginagawa namin, tama?). Pero sa huli, ang mga server ay nangangailangan ng pera, at doon kami nahihirapan.",
+        "Kung nakatulong man sa iyo ang aming mga bagay-bagay, o kung gusto mo lang tumulong sa mga kapwa dev na nasa mahirap na sitwasyon, lubos kaming magpapasalamat sa anumang maitutulong mo. Seryoso, kahit ilang piso lang ay maaaring magkaroon ng malaking pagkakaiba sa pagpapanatili nito.",
+        "Ibinuhos namin ang aming mga puso sa proyektong ito, at gusto naming ipagpatuloy ito. Mas mahalaga, gusto naming panatilihin itong libre para sa lahat na gamitin. Pero umabot na kami sa punto kung saan hindi na namin kaya mag-isa.",
+        "Salamat sa pagbabasa hanggang dito at sa pagiging bahagi ng aming komunidad. Ang galing niyo talaga, seryoso. Anumang tulong na maibibigay ninyo ay napakalaking bagay para sa amin."
+    ],
+    "buyCoffee": "Bilhan Mo Kami ng Kape",
+    "coffeeDescription": "Tingnan mo, hindi kami humihingi ng marami. Sapat lang para sa isang kape (o baka pizza).",
+    "donateButton": "Magbigay ng Kaunting Barya",
+    "saweria": "Saweria",
+    "saweriaDescription": "Kung nasa Indonesia ka, maaari mong gamitin ang magandang lokal na platform na ito para tulungan kami.",
+    "saweriaButton": "Magpadala ng Pagmamahal",
+    "openSource": "Open Source Kami!",
+    "githubDescription": "Mahigpit ang pera, pero ang aming code ay palaging libre. Gusto mong makita ang aming ginagawa? Tingnan mo kami sa GitHub!",
+    "githubButton": "Pumunta sa GitHub",
+    "donationUsage": "Ano ang Magagawa ng Iyong Pinaghirapang Pera",
+    "usageList": [
+        "Panatilihing tumatakbo ang aming server, na nag-ho-host ng parehong website at API",
+        "Tulungan kaming makuha muli ang .com domain",
+        "Bigyan kami ng mahalagang oras para maipatupad ang mga hakbang sa pagtitipid",
+        "Tumulong sa paglipat sa aming bagong .xyz domain",
+        "Panatilihing buhay ang proyektong ito para magamit ng lahat"
+    ],
+    "footerMessage": "Seryoso, kayo talaga ang pinakamahusay. Salamat sa patuloy na pagtangkilik sa amin."
+}

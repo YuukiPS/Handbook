@@ -1,0 +1,51 @@
+{
+    "title": "Mga Setting ng Player",
+    "failed_check_account_title": "Nabigong Suriin ang Account",
+    "failed_check_account_description": "Kung nakakuha ka ng error na `AxiosError: Network Error`, ito ay normal. Una, pumunta sa <0>website na ito</0>. Kung may reCaptcha, maaaring ito ay normal na isyu dahil sa Cloudflare o CORS Policy. Wala pa kaming solusyon para dito.",
+    "uid_account": "UID ng Account",
+    "uid_code": "Code",
+    "get_uid_and_code": "Kumuha ng UID at Code",
+    "check_account_button": "Suriin",
+    "check_account_button_checking": "Sinusuri...",
+    "save_account_button": "I-save",
+    "cancel_button": "Kanselahin",
+    "list_server_available": {
+        "toast": {
+            "title": "Kinakailangan ang UID",
+            "description": "Mangyaring ilagay ang iyong UID"
+        },
+        "label": "Hindi nakikita ang iyong server sa listahan?",
+        "button": "Manu-manong Idagdag",
+        "select_server": "Pumili ng Server",
+        "search_placeholder": "Maghanap ng server",
+        "tooltip": {
+            "online": "Online",
+            "offline": "Offline"
+        },
+        "dialog": {
+            "title": "Ilagay ang iyong UID",
+            "description": "Ito ang iyong UID sa laro, hindi ang YuukiPS UID",
+            "input_placeholder": "Ilagay ang iyong UID",
+            "button": {
+                "save": "I-save",
+                "cancel": "Kanselahin"
+            }
+        }
+    },
+    "output": {
+        "button": "Burahin ang output",
+        "successfully_checked_account": "Matagumpay na nasuri ang UID {{uid}}. May {{list_total}} na mga account na nakarehistro sa UID na ito.",
+        "no_account_registered": "Walang nahanap na account para sa ibinigay na UID.",
+        "error_occurred": "May naganap na error habang sinusuri ang account: {{error}}",
+        "successfully_selected_account": "Ang server na {{name}} ay matagumpay na na-save.",
+        "input_unexpected_error": "Nagkaroon ng error sa input. Hindi natukoy na mga variable: {{error}}",
+        "uid_code_saved": "Ang UID at Code ay matagumpay na na-save.",
+        "uid_code_empty": "Walang laman ang UID o Code",
+        "uid_must_be_5_digits": "Ang UID ay dapat 5 digit",
+        "code_must_be_4_digits": "Ang Code ay dapat 4 na digit"
+    },
+    "select_account": {
+        "button_trigger": "Pumili ng Account",
+        "menu_label": "Server | Palayaw | UID"
+    }
+}
